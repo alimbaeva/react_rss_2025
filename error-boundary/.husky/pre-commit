@@ -1,2 +1,4 @@
-npm run coverage
-npx lint-staged
+cd application
+npm run format
+npm run lint:styles
+npm run lint:styles:fix
