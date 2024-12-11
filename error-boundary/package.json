@@ -19,7 +19,8 @@
   },
   "lint-staged": {
     "*.ts": "eslint --fix ",
-    "*.{ts,scss,md,html,json}": "prettier --cache --write"
+    "*.{ts,scss,md,html,json}": "prettier --cache --write",
+     "commit-msg": "commitlint --edit"
   },
   "dependencies": {
     "react": "^18.3.1",
