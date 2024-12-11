@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "prepare": "husky || true"
+     "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -20,7 +20,11 @@
   "lint-staged": {
     "*.ts": "eslint --fix ",
     "*.{ts,scss,md,html,json}": "prettier --cache --write",
-     "commit-msg": "commitlint --edit"
+    "commit-msg": "commitlint --edit"
+  },
+  "validate-branch-name": {
+    "pattern": "[\\S]+$",
+    "errorMsg": "Your current branch name is invalid33333333333333"
   },
   "dependencies": {
     "react": "^18.3.1",
