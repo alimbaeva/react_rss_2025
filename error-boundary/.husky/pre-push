@@ -1,12 +1,4 @@
-#!/bin/bash
-
-# Запуск ESLint для проверки стилей кода
-echo "Running ESLint"
-npx eslint .
-
-# Запуск Prettier для проверки форматирования кода
-echo "Running Prettier"
-npx prettier --check .
-
-# Возвращаем код завершения 0, чтобы Husky разрешил пуш
-exit 0
+npm run coverage
+npm run format:fix
+npm run lint
+npx validate-branch-name
