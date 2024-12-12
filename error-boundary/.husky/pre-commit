@@ -1,3 +1,4 @@
+cd error-boundary/
 echo "Running ESLint..."
 npm run lint
 echo "Linting completed!"
