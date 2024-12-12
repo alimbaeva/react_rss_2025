@@ -40,11 +40,7 @@
     "errorMsg": "Your current branch name is invalid"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint . --ext",
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "src/**/*.{ts,tsx,js,css,scss}": ["npm run format", "npm run lint"]
   },
   "husky": {
     "hooks": {
