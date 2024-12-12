@@ -8,7 +8,7 @@ import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
 
 export default tseslint.config(
-  { ignores: ['dist'] }, // игнорируются файлы и папки, указанные в массиве
+  { ignores: ['node_modules/', 'dist/', '**/*.test.tsx', '**/*.test.ts'] }, // игнорируются файлы и папки, указанные в массиве
   {
     //в ESLint используется для наследования готовых наборов правил из различных конфигураций
     extends: [
