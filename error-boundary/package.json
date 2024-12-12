@@ -11,10 +11,14 @@
     "format": "prettier --write .",
     "prepare": "husky"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx eslint **/*.tsx"
-    }
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "npm run lint",
+      "prettier --write"
+    ],
+    "**/*.{html,json,js,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "react": "^18.3.1",
