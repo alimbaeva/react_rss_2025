@@ -11,6 +11,11 @@
     "format": "prettier --write .",
     "prepare": "husky"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx eslint **/*.tsx"
+    }
+  },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

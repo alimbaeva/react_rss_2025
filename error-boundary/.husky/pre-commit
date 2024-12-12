@@ -1,2 +1,1 @@
-echo('iiiiiiiiiiiiiiiiii')
-npm test
+npm run lint
