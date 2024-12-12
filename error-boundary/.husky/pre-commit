@@ -1,4 +1,4 @@
-git add . && git commit -v
+echo "Running ESLint..."
 
 npm test
 npm run lint
