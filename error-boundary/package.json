@@ -21,15 +21,6 @@
     "pattern": "class-components",
     "errorMsg": "Branch name does not match pattern"
   },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "npm run lint",
-      "prettier --write ."
-    ],
-    "**/*.{html,json,js,css,scss,md}": [
-      "prettier --write"
-    ]
-  },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
