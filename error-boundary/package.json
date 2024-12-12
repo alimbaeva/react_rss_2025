@@ -10,7 +10,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
-    "prepare": "husky && husky install"
+    "prepare": "husky"
   },
   "husky": {
     "hooks": {
