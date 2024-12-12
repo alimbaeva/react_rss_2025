@@ -1,6 +1,15 @@
-npx lint-staged
-echo "Running ESLint..."
-npm run lint
-echo "Linting completed!"
-npm run lint && npm run format:fix && npm run lint:styles && npm run lint:styles:fix && npm test
-lint-staged
+Copy#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx --no-install commitlint --edit "$1"
+
+# npx lint-staged
+
+
+# npx lint-staged
+# echo "Running ESLint..."
+# npm run lint
+# echo "Linting completed!"
+# npm run lint && npm run format:fix && npm run lint:styles && npm run lint:styles:fix && npm test
+# lint-staged
+# npm command
