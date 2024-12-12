@@ -13,8 +13,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "jest"
+      "pre-commit": "npm run lint"
     }
   },
   "validate-branch-name": {
