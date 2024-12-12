@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "npx eslint **/*.tsx",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "prepare": "husky"
@@ -14,7 +14,7 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "npm run lint",
-      "prettier --write"
+      "prettier --write ."
     ],
     "**/*.{html,json,js,css,scss,md}": [
       "prettier --write"
