@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   console.log('---')
-  console.log('---')б
+  console.log('---')
 
 
 
