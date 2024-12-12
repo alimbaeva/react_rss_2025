@@ -24,8 +24,8 @@
     "commit-msg": "commitlint --edit"
   },
   "validate-branch-name": {
-   "pattern": "^(init|feat|fix|refactor|docs|chore)/RSS-ECOMM-[1-4]_\\d+_[a-zA-Z0-9-]+$",
-   "errorMsg": "Your current branch name is invalid33333333333333"
+    "pattern": "^(init|feat|fix|refactor|docs|chore)/RSS-ECOMM-[1-4]_\\d+_[a-zA-Z0-9-]+$",
+    "errorMsg": "Your current branch name is invalid33333333333333"
   },
   "dependencies": {
     "react": "^18.3.1",
