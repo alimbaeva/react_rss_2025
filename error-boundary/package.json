@@ -9,24 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "coverage": "--coverage",
-    "prepare": "husky || true",
-    "lint-staged": "lint-staged"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test"
-    }
-  },
-  "lint-staged": {
-    "*.ts": "eslint --fix ",
-    "*.{ts,scss,md,html,json}": "prettier --cache --write",
-    "commit-msg": "commitlint --edit"
-  },
-  "validate-branch-name": {
-    "pattern": "^(init|feat|fix|refactor|docs|chore)/RSS-ECOMM-[1-4]_\\d+_[a-zA-Z0-9-]+$",
-    "errorMsg": "Your current branch name is invalid33333333333333"
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^18.3.1",
