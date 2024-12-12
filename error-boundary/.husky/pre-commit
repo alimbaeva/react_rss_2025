@@ -2,6 +2,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo "Running pre-commit hook"
 echo "Husky pre-commit hook is running!"
 cd error-boundary
 npm run lint
