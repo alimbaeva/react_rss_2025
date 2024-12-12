@@ -1,4 +1,6 @@
 echo "Running ESLint..."
 
+npx eslint .
+
 npm test
 npm run lint
