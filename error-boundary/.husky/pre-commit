@@ -1,1 +1,2 @@
+echo "Husky pre-commit hook is running..."
 npm lint-staged
