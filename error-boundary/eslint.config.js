@@ -12,6 +12,9 @@ export default tseslint.config(
   {
     //в ESLint используется для наследования готовых наборов правил из различных конфигураций
     extends: [
+      "eslint:recommended", 
+      "plugin:react/recommended", 
+      "prettier",
       js.configs.recommended, // Избегать неиспользуемых переменных Указывать явное сравнение (=== вместо ==) Запрет на использование недопустимого синтаксиса
       ...tseslint.configs.strict, // набор правил добавляет рекомендации для более строгого контроля типизации и улучшенной поддержки TypeScript
       eslintPluginPrettier, // автоматически синхронизирует правила форматирования Prettier и ESLint, предотвращая конфликты
