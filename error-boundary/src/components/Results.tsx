@@ -16,13 +16,13 @@ interface ResultsState {
 }
 
 class Results extends Component<ResultsProps> {
-    state: ResultsState = {
-      images: [],
-      isLoading: true,
-      error: null,
-    };
+  state: ResultsState = {
+    images: [],
+    isLoading: true,
+    error: null,
+  };
 
-  async componentDidMount() {
+  getCatsData = async () => {
     const apiKey = "live_jTLXI5GGxwquevnfnM4WJdb9R2nN2KBt7THZGwl6AYe7ChJvnQnrigW2VQp252SF";
 
     try {
@@ -43,8 +43,21 @@ class Results extends Component<ResultsProps> {
     }
   }
 
+  async componentDidMount() {
+    this.getCatsData()
+  }
+
+  componentWillUnmount() {
+    this.getCatsData();
+  }
+
+  shouldComponentUpdate(nextProps: ResultsProps) {
+    if (nextProps.searchValue === this.props.searchValue) return false;
+    this.getCatsData();
+    return true;
+  }
+
   render(): JSX.Element {
-    console.log(this.props.searchValue);
       return (
           <div>
   

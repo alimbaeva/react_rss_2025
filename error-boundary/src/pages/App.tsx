@@ -11,13 +11,12 @@ class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      searchValue: localStorage.getItem("searchValue") ?? ''
+      searchValue: localStorage.getItem("idValue") ?? ''
     }
   }
 
   handleSearch = (query: string) => {
     this.setState({ searchValue: query });
-    console.log(query)
   };
 
   render() {
