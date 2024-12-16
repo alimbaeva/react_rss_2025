@@ -40,3 +40,11 @@ export interface CatBreed {
   };
   wikipedia_url: string;
 }
+
+export interface CatsDataType {
+    breeds: CatBreed[];
+    height: number;
+    id: string;
+    url: string;
+    width: number;
+}
