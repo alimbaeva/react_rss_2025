@@ -80,7 +80,7 @@ class TopControls extends Component<TopControlsProps> {
   render(): JSX.Element {
     return (
         <form onSubmit={this.handleSubmit}>
-            <div>
+            <div className="input-wrapper">
               <input 
                 type="text"
                 value={this.state.inputValue}
@@ -88,10 +88,10 @@ class TopControls extends Component<TopControlsProps> {
                 placeholder="Введите текст для поиска"
               />
               {this.state.showListBreeds && (
-                <ul>
+                <ul className="wrapper-breed">
                     {this.state.inputOptions.map((el, index) => {
                     return (
-                        <li key={el.id + index} data-id={el.id} onClick={this.handleBreedItem}>{el.name}</li>
+                        <li className="breed-item" key={el.id + index} data-id={el.id} onClick={this.handleBreedItem}>{el.name}</li>
                     )
                     })}
                 </ul>

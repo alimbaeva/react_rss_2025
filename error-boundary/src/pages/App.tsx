@@ -21,7 +21,7 @@ class App extends Component<{}, AppState> {
 
   render() {
     return (
-      <div>
+      <div className="main-page">
         <TopControls onSearch={this.handleSearch} />
         <Results searchValue={this.state.searchValue} />
       </div>
