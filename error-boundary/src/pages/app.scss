@@ -55,3 +55,41 @@ form {
     }
   }
 }
+
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+}
+
+.card {
+  width: 320px;
+  padding: 12px;
+  box-shadow: 1px 0px 3px 3px rgb(216, 193, 193);
+  border-radius: 15px;
+
+  .img-container {
+    width: 280px;
+    min-height: 100px;
+    overflow: hidden;
+    margin: auto;
+    border-radius: 15px;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  .info-wrapper {
+    margin: 10px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}

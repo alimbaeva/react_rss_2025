@@ -62,7 +62,7 @@ class Results extends Component<ResultsProps> {
 
   render(): JSX.Element {
     return (
-      <div>
+      <div className="cards-wrapper">
         {this.state.data.map((el) => (
           <CardItem key={el.id} data={el} />
         ))}
