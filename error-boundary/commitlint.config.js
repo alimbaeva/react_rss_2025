@@ -1,1 +1,1 @@
-Copymodule.exports = { extends: ['@commitlint/config-conventional'] }
+Copymodule.exports = { extends: ['@commitlint/config-conventional'] };

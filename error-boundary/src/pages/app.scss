@@ -1,8 +1,8 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .main-page {
@@ -13,45 +13,45 @@
 }
 
 form {
-    width: 300px;
+  width: 300px;
 
-    .input-wrapper {
-        width: 100%;
+  .input-wrapper {
+    width: 100%;
+  }
+
+  input,
+  button {
+    all: unset;
+    margin-bottom: 15px;
+    padding: 7px;
+    font-weight: 700;
+    border-radius: 5px;
+    box-shadow: 1px 0px 3px 3px rgb(216, 193, 193);
+  }
+
+  button {
+    cursor: pointer;
+    padding: 7px 15px;
+
+    &:hover {
+      background-color: rgb(184, 215, 169);
+      box-shadow: none;
     }
+  }
 
-    input,
-    button {
-        all: unset;
-        margin-bottom: 15px;
-        padding: 7px;
-        font-weight: 700;
-        border-radius: 5px;
-        box-shadow: 1px 0px 3px 3px rgb(216, 193, 193);
+  .wrapper-breed {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+
+    .breed-item {
+      padding: 7px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(184, 215, 169);
+      }
     }
-
-    button {
-        cursor: pointer;
-        padding: 7px 15px;
-
-        &:hover {
-            background-color: rgb(184, 215, 169);
-            box-shadow: none;
-        }
-    }
-
-    .wrapper-breed {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        margin-bottom: 15px;
-
-        .breed-item {
-            padding: 7px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgb(184, 215, 169);
-            }
-        }
-    }
+  }
 }

@@ -42,9 +42,9 @@ export interface CatBreed {
 }
 
 export interface CatsDataType {
-    breeds: CatBreed[];
-    height: number;
-    id: string;
-    url: string;
-    width: number;
+  breeds: CatBreed[];
+  height: number;
+  id: string;
+  url: string;
+  width: number;
 }

@@ -8,46 +8,37 @@ import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
 
 export default tseslint.config(
-  { ignores: ['node_modules/', 'dist/', '**/*.test.tsx', '**/*.test.ts'] }, // игнорируются файлы и папки, указанные в массиве
+  { ignores: ['dist'] },
   {
-    //в ESLint используется для наследования готовых наборов правил из различных конфигураций
     extends: [
-      "eslint:recommended", 
-      "plugin:react/recommended", 
-      "prettier",
-      js.configs.recommended, // Избегать неиспользуемых переменных Указывать явное сравнение (=== вместо ==) Запрет на использование недопустимого синтаксиса
-      ...tseslint.configs.strict, // набор правил добавляет рекомендации для более строгого контроля типизации и улучшенной поддержки TypeScript
-      eslintPluginPrettier, // автоматически синхронизирует правила форматирования Prettier и ESLint, предотвращая конфликты
+      js.configs.recommended,
+      ...tseslint.configs.strict,
+      eslintPluginPrettier,
     ],
-    files: ['**/*.{ts,tsx}'], // files в ESLint конфигурации указывает, какие файлы должны быть обработаны линтером
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      // ESLint задает параметры языка и окружения, которые определяют, какой синтаксис JavaScript доступен и какие глобальные переменные можно использовать без объявления
-      ecmaVersion: 2020, // ESLint должен использовать синтаксис ECMAScript 2020 (ES11) ?. ??
-      globals: globals.browser, // globals.browser из пакета globals автоматически регистрирует все эти переменные как доступные
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
     plugins: {
-      // в конфигурации ESLint определяет дополнительные плагины, которые расширяют возможности линтера
-      react, // Проверка правильности типов props Запрет на использование устаревших методов жизненного цикла
-      'react-hooks': reactHooks, // Вызывать хуки только на верхнем уровне компонентов Гарантировать, что зависимости в массиве для хуков вроде useEffect корректны
-      'react-refresh': reactRefresh, // гарантирует, что только компоненты экспортируются, что необходимо для правильной работы Hot Module Replacement
-      'react-compiler': reactCompiler, // полезно для проверок, связанных с безопасностью и корректностью во время рендеринга
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'react-compiler': reactCompiler,
     },
     rules: {
-      // в конфигурации ESLint позволяет настроить поведение линтера, задавая правила для различных аспектов кода
-      ...reactHooks.configs.recommended.rules, // Хуки должны быть вызваны на верхнем уровне компонента.
+      ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
-        // гарантирует, что только React-компоненты экспортируются из модуля
-        'warn', // предупреждает об экспорте чего-то, что не является компонентом, что необходимо для корректной работы Hot Module Replacement (HMR)
+        'warn',
         { allowConstantExport: true },
       ],
-      'react-compiler/react-compiler': 'error', // проверяет, что компоненты и их JSX корректно компилируются
-      ...react.configs.recommended.rules, // рекомендации по написанию хороших React-компонентов
-      ...react.configs['jsx-runtime'].rules, // связанные с новым JSX-форматом, который использует JSX-автоматическую трансформацию
+      'react-compiler/react-compiler': 'error',
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
     },
     settings: {
-      // используется для указания настроек, которые влияют на работу плагинов и правил
       react: {
-        version: 'detect', // автоматически определит установленную версию React
+        version: 'detect',
       },
     },
   }

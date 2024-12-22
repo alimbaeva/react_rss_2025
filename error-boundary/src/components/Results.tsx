@@ -1,5 +1,6 @@
-import { Component } from "react"
-import { CatsDataType } from "../types/types";
+import { Component } from 'react';
+import { CatsDataType } from '../types/types';
+import CardItem from './CardItem';
 
 interface ResultsProps {
   searchValue: string;
@@ -13,13 +14,16 @@ interface ResultsState {
 
 class Results extends Component<ResultsProps> {
   state: ResultsState = {
-    data: localStorage.getItem("data") ? (JSON.parse(localStorage.getItem("data") as string) as CatsDataType[]) : [],
+    data: localStorage.getItem('data')
+      ? (JSON.parse(localStorage.getItem('data') as string) as CatsDataType[])
+      : [],
     isLoading: true,
     error: null,
   };
 
   getCatsData = async () => {
-    const apiKey = "live_jTLXI5GGxwquevnfnM4WJdb9R2nN2KBt7THZGwl6AYe7ChJvnQnrigW2VQp252SF";
+    const apiKey =
+      'live_jTLXI5GGxwquevnfnM4WJdb9R2nN2KBt7THZGwl6AYe7ChJvnQnrigW2VQp252SF';
 
     try {
       const response = await fetch(
@@ -27,23 +31,23 @@ class Results extends Component<ResultsProps> {
       );
 
       if (!response.ok) {
-        throw new Error("Не удалось загрузить данные.");
+        throw new Error('Не удалось загрузить данные.');
       }
 
       const data: CatsDataType[] = await response.json();
-      this.setState({ 
+      this.setState({
         ...this.state,
         data: data,
-        isLoading: false 
+        isLoading: false,
       });
-      localStorage.setItem("data", JSON.stringify(data))
-    } catch (error: any) {
-      this.setState({ ...this.state, error: error.message, isLoading: false });
+      localStorage.setItem('data', JSON.stringify(data));
+    } catch (error: unknown) {
+      this.setState({ ...this.state, error: error, isLoading: false });
     }
-  }
+  };
 
   async componentDidMount() {
-    this.getCatsData()
+    this.getCatsData();
   }
 
   shouldComponentUpdate(nextProps: ResultsProps) {
@@ -59,24 +63,12 @@ class Results extends Component<ResultsProps> {
   render(): JSX.Element {
     return (
       <div>
-        {
-          this.state.data.map((el) => (
-            <div key={el.id}>
-              <img src={el.url} alt={el.breeds[0].name} />
-              <div>
-                <p>Name: {el.breeds[0].name}</p>
-                <p>Origin: {el.breeds[0].origin}</p>
-                <p>Temperament: {el.breeds[0].temperament}</p>
-                <p>Weight: {el.breeds[0].weight.imperial}</p>
-                <p>{el.breeds[0].description}</p>
-                <p></p>
-              </div>
-            </div>
-          ))
-        }
+        {this.state.data.map((el) => (
+          <CardItem key={el.id} data={el} />
+        ))}
       </div>
-    )
-    }
+    );
+  }
 }
 
-export default Results
+export default Results;
