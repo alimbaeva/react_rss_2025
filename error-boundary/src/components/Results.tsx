@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { CatsDataType } from '../types/types';
 import CardItem from './CardItem';
+import IsLoading from './IsLoading';
 
 interface ResultsProps {
   searchValue: string;
@@ -17,13 +18,15 @@ class Results extends Component<ResultsProps> {
     data: localStorage.getItem('data')
       ? (JSON.parse(localStorage.getItem('data') as string) as CatsDataType[])
       : [],
-    isLoading: true,
+    isLoading: false,
     error: null,
   };
 
   getCatsData = async () => {
     const apiKey =
       'live_jTLXI5GGxwquevnfnM4WJdb9R2nN2KBt7THZGwl6AYe7ChJvnQnrigW2VQp252SF';
+
+    this.setState({ isLoading: true, error: null });
 
     try {
       const response = await fetch(
@@ -35,23 +38,25 @@ class Results extends Component<ResultsProps> {
       }
 
       const data: CatsDataType[] = await response.json();
-      this.setState({
-        ...this.state,
-        data: data,
-        isLoading: false,
-      });
-      localStorage.setItem('data', JSON.stringify(data));
+      setTimeout(() => {
+        this.setState({
+          data: data,
+          isLoading: false,
+        });
+        localStorage.setItem('data', JSON.stringify(data));
+      }, 700);
     } catch (error: unknown) {
       this.setState({ ...this.state, error: error, isLoading: false });
     }
   };
 
   async componentDidMount() {
-    this.getCatsData();
-  }
-
-  shouldComponentUpdate(nextProps: ResultsProps) {
-    return nextProps.searchValue !== this.props.searchValue;
+    const cachedData = localStorage.getItem('data');
+    if (cachedData) {
+      this.setState({ data: JSON.parse(cachedData) });
+    } else {
+      this.getCatsData();
+    }
   }
 
   componentDidUpdate(prevProps: ResultsProps) {
@@ -61,9 +66,23 @@ class Results extends Component<ResultsProps> {
   }
 
   render(): JSX.Element {
+    const { isLoading, data, error } = this.state;
+
+    if (isLoading) {
+      return <IsLoading />;
+    }
+
+    if (error) {
+      return <div className="error-message">{error}</div>;
+    }
+
+    if (data.length === 0) {
+      return <div className="no-data-message">Нет данных для отображения</div>;
+    }
+
     return (
       <div className="cards-wrapper">
-        {this.state.data.map((el) => (
+        {data.map((el) => (
           <CardItem key={el.id} data={el} />
         ))}
       </div>

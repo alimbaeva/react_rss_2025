@@ -23,7 +23,9 @@ class App extends Component<unknown, AppState> {
     return (
       <div className="main-page">
         <TopControls onSearch={this.handleSearch} />
-        <Results searchValue={this.state.searchValue} />
+        {this.state.searchValue && (
+          <Results searchValue={this.state.searchValue} />
+        )}
       </div>
     );
   }
