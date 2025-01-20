@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import './styles/errorBoundary.scss';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -19,6 +20,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true };
   }
 
+  handleReload = () => window.location.reload();
+
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({
       hasError: true,
@@ -31,10 +34,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
     if (hasError) {
       return (
-        <div>
+        <div className="error-block">
           {this.props.fallback}
           <h1>Somethig wrong is going...</h1>
-          <button>Reload</button>
+          <button onClick={this.handleReload}>Reload</button>
         </div>
       );
     }

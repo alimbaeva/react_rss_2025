@@ -1,0 +1,28 @@
+.error-block {
+  width: 600px;
+  margin: 50px auto;
+  color: rgb(223, 58, 58);
+
+  button {
+    all: unset;
+    margin: 15px 0;
+    padding: 7px 30px;
+    font-weight: 700;
+    border-radius: 5px;
+    box-shadow: 1px 0px 3px 3px rgb(216, 193, 193);
+
+    &:hover {
+      background-color: rgb(184, 215, 169);
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 650px) {
+    width: 90%;
+
+    h1 {
+        font-size: 26px;
+    }
+  }
+
+}
