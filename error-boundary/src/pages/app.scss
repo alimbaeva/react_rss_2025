@@ -113,8 +113,7 @@ form {
   height: 100vh;
   overflow: hidden;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.603);
-  align-items: center; 
+  align-items: center;
 
   .inner-modal {
     width: 100%;
@@ -123,7 +122,7 @@ form {
     align-items: center;
     justify-content: center;
   }
-  
+
   .inner {
     display: flex;
     align-items: center;
@@ -143,12 +142,27 @@ form {
   .item-1 {
     animation-delay: 0s;
   }
-  
+
   .item-2 {
     animation-delay: 1s;
   }
-  
+
   .item-3 {
     animation-delay: 2s;
+  }
+}
+
+.error-btn {
+  all: unset;
+  margin-bottom: 15px;
+  font-weight: 700;
+  border-radius: 5px;
+  box-shadow: 1px 0px 3px 3px rgb(142, 40, 40);
+  cursor: pointer;
+  padding: 7px 15px;
+
+  &:hover {
+    background-color: rgb(190, 124, 95);
+    box-shadow: none;
   }
 }

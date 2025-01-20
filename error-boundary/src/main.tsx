@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './pages/App';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const root = document.getElementById('root');
 if (!root) {
@@ -8,7 +9,9 @@ if (!root) {
 }
 
 createRoot(root).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  <ErrorBoundary fallback={<p>Colling error ...</p>}>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </ErrorBoundary>
 );
