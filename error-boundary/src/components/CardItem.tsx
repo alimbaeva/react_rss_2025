@@ -1,5 +1,6 @@
 import { Component, ReactNode } from 'react';
 import { CatsDataType } from '../types/types';
+import './styles/cardItem.scss';
 
 interface CardItemProps {
   data: CatsDataType;
