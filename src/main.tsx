@@ -8,6 +8,8 @@ if (!root) {
   throw new Error('Root element not found');
 }
 
+console.log(88);
+
 createRoot(root).render(
   <ErrorBoundary fallback={<p>Colling error ...</p>}>
     <StrictMode>
