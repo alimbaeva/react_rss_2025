@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
+    "format:fix": "prettier --write .",
     "prepare": "husky && husky install",
     "postinstall": "npx lint-staged --debug"
   },
@@ -44,8 +44,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "npm run format",
-      "npm run lint"
+      "npm run format:fix",
+      "npm run lint",
+      "npm run lint:fix"
     ]
   },
   "husky": {
