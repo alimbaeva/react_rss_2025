@@ -1,52 +1,58 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import { CatsDataType } from '../types/types';
 import CardItem from './CardItem';
+import './styles/result.scss';
 import IsLoading from './IsLoading';
+import { APIKEY, URLAPI_SEARCH } from '../veriables';
 
-interface ResultsProps {
-  searchValue: string;
-}
-
-interface ResultsState {
+interface ResultState {
   data: CatsDataType[];
   isLoading: boolean;
   error: string | null;
 }
 
-class Results extends Component<ResultsProps> {
-  state: ResultsState = {
-    data: localStorage.getItem('data')
-      ? (JSON.parse(localStorage.getItem('data') as string) as CatsDataType[])
-      : [],
-    isLoading: false,
-    error: null,
-  };
+interface ResultProps {
+  searchValue: string;
+  limit: number | null;
+}
+
+class Result extends Component<ResultProps, ResultState> {
+  constructor(props: ResultProps) {
+    super(props);
+    this.state = {
+      data: localStorage.getItem('data')
+        ? (JSON.parse(localStorage.getItem('data') as string) as CatsDataType[])
+        : [],
+      isLoading: false,
+      error: null,
+    };
+  }
 
   getCatsData = async () => {
-    const apiKey =
-      'live_jTLXI5GGxwquevnfnM4WJdb9R2nN2KBt7THZGwl6AYe7ChJvnQnrigW2VQp252SF';
-
     this.setState({ isLoading: true, error: null });
 
     try {
       const response = await fetch(
-        `https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${this.props.searchValue}&api_key=${apiKey}`
+        `${URLAPI_SEARCH}limit=${this.props.limit ?? 100}&breed_ids=${this.props.searchValue}&api_key=${APIKEY}`
       );
 
       if (!response.ok) {
-        throw new Error('Не удалось загрузить данные.');
+        throw new Error(
+          `Ошибка ${response.status}: ${response.statusText}. Не удалось загрузить данные.`
+        );
       }
 
       const data: CatsDataType[] = await response.json();
       setTimeout(() => {
         this.setState({
+          ...this.state,
           data: data,
           isLoading: false,
         });
         localStorage.setItem('data', JSON.stringify(data));
       }, 700);
-    } catch (error: unknown) {
-      this.setState({ ...this.state, error: error, isLoading: false });
+    } catch (err) {
+      this.setState({ ...this.state, error: `${err}`, isLoading: false });
     }
   };
 
@@ -59,13 +65,13 @@ class Results extends Component<ResultsProps> {
     }
   }
 
-  componentDidUpdate(prevProps: ResultsProps) {
+  componentDidUpdate(prevProps: ResultProps) {
     if (prevProps.searchValue !== this.props.searchValue) {
       this.getCatsData();
     }
   }
 
-  render(): JSX.Element {
+  render(): ReactNode {
     const { isLoading, data, error } = this.state;
 
     if (isLoading) {
@@ -90,4 +96,4 @@ class Results extends Component<ResultsProps> {
   }
 }
 
-export default Results;
+export default Result;

@@ -1,4 +1,5 @@
 import { Component, ReactNode } from 'react';
+import './styles/isLoading.scss';
 
 class IsLoading extends Component {
   render(): ReactNode {

@@ -48,3 +48,8 @@ export interface CatsDataType {
   url: string;
   width: number;
 }
+
+export interface Breed {
+  id: string;
+  name: string;
+}

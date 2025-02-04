@@ -1,28 +1,48 @@
-import { ChangeEvent, Component, FormEvent, MouseEvent } from 'react';
-import { CatBreed } from '../types/types';
+import {
+  ChangeEvent,
+  Component,
+  FormEvent,
+  ReactNode,
+  MouseEvent,
+} from 'react';
+import { Breed, CatBreed } from '../types/types';
+import './styles/topControls.scss';
+import { ERRORLOADING, URLAPI } from '../veriables';
+
+interface TopControlsState {
+  inputValue: string;
+  idValue: string;
+  error: { message: string } | null;
+  breeds: Breed[];
+  inputOptions: Breed[];
+  showListBreeds: boolean;
+}
 
 interface TopControlsProps {
   onSearch: (query: string) => void;
 }
 
-interface Breed {
-  id: string;
-  name: string;
-}
-
-class TopControls extends Component<TopControlsProps> {
-  state = {
-    inputValue: localStorage.getItem('searchValue') ?? '',
-    idValue: localStorage.getItem('idValue') ?? '',
-    breeds: [] as Breed[],
-    inputOptions: [] as Breed[],
-    showListBreeds: false,
-    error: null,
-  };
+class TopControls extends Component<TopControlsProps, TopControlsState> {
+  constructor(props: TopControlsProps) {
+    super(props);
+    this.state = {
+      inputValue: localStorage.getItem('searchValue') ?? '',
+      idValue: localStorage.getItem('idValue') ?? '',
+      breeds: [],
+      inputOptions: [],
+      showListBreeds: false,
+      error: null,
+    };
+  }
 
   async fetchBreeds() {
     try {
-      const response = await fetch('https://api.thecatapi.com/v1/breeds');
+      const response = await fetch(URLAPI);
+
+      if (!response.ok) {
+        throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+      }
+
       const data: CatBreed[] = await response.json();
 
       const dataBread: Breed[] = [];
@@ -31,11 +51,11 @@ class TopControls extends Component<TopControlsProps> {
       if (!this.state.inputValue.length) {
         this.setState({
           inputOptions: dataBread,
-          showListBreeds: true,
+          showListBreeds: false,
         });
       }
     } catch (error: unknown) {
-      this.setState({ error: 'Ошибка загрузки списка пород' });
+      this.setState({ error: { message: ERRORLOADING } });
       return Error(`${error}`);
     }
   }
@@ -49,6 +69,14 @@ class TopControls extends Component<TopControlsProps> {
     const filterBreads = this.state.breeds.filter((el) =>
       el.name.toLowerCase().includes(value)
     );
+
+    if (!filterBreads.length) {
+      this.setState({
+        idValue: '',
+        inputOptions: filterBreads,
+      });
+    }
+
     this.setState({
       inputOptions: filterBreads,
     });
@@ -57,19 +85,23 @@ class TopControls extends Component<TopControlsProps> {
   handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     localStorage.setItem('searchValue', this.state.inputValue);
-    this.props.onSearch(this.state.idValue);
-    this.setState({
-      showListBreeds: false,
-    });
+    if (this.state.idValue) this.props.onSearch(this.state.idValue);
+    if (!this.state.idValue || !this.state.inputValue) {
+      this.setState({
+        ...this.state,
+        idValue: '',
+        inputValue: '',
+      });
+      localStorage.setItem('searchValue', '');
+      localStorage.setItem('idValue', '');
+      this.props.onSearch('');
+    }
   };
 
   handleBreedItem = (event: MouseEvent<HTMLLIElement>) => {
     const eventId = (event.currentTarget as HTMLLIElement).dataset.id as string;
     const eventName = (event.currentTarget as HTMLLIElement)
       .textContent as string;
-    this.setState({
-      showListBreeds: false,
-    });
     this.setState({
       ...this.state,
       showListBreeds: false,
@@ -81,6 +113,13 @@ class TopControls extends Component<TopControlsProps> {
     localStorage.setItem('idValue', eventId);
   };
 
+  handleCustomError = () => {
+    this.setState({
+      ...this.state,
+      error: new Error('Custom error triggered.'),
+    });
+  };
+
   async componentDidMount() {
     this.fetchBreeds();
   }
@@ -88,19 +127,16 @@ class TopControls extends Component<TopControlsProps> {
   componentWillUnmount() {
     this.fetchBreeds();
     this.setState({
+      ...this.state,
       showListBreeds: false,
     });
   }
-
-  handleCustomError = () => {
-    this.setState({ error: new Error('Custom error triggered.') });
-  };
 
   componentDidUpdate() {
     if (this.state.error) throw this.state.error;
   }
 
-  render(): JSX.Element {
+  render(): ReactNode {
     return (
       <div className="controls-wrapper">
         <form onSubmit={this.handleSubmit}>
@@ -112,23 +148,27 @@ class TopControls extends Component<TopControlsProps> {
               placeholder="Введите текст для поиска"
             />
             {this.state.showListBreeds && (
-              <ul className="wrapper-breed">
-                {this.state.inputOptions.map((el, index) => {
-                  return (
-                    <li
-                      className="breed-item"
-                      key={el.id + index}
-                      data-id={el.id}
-                      onClick={this.handleBreedItem}
-                    >
-                      {el.name}
-                    </li>
-                  );
-                })}
-              </ul>
+              <>
+                {this.state.inputOptions.length ? (
+                  <ul className="wrapper-breed">
+                    {this.state.inputOptions.map((el, index) => {
+                      return (
+                        <li
+                          className="breed-item"
+                          key={el.id + index}
+                          data-id={el.id}
+                          onClick={this.handleBreedItem}
+                        >
+                          {el.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : null}
+              </>
             )}
           </div>
-          <button type="submit">Search</button>
+          <button>Search</button>
         </form>
         <button
           onClick={this.handleCustomError}
