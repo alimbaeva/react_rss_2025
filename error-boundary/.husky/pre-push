@@ -1,0 +1,6 @@
+echo "Running ESLint... PUSH"
+npm run format
+npm run lint
+npx validate-branch-name
+npm test
+npm test
