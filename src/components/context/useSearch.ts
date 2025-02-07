@@ -1,0 +1,12 @@
+import { useContext } from 'react';
+import SearchContext, { SearchContextType } from './SearchContext';
+
+export const useSearch = (): SearchContextType => {
+  const context = useContext(SearchContext);
+  if (!context) {
+    throw new Error(
+      'useSearch must be used within a SearchContext in SearchProvider'
+    );
+  }
+  return context;
+};

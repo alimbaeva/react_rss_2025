@@ -53,3 +53,8 @@ export interface Breed {
   id: string;
   name: string;
 }
+
+export interface SearchStateType {
+  searchValue: string;
+  limit: number;
+}
