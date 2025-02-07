@@ -5,6 +5,7 @@ import './styles/result.scss';
 import IsLoading from './IsLoading';
 import { APIKEY, URLAPI_SEARCH } from '../veriables';
 import { useSearch } from './context/useSearch';
+import EmptyData from './EmptyData';
 
 const Result: FC = () => {
   const { limit, idValue } = useSearch();
@@ -44,12 +45,12 @@ const Result: FC = () => {
 
   useEffect(() => {
     if (idValue) getCatsData();
+    if (!idValue) setData([]);
   }, [idValue, getCatsData]);
 
   if (isLoading) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;
-  if (data.length === 0)
-    return <div className="no-data-message">Нет данных для отображения</div>;
+  if (data.length === 0) return <EmptyData />;
 
   return (
     <div className="cards-wrapper">

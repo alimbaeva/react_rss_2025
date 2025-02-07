@@ -60,7 +60,7 @@ const TopControls: FC = () => {
     if (filteredBreeds.length) setInputOptions(filteredBreeds);
 
     if (!filteredBreeds.length) {
-      setIdValue('');
+      setSearchValueState({ searchValue: value, idValue: '' });
       setInputOptions([]);
     }
   };
