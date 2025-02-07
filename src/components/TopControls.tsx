@@ -29,6 +29,8 @@ const TopControls: FC = () => {
   const [showListBreeds, setShowListBreeds] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  if (error) throw new Error('Имитация ошибки при клике.');
+
   const fetchBreeds = useCallback(async () => {
     try {
       const response = await fetch(URLAPI);
@@ -42,7 +44,7 @@ const TopControls: FC = () => {
       setBreeds(dataBread);
     } catch (error: unknown) {
       console.error(error);
-      setError(ERRORLOADING);
+      throw new Error(`${ERRORLOADING}`);
     }
   }, []);
 
@@ -132,6 +134,13 @@ const TopControls: FC = () => {
         </div>
         <button>Search</button>
       </form>
+      <button
+        onClick={() => setError(ERRORLOADING)}
+        type="button"
+        className="error-btn"
+      >
+        Error Button
+      </button>
       {error && <p className="error-message">{error}</p>}
     </div>
   );

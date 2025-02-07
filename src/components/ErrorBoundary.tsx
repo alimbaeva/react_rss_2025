@@ -8,16 +8,17 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   hasError: boolean;
+  errorMessage: null | string;
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, errorMessage: null };
   }
-  static getDerivedStateFromError(error: unknown): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     console.error(error);
-    return { hasError: true };
+    return { hasError: true, errorMessage: error.message };
   }
 
   handleReload = () => window.location.reload();
@@ -37,6 +38,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         <div className="error-block">
           {this.props.fallback}
           <h1>Somethig wrong is going...</h1>
+          <h1>{this.state.errorMessage}</h1>
           <button onClick={this.handleReload}>Reload</button>
         </div>
       );

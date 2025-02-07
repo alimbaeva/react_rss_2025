@@ -7,8 +7,10 @@ import Result from '../components/Result';
 const Home: FC = () => {
   return (
     <SearchProvider>
-      <TopControls />
-      <Result />
+      <main className="main-page">
+        <TopControls />
+        <Result />
+      </main>
     </SearchProvider>
   );
 };
