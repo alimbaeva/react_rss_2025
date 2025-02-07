@@ -21,3 +21,24 @@
     place-items: center;
   }
 }
+
+.page-wrapper {
+  @extend %center;
+  gap: 15px;
+  margin: 15px;
+
+  .page-item {
+    @extend %center;
+    box-shadow: $box-shadow;
+    padding: 10px 15px;
+    border-radius: $border-radius;
+
+    &:hover {
+      background-color: $red193;
+    }
+  }
+
+  .activ {
+    background-color: $red193;
+  }
+}

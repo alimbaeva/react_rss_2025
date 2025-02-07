@@ -5,9 +5,10 @@ import './styles/result.scss';
 import IsLoading from './IsLoading';
 import { useSearch } from './context/useSearch';
 import EmptyData from './EmptyData';
+import Pagination from './pagination/Pagination';
 
 const Result: FC = () => {
-  const { searchValueKey, searchValue, cats } = useSearch();
+  const { searchValueKey, searchValue, cats, limit, currentPage } = useSearch();
   const [data, setData] = useState<CatBreed[]>(
     localStorage.getItem('dataCurent')
       ? JSON.parse(localStorage.getItem('dataCurent') as string)
@@ -15,6 +16,7 @@ const Result: FC = () => {
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [pages, setPages] = useState<number[]>([]);
 
   const getCatsData = useCallback(async () => {
     setIsLoading(true);
@@ -28,16 +30,6 @@ const Result: FC = () => {
     setData(filteredCat);
     setIsLoading(false);
     localStorage.setItem('dataCurent', JSON.stringify(filteredCat));
-
-    // await fetchGetCatsData(idValue)
-    //   .then((res) => {
-    //     if (res) setData(res);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     setError(`${err}`);
-    //     setIsLoading(false);
-    //   });
   }, [cats, searchValue, searchValueKey]);
 
   useEffect(() => {
@@ -45,16 +37,31 @@ const Result: FC = () => {
     if (!searchValue && !searchValueKey) setData([]);
   }, [searchValue, searchValueKey, getCatsData]);
 
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+
+    const arr = Array.from(
+      { length: Math.ceil(data.length / limit) },
+      (_, i) => i
+    );
+    setPages(arr);
+  }, [data, limit, pages.length]);
+
   if (isLoading) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;
   if (data.length === 0) return <EmptyData />;
 
   return (
-    <div className="cards-wrapper">
-      {data.map((el) => (
-        <CardItem key={el.id} data={el} />
-      ))}
-    </div>
+    <>
+      <Pagination pages={pages} />
+      <div className="cards-wrapper">
+        {data
+          .slice(currentPage * limit, currentPage * limit + limit)
+          .map((el) => (
+            <CardItem key={el.id} data={el} />
+          ))}
+      </div>
+    </>
   );
 };
 

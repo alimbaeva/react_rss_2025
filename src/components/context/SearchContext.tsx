@@ -21,6 +21,8 @@ export interface SearchContextType {
   limit: number;
   breeds: Breed[];
   cats: CatBreed[];
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
   setCats: Dispatch<SetStateAction<CatBreed[]>>;
   setBreedsValue: Dispatch<SetStateAction<Breed[]>>;
   setSearchValueKey: Dispatch<SetStateAction<string>>;
@@ -46,15 +48,15 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
   const [searchValueKey, setSearchValueKey] = useState<string>(
     localStorage.getItem('searchValueKey') ?? ''
   );
-  const [limit, setLimit] = useState<number>(100);
+  const [limit, setLimit] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(
+    localStorage.getItem('currentPage')
+      ? JSON.parse(localStorage.getItem('currentPage') as string)
+      : 0
+  );
   const [breeds, setBreedsValue] = useState<Breed[]>([]);
   const [cats, setCats] = useState<CatBreed[]>([]);
 
-  // const saveToLocalStorage = (
-  //   searchValue = '',
-  //   searchValueKey = '',
-  //   idValue = ''
-  // ) => {
   const saveToLocalStorage = ({
     searchValue = '',
     searchValueKey = '',
@@ -63,6 +65,7 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     localStorage.setItem('searchValue', searchValue);
     localStorage.setItem('idValue', idValue);
     localStorage.setItem('searchValueKey', searchValueKey);
+    setCurrentPage(0);
   };
 
   return (
@@ -74,6 +77,8 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
         breeds,
         cats,
         searchValueKey,
+        currentPage,
+        setCurrentPage,
         setSearchValueKey,
         setCats,
         setLimit,
