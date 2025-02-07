@@ -6,15 +6,28 @@ import {
   SetStateAction,
   FC,
 } from 'react';
+import { Breed, CatBreed } from '../../types/types';
+
+interface SaveToLocalStorageType {
+  searchValue: string;
+  searchValueKey: string;
+  idValue: string;
+}
 
 export interface SearchContextType {
   searchValue: string;
+  searchValueKey: string;
   idValue: string;
   limit: number;
+  breeds: Breed[];
+  cats: CatBreed[];
+  setCats: Dispatch<SetStateAction<CatBreed[]>>;
+  setBreedsValue: Dispatch<SetStateAction<Breed[]>>;
+  setSearchValueKey: Dispatch<SetStateAction<string>>;
   setSearchValue: Dispatch<SetStateAction<string>>;
   setLimit: Dispatch<SetStateAction<number>>;
   setIdValue: Dispatch<SetStateAction<string>>;
-  saveToLocalStorage: (searchValue: string, idValue: string) => void;
+  saveToLocalStorage: (arg: SaveToLocalStorageType) => void;
 }
 
 interface SearchProviderProps {
@@ -28,23 +41,44 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     localStorage.getItem('searchValue') ?? ''
   );
   const [idValue, setIdValue] = useState<string>(
-    localStorage.getItem('idValue') ?? 'aege'
+    localStorage.getItem('idValue') ?? ''
+  );
+  const [searchValueKey, setSearchValueKey] = useState<string>(
+    localStorage.getItem('searchValueKey') ?? ''
   );
   const [limit, setLimit] = useState<number>(100);
+  const [breeds, setBreedsValue] = useState<Breed[]>([]);
+  const [cats, setCats] = useState<CatBreed[]>([]);
 
-  const saveToLocalStorage = (searchValue: string, idValue: string) => {
+  // const saveToLocalStorage = (
+  //   searchValue = '',
+  //   searchValueKey = '',
+  //   idValue = ''
+  // ) => {
+  const saveToLocalStorage = ({
+    searchValue = '',
+    searchValueKey = '',
+    idValue = '',
+  }: SaveToLocalStorageType) => {
     localStorage.setItem('searchValue', searchValue);
     localStorage.setItem('idValue', idValue);
+    localStorage.setItem('searchValueKey', searchValueKey);
   };
 
   return (
     <SearchContext.Provider
       value={{
         searchValue,
-        setSearchValue,
         limit,
-        setLimit,
         idValue,
+        breeds,
+        cats,
+        searchValueKey,
+        setSearchValueKey,
+        setCats,
+        setLimit,
+        setSearchValue,
+        setBreedsValue,
         setIdValue,
         saveToLocalStorage,
       }}

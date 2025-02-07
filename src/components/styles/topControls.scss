@@ -2,11 +2,20 @@
 
 .controls-wrapper {
   form {
-    width: 300px;
+    width: 100%;
     position: relative;
 
     .input-wrapper {
-      width: 100%;
+      p {
+        margin: 15px 0;
+        font-weight: bold;
+      }
+
+      width: 50%;
+
+      @media (max-width: 600px) {
+        width: 100%;
+      }
     }
 
     input,
@@ -44,6 +53,15 @@
         &:hover {
           background-color: $green215;
         }
+      }
+    }
+
+    .inputs-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      @media (max-width: 600px) {
+        display: block;
       }
     }
   }

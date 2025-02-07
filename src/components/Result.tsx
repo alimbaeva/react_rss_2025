@@ -1,17 +1,16 @@
 import { useState, useEffect, FC, useCallback } from 'react';
-import { CatsDataType } from '../types/types';
-import CardItem from './CardItem';
+import { CatBreed } from '../types/types';
+import CardItem from './cards/CardItem';
 import './styles/result.scss';
 import IsLoading from './IsLoading';
-import { APIKEY, URLAPI_SEARCH } from '../veriables';
 import { useSearch } from './context/useSearch';
 import EmptyData from './EmptyData';
 
 const Result: FC = () => {
-  const { limit, idValue } = useSearch();
-  const [data, setData] = useState<CatsDataType[]>(
-    localStorage.getItem('data')
-      ? JSON.parse(localStorage.getItem('data') as string)
+  const { searchValueKey, searchValue, cats } = useSearch();
+  const [data, setData] = useState<CatBreed[]>(
+    localStorage.getItem('dataCurent')
+      ? JSON.parse(localStorage.getItem('dataCurent') as string)
       : []
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,32 +20,30 @@ const Result: FC = () => {
     setIsLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch(
-        `${URLAPI_SEARCH}limit=${limit}&breed_ids=${idValue}&api_key=${APIKEY}`
-      );
+    const keySearch = searchValueKey ? searchValueKey : searchValue;
 
-      if (!response.ok) {
-        throw new Error(
-          `Ошибка ${response.status}: ${response.statusText}. Не удалось загрузить данные.`
-        );
-      }
+    const filteredCat = cats.filter((el) =>
+      el.name.toLowerCase().includes(keySearch.toLowerCase())
+    );
+    setData(filteredCat);
+    setIsLoading(false);
+    localStorage.setItem('dataCurent', JSON.stringify(filteredCat));
 
-      const data: CatsDataType[] = await response.json();
-
-      setData(data);
-      localStorage.setItem('data', JSON.stringify(data));
-      setIsLoading(false);
-    } catch (err) {
-      setError(`${err}`);
-      setIsLoading(false);
-    }
-  }, [idValue, limit]);
+    // await fetchGetCatsData(idValue)
+    //   .then((res) => {
+    //     if (res) setData(res);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     setError(`${err}`);
+    //     setIsLoading(false);
+    //   });
+  }, [cats, searchValue, searchValueKey]);
 
   useEffect(() => {
-    if (idValue) getCatsData();
-    if (!idValue) setData([]);
-  }, [idValue, getCatsData]);
+    if (searchValue || searchValueKey) getCatsData();
+    if (!searchValue && !searchValueKey) setData([]);
+  }, [searchValue, searchValueKey, getCatsData]);
 
   if (isLoading) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;

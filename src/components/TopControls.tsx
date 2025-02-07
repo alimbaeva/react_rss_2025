@@ -7,24 +7,30 @@ import {
   FC,
   useCallback,
 } from 'react';
-import { Breed, CatBreed } from '../types/types';
-import { ERRORLOADING, URLAPI } from '../veriables';
+import { Breed } from '../types/types';
+import { ERRORLOADING } from '../veriables';
 import './styles/topControls.scss';
 import { useSearch } from './context/useSearch';
+import { fetchCats } from '../customhooks/useFetchCats';
 
 const TopControls: FC = () => {
   const {
     searchValue,
-    setSearchValue,
+    breeds,
     idValue,
+    searchValueKey,
+    setCats,
+    setSearchValue,
     setIdValue,
     saveToLocalStorage,
+    setBreedsValue,
+    setSearchValueKey,
   } = useSearch();
   const [searchValueState, setSearchValueState] = useState({
     searchValue,
+    searchValueKey,
     idValue,
   });
-  const [breeds, setBreeds] = useState<Breed[]>([]);
   const [inputOptions, setInputOptions] = useState<Breed[]>([]);
   const [showListBreeds, setShowListBreeds] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,25 +38,36 @@ const TopControls: FC = () => {
   if (error) throw new Error('Имитация ошибки при клике.');
 
   const fetchBreeds = useCallback(async () => {
-    try {
-      const response = await fetch(URLAPI);
-      if (!response.ok)
-        throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
-      const data: CatBreed[] = await response.json();
-      const dataBread: Breed[] = data.map((el) => ({
-        id: el.id,
-        name: el.name,
-      }));
-      setBreeds(dataBread);
-    } catch (error: unknown) {
-      console.error(error);
-      throw new Error(`${ERRORLOADING}`);
-    }
-  }, []);
+    await fetchCats()
+      .then((res) => {
+        const { data, breeds } = res;
+        setCats(data);
+        setBreedsValue(breeds);
+      })
+      .catch((error) => {
+        console.error(error);
+        throw new Error(`${ERRORLOADING}`);
+      });
+  }, [setBreedsValue, setCats]);
+
+  const handleChangeKey = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.toLowerCase().trim();
+
+    setSearchValueState({
+      searchValueKey: value,
+      searchValue: '',
+      idValue: '',
+    });
+    if (showListBreeds) setShowListBreeds(false);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.toLowerCase();
-    setSearchValueState({ ...searchValueState, searchValue: value });
+    const value = event.target.value.toLowerCase().trim();
+    setSearchValueState({
+      ...searchValueState,
+      searchValue: value,
+      searchValueKey: '',
+    });
     setShowListBreeds(true);
 
     const filteredBreeds = breeds.filter((el) =>
@@ -60,33 +77,52 @@ const TopControls: FC = () => {
     if (filteredBreeds.length) setInputOptions(filteredBreeds);
 
     if (!filteredBreeds.length) {
-      setSearchValueState({ searchValue: value, idValue: '' });
+      setSearchValueState({
+        searchValue: value,
+        idValue: '',
+        searchValueKey: '',
+      });
       setInputOptions([]);
     }
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-
-    if (searchValueState.idValue) {
-      setSearchValue(searchValueState.searchValue);
-      setIdValue(searchValueState.idValue);
-      saveToLocalStorage(
-        searchValueState.searchValue,
-        searchValueState.idValue
-      );
-    }
-    if (!searchValueState.searchValue || !searchValueState.idValue) {
+    if (
+      !searchValueState.searchValue &&
+      !searchValueState.idValue &&
+      !searchValueState.searchValueKey
+    ) {
       setIdValue('');
       setSearchValue('');
-      saveToLocalStorage('', '');
+      setSearchValueKey('');
+      saveToLocalStorage({
+        searchValue: '',
+        searchValueKey: '',
+        idValue: '',
+      });
+
+      return;
     }
+
+    setSearchValue(searchValueState.searchValue);
+    setSearchValueKey(searchValueState.searchValueKey);
+    setIdValue(searchValueState.idValue);
+    saveToLocalStorage({
+      searchValue: searchValueState.searchValue,
+      searchValueKey: searchValueState.searchValueKey,
+      idValue: searchValueState.idValue,
+    });
   };
 
   const handleBreedItem = (event: MouseEvent<HTMLLIElement>) => {
     const eventId = event.currentTarget.dataset.id as string;
     const eventName = event.currentTarget.textContent as string;
-    setSearchValueState({ searchValue: eventName, idValue: eventId });
+    setSearchValueState({
+      searchValue: eventName,
+      idValue: eventId,
+      searchValueKey: '',
+    });
     setShowListBreeds(false);
   };
 
@@ -104,33 +140,45 @@ const TopControls: FC = () => {
   return (
     <div className="controls-wrapper">
       <form onSubmit={handleSubmit}>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            value={searchValueState.searchValue}
-            onChange={handleChange}
-            placeholder="Введите текст для поиска"
-          />
-          {showListBreeds && (
-            <>
-              {inputOptions.length ? (
-                <ul className="wrapper-breed">
-                  {inputOptions.map((el) => (
-                    <li
-                      key={el.id}
-                      data-id={el.id}
-                      onClick={handleBreedItem}
-                      className="breed-item"
-                    >
-                      {el.name}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No breeds found</p>
-              )}
-            </>
-          )}
+        <div className="inputs-wrapper">
+          <div className="input-wrapper">
+            <p>Поиск с предложениями помогает быстро найти результат.</p>
+            <input
+              type="text"
+              value={searchValueState.searchValueKey}
+              onChange={handleChangeKey}
+              placeholder="Введите текст для поиска"
+            />
+          </div>
+          <div className="input-wrapper">
+            <p>Поиск с предложениями помогает быстро найти результат.</p>
+            <input
+              type="text"
+              value={searchValueState.searchValue}
+              onChange={handleChange}
+              placeholder="Введите текст для поиска"
+            />
+            {showListBreeds && (
+              <>
+                {inputOptions.length ? (
+                  <ul className="wrapper-breed">
+                    {inputOptions.map((el) => (
+                      <li
+                        key={el.id}
+                        data-id={el.id}
+                        onClick={handleBreedItem}
+                        className="breed-item"
+                      >
+                        {el.name}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No breeds found</p>
+                )}
+              </>
+            )}
+          </div>
         </div>
         <button>Search</button>
       </form>
