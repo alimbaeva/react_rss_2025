@@ -20,7 +20,10 @@ const TopControls: FC = () => {
     setIdValue,
     saveToLocalStorage,
   } = useSearch();
-  const [searchValueState, setSearchValueState] = useState(searchValue);
+  const [searchValueState, setSearchValueState] = useState({
+    searchValue,
+    idValue,
+  });
   const [breeds, setBreeds] = useState<Breed[]>([]);
   const [inputOptions, setInputOptions] = useState<Breed[]>([]);
   const [showListBreeds, setShowListBreeds] = useState<boolean>(false);
@@ -45,7 +48,7 @@ const TopControls: FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase();
-    setSearchValueState(value);
+    setSearchValueState({ ...searchValueState, searchValue: value });
     setShowListBreeds(true);
 
     const filteredBreeds = breeds.filter((el) =>
@@ -62,7 +65,16 @@ const TopControls: FC = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (!idValue || !searchValue) {
+
+    if (searchValueState.idValue) {
+      setSearchValue(searchValueState.searchValue);
+      setIdValue(searchValueState.idValue);
+      saveToLocalStorage(
+        searchValueState.searchValue,
+        searchValueState.idValue
+      );
+    }
+    if (!searchValueState.searchValue || !searchValueState.idValue) {
       setIdValue('');
       setSearchValue('');
       saveToLocalStorage('', '');
@@ -72,11 +84,8 @@ const TopControls: FC = () => {
   const handleBreedItem = (event: MouseEvent<HTMLLIElement>) => {
     const eventId = event.currentTarget.dataset.id as string;
     const eventName = event.currentTarget.textContent as string;
-    setSearchValue(eventName);
-    setSearchValueState(eventName);
-    setIdValue(eventId);
+    setSearchValueState({ searchValue: eventName, idValue: eventId });
     setShowListBreeds(false);
-    saveToLocalStorage(eventName, eventId);
   };
 
   useEffect(() => {
@@ -96,7 +105,7 @@ const TopControls: FC = () => {
         <div className="input-wrapper">
           <input
             type="text"
-            value={searchValueState}
+            value={searchValueState.searchValue}
             onChange={handleChange}
             placeholder="Введите текст для поиска"
           />

@@ -28,7 +28,7 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     localStorage.getItem('searchValue') ?? ''
   );
   const [idValue, setIdValue] = useState<string>(
-    localStorage.getItem('idValue') ?? ''
+    localStorage.getItem('idValue') ?? 'aege'
   );
   const [limit, setLimit] = useState<number>(10);
 
