@@ -5,6 +5,7 @@ import {
   Dispatch,
   SetStateAction,
   FC,
+  useEffect,
 } from 'react';
 import { Breed, CatBreed } from '../../types/types';
 
@@ -39,14 +40,14 @@ interface SearchProviderProps {
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
-  const [searchValue, setSearchValue] = useState<string>(
-    localStorage.getItem('searchValue') ?? ''
+  const locSearchValue = localStorage.getItem('searchValue');
+  const locSearchValueKey = localStorage.getItem('searchValueKey');
+  const [searchValue, setSearchValue] = useState<string>(locSearchValue ?? '');
+  const [searchValueKey, setSearchValueKey] = useState<string>(
+    locSearchValueKey ?? ''
   );
   const [idValue, setIdValue] = useState<string>(
     localStorage.getItem('idValue') ?? ''
-  );
-  const [searchValueKey, setSearchValueKey] = useState<string>(
-    localStorage.getItem('searchValueKey') ?? ''
   );
   const [limit, setLimit] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(
@@ -65,8 +66,16 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     localStorage.setItem('searchValue', searchValue);
     localStorage.setItem('idValue', idValue);
     localStorage.setItem('searchValueKey', searchValueKey);
-    setCurrentPage(0);
   };
+
+  useEffect(() => {
+    if (
+      locSearchValueKey !== searchValueKey ||
+      searchValue !== locSearchValue
+    ) {
+      setCurrentPage(0);
+    }
+  }, [locSearchValue, locSearchValueKey, searchValue, searchValueKey]);
 
   return (
     <SearchContext.Provider

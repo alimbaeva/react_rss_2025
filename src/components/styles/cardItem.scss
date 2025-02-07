@@ -6,6 +6,10 @@
   box-shadow: $box-shadow;
   border-radius: 15px;
 
+  &:hover {
+    background-color: $red193;
+  }
+
   .img-container {
     width: 280px;
     min-height: 100px;

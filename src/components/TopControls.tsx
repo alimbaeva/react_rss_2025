@@ -64,7 +64,7 @@ const TopControls: FC = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase().trim();
     setSearchValueState({
-      ...searchValueState,
+      idValue: '',
       searchValue: value,
       searchValueKey: '',
     });
@@ -116,11 +116,10 @@ const TopControls: FC = () => {
   };
 
   const handleBreedItem = (event: MouseEvent<HTMLLIElement>) => {
-    const eventId = event.currentTarget.dataset.id as string;
     const eventName = event.currentTarget.textContent as string;
     setSearchValueState({
       searchValue: eventName,
-      idValue: eventId,
+      idValue: '',
       searchValueKey: '',
     });
     setShowListBreeds(false);

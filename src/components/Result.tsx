@@ -8,7 +8,14 @@ import EmptyData from './EmptyData';
 import Pagination from './pagination/Pagination';
 
 const Result: FC = () => {
-  const { searchValueKey, searchValue, cats, limit, currentPage } = useSearch();
+  const {
+    searchValueKey,
+    searchValue,
+    cats,
+    limit,
+    currentPage,
+    setCurrentPage,
+  } = useSearch();
   const [data, setData] = useState<CatBreed[]>(
     localStorage.getItem('dataCurent')
       ? JSON.parse(localStorage.getItem('dataCurent') as string)
@@ -45,7 +52,11 @@ const Result: FC = () => {
       (_, i) => i
     );
     setPages(arr);
-  }, [data, limit, pages.length]);
+    if (arr.length === 1) {
+      setCurrentPage(0);
+      localStorage.setItem('currentPage', `${0}`);
+    }
+  }, [data, limit, pages.length, setCurrentPage]);
 
   if (isLoading) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;
