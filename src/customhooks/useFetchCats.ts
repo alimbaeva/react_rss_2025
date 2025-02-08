@@ -2,9 +2,11 @@ import { Breed, CatBreed, CatsDataType } from '../types/types';
 import { APIKEY, ERRORLOADING, URLAPI, URLAPI_SEARCH } from '../veriables';
 
 export const fetchCatsAll = async () => {
-  const breeds = JSON.parse(
-    localStorage.getItem('breedsValue') as string
-  ) as Breed[];
+  const breedsRaw = localStorage.getItem('breedsValue');
+  const breeds: Breed[] = breedsRaw ? JSON.parse(breedsRaw) : [];
+
+  if (!breeds.length) return [];
+
   const results: CatsDataType[] = [];
   for (let i = 0; i < Math.min(12, breeds.length); i++) {
     try {
@@ -17,6 +19,7 @@ export const fetchCatsAll = async () => {
       await new Promise((res) => setTimeout(res, 600));
     } catch (err) {
       console.error(err);
+      return [];
     }
   }
   return results;

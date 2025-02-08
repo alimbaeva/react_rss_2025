@@ -7,7 +7,10 @@ const Results: FC = () => {
   const { idValue } = useSearch();
 
   return (
-    <div className={idValue ? 'result-wrapper in-details' : 'result-wrapper'}>
+    <div
+      data-testid="empty-Results"
+      className={idValue ? 'result-wrapper in-details' : 'result-wrapper'}
+    >
       <Result />
       {idValue && <Details />}
     </div>
