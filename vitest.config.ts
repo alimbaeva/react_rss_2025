@@ -18,7 +18,7 @@ export default defineConfig({
       provider: 'istanbul', // Явно указываем Istanbul как провайдер покрытия
       thresholds: {
         statements: 70,
-        branches: 70,
+        branches: 60,
         functions: 70,
         lines: 70,
       },

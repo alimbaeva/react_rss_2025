@@ -28,8 +28,9 @@ export const fetchCatsAll = async () => {
 export const fetchCats = async () => {
   try {
     const response = await fetch(URLAPI);
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+    }
     const data: CatBreed[] = await response.json();
     const dataBread: Breed[] = data.map((el) => ({
       id: el.id,

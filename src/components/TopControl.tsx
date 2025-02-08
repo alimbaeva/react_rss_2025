@@ -33,8 +33,8 @@ const TopControls: FC = () => {
   const fetchBreeds = useCallback(async () => {
     try {
       const { data, breeds } = await fetchCats();
-      setCats(data);
-      setBreedsValue(breeds);
+      setCats(data ? data : []);
+      setBreedsValue(breeds ? breeds : []);
     } catch (error) {
       console.error(error);
       setError('Ошибка загрузки списка пород');
@@ -42,13 +42,18 @@ const TopControls: FC = () => {
     }
   }, [setBreedsValue, setCats]);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = (event: FormEvent<Element>) => {
+    event?.preventDefault();
+
     if (!searchValueState.searchValue && !searchValueState.searchValueKey) {
       setIdValue('');
       setSearchValue('');
       setSearchValueKey('');
-      saveToLocalStorage({ searchValue: '', searchValueKey: '', idValue: '' });
+      saveToLocalStorage({
+        searchValue: '',
+        searchValueKey: '',
+        idValue: '',
+      });
       return;
     }
 
