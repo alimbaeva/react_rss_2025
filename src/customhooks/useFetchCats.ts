@@ -46,7 +46,7 @@ export const fetchCats = async () => {
 export const fetchGetCatsData = async (idValue: string) => {
   try {
     const response = await fetch(
-      `${URLAPI_SEARCH}limit=100&breed_ids=${idValue}&api_key=${APIKEY}`
+      `${URLAPI_SEARCH}limit=10&breed_ids=${idValue}&api_key=${APIKEY}`
     );
     if (!response.ok) {
       throw new Error(

@@ -63,16 +63,16 @@ const Result: FC = () => {
   if (data.length === 0) return <EmptyData />;
 
   return (
-    <>
+    <div>
       <Pagination pages={pages} />
-      <div className="cards-wrapper">
+      <div className="cards-wrapper grid-in-part">
         {data
           .slice(currentPage * limit, currentPage * limit + limit)
           .map((el) => (
             <CardItem key={el.id} data={el} />
           ))}
       </div>
-    </>
+    </div>
   );
 };
 
