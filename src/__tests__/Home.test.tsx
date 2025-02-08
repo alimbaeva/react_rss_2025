@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import Home from '../pages/Home';
 
-vi.mock('../components/TopControls', () => ({
+vi.mock('../components/TopControl', () => ({
   default: vi.fn(() => <div>TopControls</div>),
 }));
 
