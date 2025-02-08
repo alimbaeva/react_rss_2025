@@ -72,7 +72,7 @@ const SearchInputs: FC<SearchInputsProps> = ({
       setInputOptions(breeds);
       setShowListBreeds(false);
     }
-  }, [breeds, searchValueState.searchValue]);
+  }, [breeds, searchValueState.searchValue, setShowListBreeds]);
 
   return (
     <div className="inputs-wrapper">
