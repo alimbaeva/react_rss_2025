@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, useCallback } from 'react';
+import { useState, useEffect, FC, useCallback, MouseEvent } from 'react';
 import { CatBreed } from '../types/types';
 import CardItem from './cards/CardItem';
 import './styles/result.scss';
@@ -14,7 +14,9 @@ const Result: FC = () => {
     cats,
     limit,
     currentPage,
+    idValue,
     setCurrentPage,
+    setIdValue,
   } = useSearch();
   const [data, setData] = useState<CatBreed[]>(
     localStorage.getItem('dataCurent')
@@ -38,6 +40,13 @@ const Result: FC = () => {
     setIsLoading(false);
     localStorage.setItem('dataCurent', JSON.stringify(filteredCat));
   }, [cats, searchValue, searchValueKey]);
+
+  const handleMainResultBlock = (event: MouseEvent<HTMLDivElement>) => {
+    const close = (event.target as HTMLElement).dataset.element;
+
+    if (close !== 'element') setIdValue('');
+    return;
+  };
 
   useEffect(() => {
     if (searchValue || searchValueKey) getCatsData();
@@ -63,9 +72,13 @@ const Result: FC = () => {
   if (data.length === 0) return <EmptyData />;
 
   return (
-    <div>
+    <div id="result" onClick={handleMainResultBlock}>
       <Pagination pages={pages} />
-      <div className="cards-wrapper grid-in-part">
+      <div
+        className={
+          idValue ? 'cards-wrapper grid-in-part' : 'cards-wrapper grid-in-full'
+        }
+      >
         {data
           .slice(currentPage * limit, currentPage * limit + limit)
           .map((el) => (

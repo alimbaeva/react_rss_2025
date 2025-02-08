@@ -32,6 +32,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
           <span>Temperament:</span> {data.temperament}
         </p>
       </div>
+      <div data-element="element" className="fill"></div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import DetailsCards from './cards/DetailsCards';
 import './styles/details.scss';
 
 const Details: FC = () => {
-  const { idValue } = useSearch();
+  const { idValue, setIdValue } = useSearch();
   const [detaileCards, setDetaileCards] = useState<CatsDataType[]>([]);
 
   const getData = useCallback(async () => {
@@ -19,6 +19,11 @@ const Details: FC = () => {
     }
   }, [idValue]);
 
+  const handleCloseDetail = () => {
+    setIdValue('');
+    localStorage.setItem('idValue', '');
+  };
+
   useEffect(() => {
     if (idValue) getData();
   }, [idValue, getData]);
@@ -28,7 +33,9 @@ const Details: FC = () => {
   return (
     <div className="details-wraper">
       <div>
-        <button className="close-btn">Close</button>
+        <button onClick={handleCloseDetail} className="close-btn">
+          Close
+        </button>
       </div>
       <div className="info-block">
         <p>Ditaile Information:</p>
