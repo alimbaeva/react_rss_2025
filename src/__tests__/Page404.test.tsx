@@ -1,4 +1,3 @@
-// src/tests/Page404.test.tsx
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Page404 from '../pages/page404/Page404';
