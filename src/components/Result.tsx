@@ -46,7 +46,6 @@ const Result: FC = () => {
   const handleMainResultBlock = (event: MouseEvent<HTMLDivElement>) => {
     const close = (event.target as HTMLElement).dataset.element;
 
-    // console.log(searchParams.get('page'));
     if (close !== 'element') setIdValue('');
     return;
   };
