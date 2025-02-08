@@ -6,7 +6,7 @@ interface DetailsCardsProps {
 
 const DetailsCards: FC<DetailsCardsProps> = ({ url }) => {
   return (
-    <div className="image-wrapper">
+    <div data-testid="details-card" className="image-wrapper">
       <img src={url} alt="cat image" />
     </div>
   );

@@ -38,7 +38,11 @@ const Details: FC = () => {
   return (
     <div className="details-wraper">
       <div>
-        <button onClick={handleCloseDetail} className="close-btn">
+        <button
+          data-testid="details-btn"
+          onClick={handleCloseDetail}
+          className="close-btn"
+        >
           Close
         </button>
       </div>
