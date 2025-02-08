@@ -23,12 +23,12 @@ const Result: FC = () => {
       ? JSON.parse(localStorage.getItem('dataCurent') as string)
       : []
   );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoad, setIsLoad] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [pages, setPages] = useState<number[]>([]);
 
   const getCatsData = useCallback(async () => {
-    setIsLoading(true);
+    setIsLoad(true);
     setError(null);
 
     const keySearch = searchValueKey ? searchValueKey : searchValue;
@@ -37,7 +37,7 @@ const Result: FC = () => {
       el.name.toLowerCase().includes(keySearch.toLowerCase())
     );
     setData(filteredCat);
-    setIsLoading(false);
+    setTimeout(() => setIsLoad(false), 300);
     localStorage.setItem('dataCurent', JSON.stringify(filteredCat));
   }, [cats, searchValue, searchValueKey]);
 
@@ -67,7 +67,7 @@ const Result: FC = () => {
     }
   }, [data, limit, pages.length, setCurrentPage]);
 
-  if (isLoading) return <IsLoading />;
+  if (isLoad) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;
   if (data.length === 0) return <EmptyData />;
 

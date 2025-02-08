@@ -7,7 +7,7 @@ const Results: FC = () => {
   const { idValue } = useSearch();
 
   return (
-    <div className="result-wrapper">
+    <div className={idValue ? 'result-wrapper in-details' : 'result-wrapper'}>
       <Result />
       {idValue && <Details />}
     </div>

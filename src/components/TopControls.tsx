@@ -88,11 +88,7 @@ const TopControls: FC = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (
-      !searchValueState.searchValue &&
-      !searchValueState.idValue &&
-      !searchValueState.searchValueKey
-    ) {
+    if (!searchValueState.searchValue && !searchValueState.searchValueKey) {
       setIdValue('');
       setSearchValue('');
       setSearchValueKey('');
@@ -107,11 +103,11 @@ const TopControls: FC = () => {
 
     setSearchValue(searchValueState.searchValue);
     setSearchValueKey(searchValueState.searchValueKey);
-    setIdValue(searchValueState.idValue);
+    setIdValue('');
     saveToLocalStorage({
       searchValue: searchValueState.searchValue,
       searchValueKey: searchValueState.searchValueKey,
-      idValue: searchValueState.idValue,
+      idValue: '',
     });
   };
 
@@ -141,7 +137,7 @@ const TopControls: FC = () => {
       <form onSubmit={handleSubmit}>
         <div className="inputs-wrapper">
           <div className="input-wrapper">
-            <p>Поиск с предложениями помогает быстро найти результат.</p>
+            <p>Поиск.</p>
             <input
               type="text"
               value={searchValueState.searchValueKey}

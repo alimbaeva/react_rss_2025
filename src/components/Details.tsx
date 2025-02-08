@@ -4,16 +4,20 @@ import { fetchGetCatsData } from '../customhooks/useFetchCats';
 import { CatsDataType } from '../types/types';
 import DetailsCards from './cards/DetailsCards';
 import './styles/details.scss';
+import IsLoading from './IsLoading';
 
 const Details: FC = () => {
   const { idValue, setIdValue } = useSearch();
   const [detaileCards, setDetaileCards] = useState<CatsDataType[]>([]);
+  const [isLoad, setIsLoad] = useState(false);
 
   const getData = useCallback(async () => {
     try {
+      setIsLoad(true);
       const res = await fetchGetCatsData(idValue);
       if (!res) return;
       setDetaileCards(res);
+      setTimeout(() => setIsLoad(false), 300);
     } catch (err) {
       console.log(err);
     }
@@ -28,6 +32,7 @@ const Details: FC = () => {
     if (idValue) getData();
   }, [idValue, getData]);
 
+  if (isLoad) return <IsLoading />;
   if (!detaileCards.length) return;
 
   return (
