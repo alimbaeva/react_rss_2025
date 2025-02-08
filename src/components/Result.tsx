@@ -6,6 +6,7 @@ import IsLoading from './IsLoading';
 import { useSearch } from './context/useSearch';
 import EmptyData from './EmptyData';
 import Pagination from './pagination/Pagination';
+import { useSearchParams } from 'react-router-dom';
 
 const Result: FC = () => {
   const {
@@ -26,6 +27,7 @@ const Result: FC = () => {
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [pages, setPages] = useState<number[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const getCatsData = useCallback(async () => {
     setIsLoad(true);
@@ -44,6 +46,7 @@ const Result: FC = () => {
   const handleMainResultBlock = (event: MouseEvent<HTMLDivElement>) => {
     const close = (event.target as HTMLElement).dataset.element;
 
+    // console.log(searchParams.get('page'));
     if (close !== 'element') setIdValue('');
     return;
   };
@@ -66,6 +69,23 @@ const Result: FC = () => {
       localStorage.setItem('currentPage', `${0}`);
     }
   }, [data, limit, pages.length, setCurrentPage]);
+
+  useEffect(() => {
+    const page = Number(searchParams.get('page'));
+    if (data.length <= 0) {
+      setSearchParams();
+      return;
+    }
+    if (idValue) {
+      setSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` });
+      return;
+    }
+
+    if (!page || currentPage !== page) {
+      setSearchParams({ page: `${currentPage + 1}` });
+      return;
+    }
+  }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
 
   if (isLoad) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;

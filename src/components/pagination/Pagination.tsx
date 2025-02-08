@@ -7,6 +7,7 @@ interface PaginationProps {
 
 const Pagination: FC<PaginationProps> = ({ pages }) => {
   const { currentPage, setCurrentPage } = useSearch();
+
   const handlePageNum = (event: MouseEvent<HTMLDivElement>) => {
     setCurrentPage(Number(event.currentTarget.id));
     localStorage.setItem('currentPage', event.currentTarget.id);
