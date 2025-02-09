@@ -13,7 +13,6 @@ export default defineConfig({
         '**/*.test.tsx',
         '**/*.spec.tsx',
         'src/__tests__/setup.ts',
-        'src/pages/App.tsx',
       ],
       provider: 'istanbul', // Явно указываем Istanbul как провайдер покрытия
       thresholds: {

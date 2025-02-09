@@ -1,5 +1,5 @@
 import { Breed, CatBreed, CatsDataType } from '../types/types';
-import { APIKEY, ERRORLOADING, URLAPI, URLAPI_SEARCH } from '../veriables';
+import { APIKEY, URLAPI, URLAPI_SEARCH } from '../veriables';
 
 export const fetchCatsAll = async () => {
   const breedsRaw = localStorage.getItem('breedsValue');
@@ -43,7 +43,7 @@ export const fetchCats = async () => {
     return { data: data, breeds: dataBread };
   } catch (error: unknown) {
     console.error(error);
-    throw new Error(`${ERRORLOADING}`);
+    return { data: [], breeds: [] };
   }
 };
 

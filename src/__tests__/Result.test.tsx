@@ -1,76 +1,59 @@
+import { render, screen } from '@testing-library/react';
+import { vi, MockedFunction } from 'vitest';
 import Result from '../components/Result';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen, waitFor } from '@testing-library/react';
-import { useSearch } from '../components/context/useSearch';
-import { describe, it, vi, expect, beforeEach, Mock } from 'vitest';
-import { mockDataCatsData } from './mockData';
+import { useResultData } from '../components/useResultData';
 
-vi.mock('../components/context/useSearch', () => ({
-  useSearch: vi.fn(),
-}));
+vi.mock('../components/useResultData');
+
+const mockUseResultData = useResultData as MockedFunction<typeof useResultData>;
 
 describe('Result Component', () => {
-  beforeEach(() => {
-    // Мокаем возвращаемые значения из useSearch
-    (useSearch as Mock).mockReturnValue({
-      cats: mockDataCatsData, // Мокаем кошек
-      searchValueKey: '',
-      searchValue: '',
-      limit: 10,
-      currentPage: 1,
-      idValue: 'some-id',
-      setCurrentPage: vi.fn(),
+  it('renders loading state', () => {
+    mockUseResultData.mockReturnValue({
+      isLoad: true,
+      data: [],
+      error: null,
+      pages: [],
+      idValue: '',
       setIdValue: vi.fn(),
+      currentPage: 0,
+      limit: 0,
     });
+    render(<Result />);
+    expect(screen.getByTestId('load-item-1')).toBeInTheDocument();
+    expect(screen.getByTestId('load-item-2')).toBeInTheDocument();
+    expect(screen.getByTestId('load-item-3')).toBeInTheDocument();
   });
 
-  it('should render the EmptyData component when no cats are found', async () => {
-    (useSearch as Mock).mockReturnValue({
-      cats: [],
-      searchValueKey: '',
-      searchValue: '',
-      limit: 10,
-      currentPage: 1,
-      idValue: 'some-id',
-      setCurrentPage: vi.fn(),
+  it('renders error state', () => {
+    mockUseResultData.mockReturnValue({
+      isLoad: false,
+      data: [],
+      error: 'Something went wrong!',
+      pages: [],
+      idValue: '',
       setIdValue: vi.fn(),
+      currentPage: 0,
+      limit: 0,
     });
-
-    render(
-      <MemoryRouter>
-        <Result />
-      </MemoryRouter>
-    );
-
-    const emptyDataText = screen.getByText(/Нет данных для отображения!/i);
-    expect(emptyDataText).toBeInTheDocument();
+    render(<Result />);
+    expect(screen.getByText('Something went wrong!')).toBeInTheDocument();
   });
 
-  it('should render cats when search value is provided', async () => {
-    const mockCats = [
-      { id: '1', name: 'Persian' },
-      { id: '2', name: 'Siamese' },
-    ];
-
-    (useSearch as Mock).mockReturnValue({
-      searchValueKey: '',
-      searchValue: 'Persian',
-      cats: mockCats,
-      limit: 10,
-      currentPage: 1,
-      idValue: 'some-id',
-      setCurrentPage: vi.fn(),
+  it('renders empty data state', () => {
+    mockUseResultData.mockReturnValue({
+      isLoad: false,
+      data: [],
+      error: null,
+      pages: [],
+      idValue: '',
       setIdValue: vi.fn(),
+      currentPage: 0,
+      limit: 0,
     });
-
-    render(
-      <MemoryRouter>
-        <Result />
-      </MemoryRouter>
-    );
-    await waitFor(() => screen.findByText(/1/i));
-
-    const cardItem = screen.getByText(/1/i);
-    expect(cardItem).toBeInTheDocument();
+    render(<Result />);
+    expect(screen.getByTestId('empty-data-1')).toBeInTheDocument();
+    expect(screen.getByTestId('empty-data-2')).toBeInTheDocument();
+    expect(screen.getByTestId('empty-data-3')).toBeInTheDocument();
   });
 });

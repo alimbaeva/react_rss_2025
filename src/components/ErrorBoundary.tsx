@@ -38,7 +38,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         <div className="error-block">
           {this.props.fallback}
           <h1>Somethig wrong is going...</h1>
-          <h1>{this.state.errorMessage}</h1>
+          <h1 data-testid="error-message">{this.state.errorMessage}</h1>
           <button onClick={this.handleReload}>Reload</button>
         </div>
       );

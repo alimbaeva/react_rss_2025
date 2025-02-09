@@ -17,6 +17,7 @@ const TopControls: FC = () => {
     saveToLocalStorage,
     setBreedsValue,
     setSearchValueKey,
+    setCurrentPage,
   } = useSearch();
 
   const [searchValueState, setSearchValueState] = useState({
@@ -38,7 +39,8 @@ const TopControls: FC = () => {
     } catch (error) {
       console.error(error);
       setError('Ошибка загрузки списка пород');
-      throw new Error(`${ERRORLOADING}`);
+      setCats([]);
+      setBreedsValue([]);
     }
   }, [setBreedsValue, setCats]);
 
@@ -65,6 +67,8 @@ const TopControls: FC = () => {
       searchValueKey: searchValueState.searchValueKey,
       idValue: '',
     });
+    setCurrentPage(0);
+    localStorage.setItem('currentPage', `${0}`);
   };
 
   useEffect(() => {
@@ -81,16 +85,21 @@ const TopControls: FC = () => {
           setSearchValueState={setSearchValueState}
           setShowListBreeds={setShowListBreeds}
         />
-        <button>Search</button>
+        <button data-testid="search-button">Search</button>
       </form>
       <button
         onClick={() => setError(ERRORLOADING)}
         type="button"
         className="error-btn"
+        data-testid="error-button"
       >
         Error Button
       </button>
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <p className="error-message" data-testid="error-message">
+          {error}
+        </p>
+      )}
     </div>
   );
 };

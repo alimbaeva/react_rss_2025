@@ -1,9 +1,10 @@
-import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Results from '../components/results/Results';
-import { SearchContextType } from '../components/context/SearchContext';
 import { MemoryRouter } from 'react-router-dom';
-import SearchContext from '../components/context/SearchContext';
+import SearchContext, {
+  SearchContextType,
+} from '../components/context/SearchContext';
 
 const mockSearchContext: SearchContextType = {
   searchValue: '',
@@ -46,4 +47,66 @@ test('должен рендерить Result и не рендерить Details,
 
   expect(screen.queryByText('Result')).not.toBeInTheDocument();
   expect(screen.queryByText('Details')).not.toBeInTheDocument();
+});
+
+test('должен рендерить Result и Details, если idValue задано', async () => {
+  const updatedMockSearchContext = {
+    ...mockSearchContext,
+    idValue: '12345',
+  };
+
+  render(
+    <MemoryRouter>
+      <SearchContext.Provider value={updatedMockSearchContext}>
+        <Results />
+      </SearchContext.Provider>
+    </MemoryRouter>
+  );
+
+  const emptyData1 = await screen.findByTestId('empty-data-1');
+  expect(emptyData1).toBeInTheDocument();
+
+  const emptyData2 = await screen.findByTestId('empty-data-2');
+  expect(emptyData2).toBeInTheDocument();
+
+  const emptyData3 = await screen.findByTestId('empty-data-3');
+  expect(emptyData3).toBeInTheDocument();
+});
+
+test('должен обновлять отображение Result и Details при изменении idValue', async () => {
+  const { rerender } = render(
+    <MemoryRouter>
+      <SearchContext.Provider value={mockSearchContext}>
+        <Results />
+      </SearchContext.Provider>
+    </MemoryRouter>
+  );
+
+  // Проверяем, что компоненты не отображаются в начале
+  expect(screen.queryByText('Result')).not.toBeInTheDocument();
+  expect(screen.queryByText('Details')).not.toBeInTheDocument();
+
+  // Обновляем idValue
+  const updatedMockSearchContext = {
+    ...mockSearchContext,
+    idValue: '12345',
+  };
+
+  // Повторно рендерим компонент с новым значением idValue
+  rerender(
+    <MemoryRouter>
+      <SearchContext.Provider value={updatedMockSearchContext}>
+        <Results />
+      </SearchContext.Provider>
+    </MemoryRouter>
+  );
+
+  const emptyData1 = await screen.findByTestId('load-item-1');
+  expect(emptyData1).toBeInTheDocument();
+
+  const emptyData2 = await screen.findByTestId('load-item-2');
+  expect(emptyData2).toBeInTheDocument();
+
+  const emptyData3 = await screen.findByTestId('load-item-3');
+  expect(emptyData3).toBeInTheDocument();
 });
