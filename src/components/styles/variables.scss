@@ -1,0 +1,33 @@
+$red193: rgb(216, 193, 193);
+$red40: rgb(142, 40, 40);
+$orange124: rgb(190, 124, 95);
+$border-radius: 5px;
+$box-shadow: 1px 0px 3px 3px $red193;
+$green215: rgb(184, 215, 169);
+
+%button {
+  all: unset;
+  margin-bottom: 15px;
+  padding: 7px;
+  font-weight: 700;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+%center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

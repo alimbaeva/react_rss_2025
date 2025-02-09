@@ -1,0 +1,83 @@
+@use './variables' as *;
+
+.controls-wrapper {
+  form {
+    width: 100%;
+    position: relative;
+
+    .input-wrapper {
+      p {
+        margin: 15px 0;
+        font-weight: bold;
+      }
+
+      width: 50%;
+
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+    }
+
+    input,
+    button {
+      @extend %button;
+    }
+
+    button {
+      cursor: pointer;
+      padding: 7px 15px;
+
+      &:hover {
+        background-color: $green215;
+        box-shadow: none;
+      }
+    }
+
+    .wrapper-breed {
+      position: absolute;
+      background-color: white;
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+      margin-bottom: 15px;
+      max-height: 200px;
+      width: 100%;
+      overflow: hidden;
+      overflow-y: auto;
+      z-index: 100;
+
+      .breed-item {
+        padding: 7px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $green215;
+        }
+      }
+    }
+
+    .inputs-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      @media (max-width: 600px) {
+        display: block;
+      }
+    }
+  }
+}
+
+.error-btn {
+  all: unset;
+  margin-bottom: 15px;
+  font-weight: 700;
+  border-radius: 5px;
+  box-shadow: 1px 0px 3px 3px $red40;
+  cursor: pointer;
+  padding: 7px 15px;
+
+  &:hover {
+    background-color: $orange124;
+    box-shadow: none;
+  }
+}
