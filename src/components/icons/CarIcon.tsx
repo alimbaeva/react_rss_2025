@@ -5,7 +5,7 @@ const CatIcon: FC<FillType> = ({ fill }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="1em"
+      height="30px"
       fill={fill}
       viewBox="0 0 512 512"
     >
