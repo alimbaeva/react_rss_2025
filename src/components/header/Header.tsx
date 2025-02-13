@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import ChooseIcone from '../icons/ChooseIcone';
 import '../styles/header.scss';
 import CatIcon from '../icons/CarIcon';
 import MooneIcon from '../icons/MooneIcon';
 import SunIcon from '../icons/SunIcon';
+import Logo from '../logo/Logo';
 
 const headerIconColor = '#e67a7a';
 
@@ -11,13 +11,7 @@ const Header: FC = () => {
   return (
     <header>
       <div className="header">
-        <div className="logo">
-          <div>
-            <h1>CC</h1>
-            <ChooseIcone fill={headerIconColor} />
-          </div>
-          <h1>Cute Cats</h1>
-        </div>
+        <Logo />
         <div className="right-part">
           <div>
             <CatIcon fill={headerIconColor} />
