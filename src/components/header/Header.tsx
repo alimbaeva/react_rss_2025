@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import ChooseIcone from '../icons/ChooseIcone';
 import '../styles/header.scss';
+import CatIcon from '../icons/CarIcon';
 
 const Header: FC = () => {
   return (
@@ -12,6 +13,11 @@ const Header: FC = () => {
             <ChooseIcone fill={'#e67a7a'} />
           </div>
           <h1>Cute Cats</h1>
+        </div>
+        <div>
+          <div>
+            <CatIcon fill={'#e67a7a'} />
+          </div>
         </div>
       </div>
     </header>

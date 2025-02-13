@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { FillType } from '../../types/icons';
 
-const DownloadIcon: FC<FillType> = ({ fill }) => {
+const DownloadIcon: FC<FillType> = ({ fill, height = '25px' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="1em"
+      height={height}
       fill={fill}
       viewBox="0 0 512 512"
     >

@@ -1,6 +1,8 @@
 @use './variables' as *;
 
 .header {
+  @extend %center;
+  justify-content: space-between;
   width: 1100px;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -9,12 +11,12 @@
 }
 
 .logo {
-    width: 150px;
-    color: $orange7a;
-    div {
-      @extend %center;
-    }
-    h1 {
-      font-size: 1.5rem;
-    }
+  width: 150px;
+  color: $orange7a;
+  div {
+    @extend %center;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
 }
