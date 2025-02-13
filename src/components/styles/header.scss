@@ -20,3 +20,28 @@
     font-size: 1.5rem;
   }
 }
+
+.right-part {
+  @extend %center;
+  justify-content: space-between;
+}
+
+.theam-wrapper {
+  @extend %center;
+  margin-left: 15px;
+
+  .theam-item {
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .nihgt {
+    background-color: $black;
+    @extend %themeBtn;
+  }
+
+  .day {
+    background-color: $sun;
+    @extend %themeBtn;
+  }
+}
