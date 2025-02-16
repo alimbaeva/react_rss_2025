@@ -1,16 +1,18 @@
 import { FC, MouseEvent } from 'react';
-import { useSearch } from '../context/useSearch';
+import { RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage } from '../../store/slices/searchSlice';
 
 interface PaginationProps {
   pages: number[];
 }
 
 const Pagination: FC<PaginationProps> = ({ pages }) => {
-  const { currentPage, setCurrentPage } = useSearch();
+  const dispatch = useDispatch();
+  const { currentPage } = useSelector((state: RootState) => state.search);
 
   const handlePageNum = (event: MouseEvent<HTMLDivElement>) => {
-    setCurrentPage(Number(event.currentTarget.id));
-    localStorage.setItem('currentPage', event.currentTarget.id);
+    dispatch(setCurrentPage(Number(event.currentTarget.id)));
   };
 
   return (
