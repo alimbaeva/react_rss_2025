@@ -21,6 +21,10 @@
     display: inline-block;
     margin: 1rem;
 
+    &:hover {
+      background-color: $red193;
+    }
+
     &:hover::after {
       opacity: 1;
       visibility: visible;
