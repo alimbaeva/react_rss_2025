@@ -64,7 +64,7 @@ const SearchInputs: FC = () => {
   const handleSubmit = (event: FormEvent<Element>) => {
     event?.preventDefault();
 
-    if (!searchValue && !searchValueKey) {
+    if (!seaValue && !valueKey) {
       dispatch(setCleanSearch());
       return;
     }
@@ -74,11 +74,11 @@ const SearchInputs: FC = () => {
   };
 
   useEffect(() => {
-    if (!searchValue) {
+    if (!seaValue) {
       setInputOptions(breeds);
       setShowListBreeds(false);
     }
-  }, [breeds, searchValue]);
+  }, [breeds, seaValue]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -121,7 +121,9 @@ const SearchInputs: FC = () => {
           )}
         </div>
       </div>
-      <button data-testid="search-button">Search</button>
+      <button data-testid="search-button" type="submit">
+        Search
+      </button>
     </form>
   );
 };

@@ -43,8 +43,6 @@ const searchSlice = createSlice({
     setIdValue(state, action: PayloadAction<string>) {
       state.idValue = action.payload;
       localStorage.setItem('idValue', action.payload);
-      //   localStorage.setItem('searchValue', '');
-      // localStorage.setItem('searchValueKey', '');
     },
     setCleanSearch(state) {
       state.idValue = '';
@@ -60,7 +58,6 @@ const searchSlice = createSlice({
     },
     setPages(state, action: PayloadAction<number[]>) {
       state.pages = action.payload;
-      localStorage.setItem('currentPage', JSON.stringify(action.payload));
     },
   },
 });

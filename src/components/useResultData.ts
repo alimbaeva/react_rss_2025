@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CatBreed } from '../types/types';
 import { useSearchParams } from 'react-router-dom';
-import { fetchCats } from '../customhooks/useFetchCats';
 import { RootState } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setPages } from '../store/slices/searchSlice';
@@ -11,6 +10,7 @@ export const useResultData = () => {
   const { searchValueKey, searchValue, pages, limit, currentPage, idValue } =
     useSelector((state: RootState) => state.search);
   const cats = useSelector((state: RootState) => state.breeds.cats);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dataLocSt = localStorage.getItem('dataCurent') ? true : false;
@@ -18,7 +18,7 @@ export const useResultData = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [data, setData] = useState<CatBreed[]>(
-    dataLocSt ? JSON.parse(localStorage.getItem('dataCurent') as string) : []
+    dataLocSt ? JSON.parse(localStorage.getItem('dataCurent') as string) : cats
   );
 
   const getCatsData = useCallback(async () => {
@@ -69,14 +69,8 @@ export const useResultData = () => {
   }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
 
   useEffect(() => {
-    if (!dataLocSt) {
-      const getCats = async () => {
-        const { data: catsAll } = await fetchCats();
-        setData(catsAll);
-      };
-      getCats();
-    }
-  }, [dataLocSt]);
+    if (!dataLocSt) setData(cats);
+  }, [cats, dataLocSt]);
 
   return {
     data,
