@@ -1,21 +1,22 @@
-import { useState, useEffect, FormEvent, FC, useCallback } from 'react';
+import { useState, FormEvent, FC } from 'react';
 import { ERRORLOADING } from '../veriables';
 import { useSearch } from './context/useSearch';
-import { fetchCats } from '../customhooks/useFetchCats';
 import SearchInputs from './SearchInputs';
 import './styles/topControls.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { useGetBreedsQuery } from '../store/queryApi/breedsApi';
 
 const TopControls: FC = () => {
+  const breeds = useSelector((state: RootState) => state.breeds.breeds);
+  const { error } = useGetBreedsQuery(undefined);
   const {
     searchValue,
-    breeds,
     idValue,
     searchValueKey,
-    setCats,
     setSearchValue,
     setIdValue,
     saveToLocalStorage,
-    setBreedsValue,
     setSearchValueKey,
     setCurrentPage,
   } = useSearch();
@@ -27,22 +28,9 @@ const TopControls: FC = () => {
   });
 
   const [showListBreeds, setShowListBreeds] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errorBtn, setErrorBtn] = useState<string | null>(null);
 
-  if (error) throw new Error('Имитация ошибки при клике.');
-
-  const fetchBreeds = useCallback(async () => {
-    try {
-      const { data, breeds } = await fetchCats();
-      setCats(data ? data : []);
-      setBreedsValue(breeds ? breeds : []);
-    } catch (error) {
-      console.error(error);
-      setError('Ошибка загрузки списка пород');
-      setCats([]);
-      setBreedsValue([]);
-    }
-  }, [setBreedsValue, setCats]);
+  if (errorBtn) throw new Error('Имитация ошибки при клике.');
 
   const handleSubmit = (event: FormEvent<Element>) => {
     event?.preventDefault();
@@ -71,10 +59,6 @@ const TopControls: FC = () => {
     localStorage.setItem('currentPage', `${0}`);
   };
 
-  useEffect(() => {
-    fetchBreeds();
-  }, [fetchBreeds]);
-
   return (
     <div className="controls-wrapper">
       <form onSubmit={handleSubmit}>
@@ -88,7 +72,7 @@ const TopControls: FC = () => {
         <button data-testid="search-button">Search</button>
       </form>
       <button
-        onClick={() => setError(ERRORLOADING)}
+        onClick={() => setErrorBtn(ERRORLOADING)}
         type="button"
         className="error-btn"
         data-testid="error-button"
@@ -97,7 +81,7 @@ const TopControls: FC = () => {
       </button>
       {error && (
         <p className="error-message" data-testid="error-message">
-          {error}
+          {errorBtn}
         </p>
       )}
     </div>
