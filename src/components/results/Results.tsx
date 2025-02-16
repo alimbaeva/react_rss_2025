@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSearch } from '../context/useSearch';
 import Result from '../Result';
 import Details from '../Details';
+import DropDownInfo from '../dropDownInfo/DropDownInfo';
 
 const Results: FC = () => {
   const { idValue } = useSearch();
@@ -13,6 +14,7 @@ const Results: FC = () => {
     >
       <Result />
       {idValue && <Details />}
+      <DropDownInfo />
     </div>
   );
 };
