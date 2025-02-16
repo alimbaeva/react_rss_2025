@@ -42,7 +42,13 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
         </p>
       </div>
       <div data-element="element" className="fill">
-        <ChooseIcone fill={chooseItem ? chooseColorTrue : chooseColorFalse} />
+        <div data-element="element" className="choose-wrapper">
+          <div className="choose-item">
+            <ChooseIcone
+              fill={chooseItem ? chooseColorTrue : chooseColorFalse}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
