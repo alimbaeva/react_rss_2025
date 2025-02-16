@@ -1,18 +1,20 @@
 import { FC, MouseEvent } from 'react';
 import { CatBreed } from '../../types/types';
 import '../styles/cardItem.scss';
-import { useSearch } from '../context/useSearch';
+import { RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIdValue } from '../../store/slices/searchSlice';
 
 interface CardItemProps {
   data: CatBreed;
 }
 
 const CardItem: FC<CardItemProps> = ({ data }) => {
-  const { idValue, setIdValue } = useSearch();
+  const dispatch = useDispatch();
+  const { idValue } = useSelector((state: RootState) => state.search);
 
   const handleCard = (event: MouseEvent<HTMLDivElement>) => {
-    setIdValue(event.currentTarget.id);
-    localStorage.setItem('idValue', event.currentTarget.id);
+    dispatch(setIdValue(event.currentTarget.id));
   };
 
   return (

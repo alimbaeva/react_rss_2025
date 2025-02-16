@@ -44,7 +44,7 @@ const searchSlice = createSlice({
       state.idValue = action.payload;
       localStorage.setItem('idValue', action.payload);
       //   localStorage.setItem('searchValue', '');
-      localStorage.setItem('searchValueKey', '');
+      // localStorage.setItem('searchValueKey', '');
     },
     setCleanSearch(state) {
       state.idValue = '';

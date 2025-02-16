@@ -1,13 +1,16 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useSearch } from './context/useSearch';
 import { fetchGetCatsData } from '../customhooks/useFetchCats';
 import { CatsDataType } from '../types/types';
 import DetailsCards from './cards/DetailsCards';
 import './styles/details.scss';
 import IsLoading from './IsLoading';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { setIdValue } from '../store/slices/searchSlice';
 
 const Details: FC = () => {
-  const { idValue, setIdValue } = useSearch();
+  const dispatch = useDispatch();
+  const { idValue } = useSelector((state: RootState) => state.search);
   const [detaileCards, setDetaileCards] = useState<CatsDataType[]>([]);
   const [isLoad, setIsLoad] = useState(false);
 
@@ -24,8 +27,7 @@ const Details: FC = () => {
   }, [idValue]);
 
   const handleCloseDetail = () => {
-    setIdValue('');
-    localStorage.setItem('idValue', '');
+    dispatch(setIdValue(''));
   };
 
   useEffect(() => {
