@@ -1,5 +1,12 @@
 @use './variables' as *;
 
+.wrapper-info {
+    display: inline-block;
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+}
+
 .down-info {
   padding: 1rem;
   background-color: $white;

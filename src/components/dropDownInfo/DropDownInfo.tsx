@@ -7,7 +7,7 @@ const headerIconColor = '#e67a7a';
 
 const DropDownInfo: FC = () => {
   return (
-    <section>
+    <section className="wrapper-info">
       <div className="down-info">
         <div>
           <p className="count-item">
