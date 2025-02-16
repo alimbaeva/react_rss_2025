@@ -3,31 +3,18 @@ import { ERRORLOADING } from '../veriables';
 import { useSearch } from './context/useSearch';
 import SearchInputs from './SearchInputs';
 import './styles/topControls.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { useGetBreedsQuery } from '../store/queryApi/breedsApi';
+import { setCleanSearch } from '../store/slices/searchSlice';
 
 const TopControls: FC = () => {
-  const breeds = useSelector((state: RootState) => state.breeds.breeds);
+  const dispatch = useDispatch();
+  const { searchValue, searchValueKey } = useSelector(
+    (state: RootState) => state.search
+  );
   const { error } = useGetBreedsQuery(undefined);
-  const {
-    searchValue,
-    idValue,
-    searchValueKey,
-    setSearchValue,
-    setIdValue,
-    saveToLocalStorage,
-    setSearchValueKey,
-    setCurrentPage,
-  } = useSearch();
-
-  const [searchValueState, setSearchValueState] = useState({
-    searchValue,
-    searchValueKey,
-    idValue,
-  });
-
-  const [showListBreeds, setShowListBreeds] = useState<boolean>(false);
+  const { setCurrentPage } = useSearch();
   const [errorBtn, setErrorBtn] = useState<string | null>(null);
 
   if (errorBtn) throw new Error('Имитация ошибки при клике.');
@@ -35,26 +22,11 @@ const TopControls: FC = () => {
   const handleSubmit = (event: FormEvent<Element>) => {
     event?.preventDefault();
 
-    if (!searchValueState.searchValue && !searchValueState.searchValueKey) {
-      setIdValue('');
-      setSearchValue('');
-      setSearchValueKey('');
-      saveToLocalStorage({
-        searchValue: '',
-        searchValueKey: '',
-        idValue: '',
-      });
+    if (!searchValue && !searchValueKey) {
+      dispatch(setCleanSearch());
       return;
     }
 
-    setSearchValue(searchValueState.searchValue);
-    setSearchValueKey(searchValueState.searchValueKey);
-    setIdValue('');
-    saveToLocalStorage({
-      searchValue: searchValueState.searchValue,
-      searchValueKey: searchValueState.searchValueKey,
-      idValue: '',
-    });
     setCurrentPage(0);
     localStorage.setItem('currentPage', `${0}`);
   };
@@ -62,13 +34,7 @@ const TopControls: FC = () => {
   return (
     <div className="controls-wrapper">
       <form onSubmit={handleSubmit}>
-        <SearchInputs
-          searchValueState={searchValueState}
-          breeds={breeds}
-          showListBreeds={showListBreeds}
-          setSearchValueState={setSearchValueState}
-          setShowListBreeds={setShowListBreeds}
-        />
+        <SearchInputs />
         <button data-testid="search-button">Search</button>
       </form>
       <button

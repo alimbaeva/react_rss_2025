@@ -2,28 +2,24 @@ import { useState, useEffect, useCallback } from 'react';
 import { CatBreed } from '../types/types';
 import { useSearchParams } from 'react-router-dom';
 import { fetchCats } from '../customhooks/useFetchCats';
-import { useSearch } from './context/useSearch';
+import { RootState } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage, setPages } from '../store/slices/searchSlice';
 
 export const useResultData = () => {
-  const {
-    searchValueKey,
-    searchValue,
-    cats,
-    limit,
-    currentPage,
-    idValue,
-    setCurrentPage,
-    setIdValue,
-  } = useSearch();
+  const dispatch = useDispatch();
+  const { searchValueKey, searchValue, pages, limit, currentPage, idValue } =
+    useSelector((state: RootState) => state.search);
+  const cats = useSelector((state: RootState) => state.breeds.cats);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dataLocSt = localStorage.getItem('dataCurent') ? true : false;
+  const [isLoad, setIsLoad] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   const [data, setData] = useState<CatBreed[]>(
     dataLocSt ? JSON.parse(localStorage.getItem('dataCurent') as string) : []
   );
-  const [isLoad, setIsLoad] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [pages, setPages] = useState<number[]>([]);
 
   const getCatsData = useCallback(async () => {
     setIsLoad(true);
@@ -49,12 +45,11 @@ export const useResultData = () => {
       { length: Math.ceil(data.length / limit) },
       (_, i) => i
     );
-    setPages(arr);
+    dispatch(setPages(arr));
     if (arr.length === 1) {
-      setCurrentPage(0);
-      localStorage.setItem('currentPage', `${0}`);
+      dispatch(setCurrentPage(0));
     }
-  }, [data, limit, pages.length, setCurrentPage]);
+  }, [data.length, dispatch, limit]);
 
   useEffect(() => {
     const page = Number(searchParams.get('page'));
@@ -89,7 +84,6 @@ export const useResultData = () => {
     isLoad,
     error,
     idValue,
-    setIdValue,
     currentPage,
     limit,
   };

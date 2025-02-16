@@ -1,49 +1,28 @@
 import { ChangeEvent, MouseEvent, FC, useState, useEffect } from 'react';
 import { Breed } from '../types/types';
 import './styles/topControls.scss';
+import { RootState } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue, setSearchValueKey } from '../store/slices/searchSlice';
 
-interface SearchInputsProps {
-  searchValueState: {
-    searchValue: string;
-    searchValueKey: string;
-    idValue: string;
-  };
-  breeds: Breed[];
-  showListBreeds: boolean;
-  setSearchValueState: (state: {
-    searchValue: string;
-    searchValueKey: string;
-    idValue: string;
-  }) => void;
-  setShowListBreeds: (value: boolean) => void;
-}
-
-const SearchInputs: FC<SearchInputsProps> = ({
-  searchValueState,
-  breeds,
-  showListBreeds,
-  setSearchValueState,
-  setShowListBreeds,
-}) => {
+const SearchInputs: FC = () => {
+  const dispatch = useDispatch();
+  const breeds = useSelector((state: RootState) => state.breeds.breeds);
+  const { searchValue, searchValueKey } = useSelector(
+    (state: RootState) => state.search
+  );
   const [inputOptions, setInputOptions] = useState<Breed[]>([]);
+  const [showListBreeds, setShowListBreeds] = useState<boolean>(true);
 
   const handleChangeKey = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase().trim();
-    setSearchValueState({
-      searchValueKey: value,
-      searchValue: '',
-      idValue: '',
-    });
+    dispatch(setSearchValueKey(value));
     setShowListBreeds(false);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase().trim();
-    setSearchValueState({
-      searchValue: value,
-      searchValueKey: '',
-      idValue: '',
-    });
+    dispatch(setSearchValue(value));
     setShowListBreeds(true);
 
     const filteredBreeds = breeds.filter((el) =>
@@ -59,20 +38,16 @@ const SearchInputs: FC<SearchInputsProps> = ({
 
   const handleBreedItem = (event: MouseEvent<HTMLLIElement>) => {
     const eventName = event.currentTarget.textContent as string;
-    setSearchValueState({
-      searchValue: eventName,
-      idValue: '',
-      searchValueKey: '',
-    });
+    dispatch(setSearchValue(eventName));
     setShowListBreeds(false);
   };
 
   useEffect(() => {
-    if (!searchValueState.searchValue) {
+    if (!searchValue) {
       setInputOptions(breeds);
       setShowListBreeds(false);
     }
-  }, [breeds, searchValueState.searchValue, setShowListBreeds]);
+  }, [breeds, searchValue]);
 
   return (
     <div className="inputs-wrapper">
@@ -80,7 +55,7 @@ const SearchInputs: FC<SearchInputsProps> = ({
         <p>Поиск.</p>
         <input
           type="text"
-          value={searchValueState.searchValueKey || ''}
+          value={searchValueKey || ''}
           onChange={handleChangeKey}
           placeholder="Введите текст для поиска"
         />
@@ -89,7 +64,7 @@ const SearchInputs: FC<SearchInputsProps> = ({
         <p>Поиск с предложениями помогает быстро найти результат.</p>
         <input
           type="text"
-          value={searchValueState.searchValue || ''}
+          value={searchValue || ''}
           onChange={handleChange}
           placeholder="Введите текст для поиска"
         />

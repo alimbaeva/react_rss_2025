@@ -5,22 +5,17 @@ import IsLoading from './IsLoading';
 import EmptyData from './EmptyData';
 import Pagination from './pagination/Pagination';
 import { useResultData } from './useResultData';
+import { useDispatch } from 'react-redux';
+import { setIdValue } from '../store/slices/searchSlice';
 
 const Result: FC = () => {
-  const {
-    data,
-    pages,
-    isLoad,
-    error,
-    idValue,
-    setIdValue,
-    currentPage,
-    limit,
-  } = useResultData();
+  const dispatch = useDispatch();
+  const { data, pages, isLoad, error, idValue, currentPage, limit } =
+    useResultData();
 
   const handleMainResultBlock = (event: MouseEvent<HTMLDivElement>) => {
     const close = (event.target as HTMLElement).dataset.element;
-    if (close !== 'element') setIdValue('');
+    if (close !== 'element') dispatch(setIdValue(''));
   };
 
   if (isLoad) return <IsLoading />;
