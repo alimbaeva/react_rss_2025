@@ -1,1 +1,49 @@
 @use './variables' as *;
+
+.down-info {
+  padding: 1rem;
+  background-color: $white;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  display: inline-block;
+
+  button {
+    @extend %button;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+
+    &:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .trash-btn::after {
+    content: 'Delete all selected items';
+    @extend %afterElement;
+  }
+
+  .download-btn::after {
+    content: 'Download selected data';
+    @extend %afterElement;
+  }
+
+  .reveal-btn::after {
+    content: 'Show a list of selected data';
+    @extend %afterElement;
+  }
+
+  .count-item {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 1rem;
+    border-bottom: 1px solid $red40;
+
+    span {
+      color: $red40;
+      font-weight: 700;
+    }
+  }
+}
