@@ -7,10 +7,25 @@ import IsLoading from './IsLoading';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { setIdValue } from '../store/slices/searchSlice';
+import ChooseIcone from './icons/ChooseIcone';
+import {
+  addToSelected,
+  removeFromSelected,
+} from '../store/slices/selectedSlice';
+
+const chooseColorTrue = 'rgb(74, 198, 11)';
+const chooseColorFalse = '#f3f798';
 
 const Details: FC = () => {
   const dispatch = useDispatch();
   const { idValue } = useSelector((state: RootState) => state.search);
+  const selectedIds = useSelector(
+    (state: RootState) => state.selected.selectedIds
+  );
+
+  const [chooseItem, setChooseItem] = useState(
+    selectedIds.includes(idValue) ? true : false
+  );
   const [detaileCards, setDetaileCards] = useState<CatsDataType[]>([]);
   const [isLoad, setIsLoad] = useState(false);
 
@@ -30,6 +45,23 @@ const Details: FC = () => {
     dispatch(setIdValue(''));
   };
 
+  const handleChoose = () => {
+    const saveData = {
+      id: idValue,
+      description: detaileCards[0].breeds[0].description,
+      name: detaileCards[0].breeds[0].name,
+      origin: detaileCards[0].breeds[0].origin,
+    };
+    if (!chooseItem) {
+      dispatch(addToSelected(saveData));
+      setChooseItem(true);
+    }
+    if (chooseItem) {
+      dispatch(removeFromSelected(idValue));
+      setChooseItem(false);
+    }
+  };
+
   useEffect(() => {
     if (idValue) getData();
   }, [idValue, getData]);
@@ -39,7 +71,7 @@ const Details: FC = () => {
 
   return (
     <div className="details-wraper">
-      <div>
+      <div className="button-wrapper">
         <button
           data-testid="details-btn"
           onClick={handleCloseDetail}
@@ -47,6 +79,10 @@ const Details: FC = () => {
         >
           Close
         </button>
+        <div onClick={handleChoose} className="choose-item">
+          <ChooseIcone fill={chooseItem ? chooseColorTrue : chooseColorFalse} />
+          <div data-element="choose" className="fill"></div>
+        </div>
       </div>
       <div className="info-block">
         <p>Ditaile Information:</p>

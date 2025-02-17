@@ -1,10 +1,14 @@
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import { CatBreed } from '../../types/types';
 import '../styles/cardItem.scss';
 import { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIdValue } from '../../store/slices/searchSlice';
 import ChooseIcone from '../icons/ChooseIcone';
+import {
+  addToSelected,
+  removeFromSelected,
+} from '../../store/slices/selectedSlice';
 
 interface CardItemProps {
   data: CatBreed;
@@ -16,13 +20,38 @@ const chooseColorFalse = '#f3f798';
 const CardItem: FC<CardItemProps> = ({ data }) => {
   const dispatch = useDispatch();
   const { idValue } = useSelector((state: RootState) => state.search);
-  const [chooseItem, setChooseItem] = useState(false);
+  const selectedIds = useSelector(
+    (state: RootState) => state.selected.selectedIds
+  );
+  const [chooseItem, setChooseItem] = useState(
+    selectedIds.includes(data.id) ? true : false
+  );
 
   const handleCard = (e: MouseEvent<HTMLDivElement>) => {
-    console.log(e);
+    const chooseId = (e.target as HTMLElement).getAttribute('data-element');
+    if (chooseId === 'choose') {
+      const saveData = {
+        id: data.id,
+        description: data.description,
+        name: data.name,
+        origin: data.origin,
+      };
+      if (!chooseItem) {
+        dispatch(addToSelected(saveData));
+        setChooseItem(true);
+      }
+      if (chooseItem) {
+        dispatch(removeFromSelected(data.id));
+        setChooseItem(false);
+      }
+    }
     dispatch(setIdValue(data.id));
-    setChooseItem(true);
   };
+
+  useEffect(() => {
+    if (selectedIds.includes(data.id)) setChooseItem(true);
+    if (!selectedIds.includes(data.id)) setChooseItem(false);
+  }, [data.id, selectedIds]);
 
   return (
     <div
@@ -47,6 +76,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
             <ChooseIcone
               fill={chooseItem ? chooseColorTrue : chooseColorFalse}
             />
+            <div data-element="choose" className="fill"></div>
           </div>
         </div>
       </div>

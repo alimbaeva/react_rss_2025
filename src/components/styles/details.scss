@@ -10,12 +10,30 @@
   }
 }
 
+.button-wrapper {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+}
+
 .close-btn {
   @extend %button;
   cursor: pointer;
 
   &:hover {
     background-color: $red193;
+  }
+}
+
+.choose-item {
+  display: inline-block;
+  padding: 2px;
+  position: relative;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  &:hover {
+    box-shadow: $box-shadow-inner;
   }
 }
 

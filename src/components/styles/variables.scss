@@ -4,11 +4,12 @@ $orange124: rgb(190, 124, 95);
 $orange7a: #e67a7a;
 $border-radius: 5px;
 $border100: 100%;
-$box-shadow: 1px 0px 3px 3px $red193;
 $green215: rgb(184, 215, 169);
+$sun: #f3f798;
+$box-shadow: 1px 0px 3px 3px $red193;
+$box-shadow-inner: inset 1px 0px 3px 3px $sun;
 $black: #000;
 $white: #fff;
-$sun: #f3f798;
 
 %button {
   all: unset;

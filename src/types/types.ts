@@ -60,6 +60,13 @@ export interface CatsDataType {
   width: number;
 }
 
+export interface CatItemType {
+  id: string;
+  description: string;
+  name: string;
+  origin: string;
+}
+
 export interface Breed {
   id: string;
   name: string;
