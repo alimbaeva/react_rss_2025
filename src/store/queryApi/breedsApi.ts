@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { APIKEY } from '../../veriables';
+import { APIKEY, URLAPI } from '../../veriables';
 import { Breed, CatBreed } from '../../types/types';
 import { saveToLocalStorage } from '../../customhooks/localActions';
 
 export const breedsApi = createApi({
   reducerPath: 'breedsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.thecatapi.com/v1',
+    baseUrl: URLAPI,
     prepareHeaders: (headers) => {
       headers.set('x-api-key', APIKEY);
       return headers;

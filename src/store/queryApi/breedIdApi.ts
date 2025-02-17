@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { APIKEY } from '../../veriables';
+import { APIKEY, URLAPI, URLAPI_SEARCH } from '../../veriables';
 import { CatsDataType } from '../../types/types';
 import { saveToLocalStorage } from '../../customhooks/localActions';
 
 export const breedIdApi = createApi({
   reducerPath: 'breedIdApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.thecatapi.com/v1',
+    baseUrl: URLAPI,
     prepareHeaders: (headers) => {
       headers.set('x-api-key', APIKEY);
       return headers;
@@ -14,7 +14,7 @@ export const breedIdApi = createApi({
   }),
   endpoints: (builder) => ({
     getCatsDataByBreed: builder.query<CatsDataType[], string>({
-      query: (idValue) => `/images/search?limit=10&breed_ids=${idValue}`,
+      query: (idValue) => `${URLAPI_SEARCH}${idValue}`,
       transformResponse: (response: CatsDataType[]) => {
         saveToLocalStorage('data', response);
         return response;
