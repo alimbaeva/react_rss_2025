@@ -56,6 +56,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
   return (
     <div
       id={data.id}
+      data-testid="card"
       onClick={handleCard}
       className={idValue === data.id ? 'activ card' : 'card'}
     >
@@ -72,7 +73,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
       </div>
       <div data-element="element" className="fill">
         <div data-element="element" className="choose-wrapper">
-          <div className="choose-item">
+          <div data-testid="choose-button" className="choose-item">
             <ChooseIcone
               fill={chooseItem ? chooseColorTrue : chooseColorFalse}
             />
