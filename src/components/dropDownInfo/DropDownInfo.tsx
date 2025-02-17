@@ -1,22 +1,42 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import DownloadIcon from '../icons/DownloadIcon';
 import TrashIcon from '../icons/TrashIcon';
 import '../styles/dropDownInfo.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { clearSelected } from '../../store/slices/selectedSlice';
 
 const headerIconColor = '#e67a7a';
 
 const DropDownInfo: FC = () => {
+  const dispatch = useDispatch();
+  const selectedIds = useSelector(
+    (state: RootState) => state.selected.selectedIds
+  );
+
+  const [count, setCount] = useState(0);
+
+  const hadleTrashSelected = () => {
+    dispatch(clearSelected());
+  };
+
+  useEffect(() => {
+    setCount(selectedIds.length);
+  }, [selectedIds]);
+
+  if (!count) return;
+
   return (
     <section className="wrapper-info">
       <div className="down-info">
         <div>
           <p className="count-item">
-            <span>3</span> items selected
+            <span>{count}</span> items selected
           </p>
           <button className="reveal-btn">Reveal more information</button>
         </div>
         <div className="button-wrapper">
-          <button className="trash-btn">
+          <button onClick={hadleTrashSelected} className="trash-btn">
             <TrashIcon fill={headerIconColor} />
           </button>
           <button className="download-btn">
