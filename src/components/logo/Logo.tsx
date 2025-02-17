@@ -5,12 +5,12 @@ import { headerIconColor } from '../../veriables';
 
 const Logo: FC = () => {
   return (
-    <div className="logo">
+    <div className="logo" data-testid="logo">
       <div>
-        <h1>CC</h1>
-        <ChooseIcone fill={headerIconColor} />
+        <h1 data-testid="logo-h1">CC</h1>
+        <ChooseIcone fill={headerIconColor} data-testid="logo-chooseIcone" />
       </div>
-      <h1>Cute Cats</h1>
+      <h1 data-testid="logo-text">Cute Cats</h1>
     </div>
   );
 };
