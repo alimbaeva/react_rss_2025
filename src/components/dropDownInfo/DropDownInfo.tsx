@@ -6,8 +6,7 @@ import { clearSelected } from '../../store/slices/selectedSlice';
 import '../styles/dropDownInfo.scss';
 import DownloadFile from './DownloadFile';
 import MoreInformation from './MoreInformation';
-
-const headerIconColor = '#e67a7a';
+import { headerIconColor } from '../../veriables';
 
 const DropDownInfo: FC = () => {
   const dispatch = useDispatch();

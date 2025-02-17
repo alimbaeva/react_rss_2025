@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import '../styles/header.scss';
 import ChooseIcone from '../icons/ChooseIcone';
-
-const headerIconColor = '#e67a7a';
+import { headerIconColor } from '../../veriables';
 
 const Logo: FC = () => {
   return (

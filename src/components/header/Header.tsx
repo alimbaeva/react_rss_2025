@@ -4,8 +4,7 @@ import CatIcon from '../icons/CarIcon';
 import MooneIcon from '../icons/MooneIcon';
 import SunIcon from '../icons/SunIcon';
 import Logo from '../logo/Logo';
-
-const headerIconColor = '#e67a7a';
+import { headerIconColor } from '../../veriables';
 
 const Header: FC = () => {
   return (

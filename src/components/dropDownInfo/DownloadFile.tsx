@@ -3,8 +3,7 @@ import DownloadIcon from '../icons/DownloadIcon';
 import { RootState } from '../../store/store';
 import '../styles/dropDownInfo.scss';
 import { useSelector } from 'react-redux';
-
-const headerIconColor = '#e67a7a';
+import { headerIconColor } from '../../veriables';
 
 const DownloadFile: FC = () => {
   const { selectedData, selectedIds } = useSelector(
