@@ -18,13 +18,17 @@ const Header: FC = () => {
           <div>
             <CatIcon fill={headerIconColor} />
           </div>
-          <div onClick={toggleTheme} className="theam-wrapper">
+          <div
+            data-testid="theme-toggle"
+            onClick={toggleTheme}
+            className="theam-wrapper"
+          >
             {theme === 'light' ? (
-              <div className="theam-item nihgt">
+              <div data-testid="moon-icon" className="theam-item nihgt">
                 <MooneIcon fill={headerIconColor} />
               </div>
             ) : (
-              <div className="theam-item day">
+              <div data-testid="sun-icon" className="theam-item day">
                 <SunIcon fill={headerIconColor} height={'30px'} />
               </div>
             )}
