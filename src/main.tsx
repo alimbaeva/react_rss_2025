@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary';
 import App from './pages/App';
 import { store } from './store/store';
+import { ThemeProvider } from './components/context/ThemeContext ';
 
 const root = document.getElementById('root');
 if (!root) {
@@ -14,7 +15,9 @@ createRoot(root).render(
   <ErrorBoundary fallback={<p>Colling error ...</p>}>
     <StrictMode>
       <Provider store={store}>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </Provider>
     </StrictMode>
   </ErrorBoundary>

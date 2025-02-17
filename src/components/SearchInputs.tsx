@@ -16,9 +16,11 @@ import {
   setSearchValue,
   setSearchValueKey,
 } from '../store/slices/searchSlice';
+import { useTheme } from './context/useSearch';
 
 const SearchInputs: FC = () => {
   const dispatch = useDispatch();
+  const { theme } = useTheme();
   const breeds = useSelector((state: RootState) => state.breeds.breeds);
   const { searchValue, searchValueKey } = useSelector(
     (state: RootState) => state.search
@@ -103,7 +105,13 @@ const SearchInputs: FC = () => {
           {showListBreeds && (
             <>
               {inputOptions.length > 0 ? (
-                <ul className="wrapper-breed">
+                <ul
+                  className={
+                    theme === 'light'
+                      ? 'light-info wrapper-breed'
+                      : 'dark-info wrapper-breed'
+                  }
+                >
                   {inputOptions.map((el) => (
                     <li
                       key={el.id}

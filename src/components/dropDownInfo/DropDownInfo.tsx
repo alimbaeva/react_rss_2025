@@ -7,10 +7,12 @@ import '../styles/dropDownInfo.scss';
 import DownloadFile from './DownloadFile';
 import MoreInformation from './MoreInformation';
 import { headerIconColor } from '../../veriables';
+import { useTheme } from '../context/useSearch';
 
 const DropDownInfo: FC = () => {
   const dispatch = useDispatch();
   const { selectedIds } = useSelector((state: RootState) => state.selected);
+  const { theme } = useTheme();
 
   const [count, setCount] = useState(0);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -28,7 +30,11 @@ const DropDownInfo: FC = () => {
 
   return (
     <section className="wrapper-info">
-      <div className="down-info">
+      <div
+        className={
+          theme === 'light' ? 'light-info down-info' : 'dark-info down-info'
+        }
+      >
         <div>
           <p className="count-item">
             <span>{count}</span> items selected

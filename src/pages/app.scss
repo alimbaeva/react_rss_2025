@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-.main-page {
+.main-section {
   width: 1100px;
   margin: 30px auto;
   flex-wrap: wrap;
@@ -56,4 +56,9 @@
 
 .in-details {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.dark {
+  background-color: black;
+  color: rgb(243, 238, 231) !important;
 }

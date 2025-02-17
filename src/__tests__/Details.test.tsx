@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import Details from '../components/Details';
-import SearchContext from '../components/context/SearchContext';
+import SearchContext from '../components/context/ThemeContext ';
 import { mockDataCatsData, mockSearchContext } from './mockData';
 import { fetchGetCatsData } from '../customhooks/useFetchCats';
 

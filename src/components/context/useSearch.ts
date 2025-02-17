@@ -1,12 +1,11 @@
 import { useContext } from 'react';
-import SearchContext, { SearchContextType } from './SearchContext';
+import { ThemeContextType } from './ThemeContext ';
+import ThemeContext from './ThemeContext ';
 
-export const useSearch = (): SearchContextType => {
-  const context = useContext(SearchContext);
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error(
-      'useSearch must be used within a SearchContext in SearchProvider'
-    );
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };

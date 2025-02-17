@@ -4,7 +4,7 @@ import Results from '../components/results/Results';
 import { MemoryRouter } from 'react-router-dom';
 import SearchContext, {
   SearchContextType,
-} from '../components/context/SearchContext';
+} from '../components/context/ThemeContext ';
 
 const mockSearchContext: SearchContextType = {
   searchValue: '',

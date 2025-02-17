@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import CardItem from '../components/cards/CardItem';
-import SearchContext from '../components/context/SearchContext';
+import SearchContext from '../components/context/ThemeContext ';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import { CatBreed } from '../types/types';

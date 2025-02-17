@@ -58,6 +58,14 @@ $white: #fff;
   transition: opacity 0.2s ease-in-out;
 }
 
+.light-info {
+  background-color: $white;
+}
+
+.dark-info {
+  background-color: $black;
+}
+
 @keyframes blink {
   0% {
     opacity: 0.2;

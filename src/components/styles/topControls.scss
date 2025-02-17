@@ -35,10 +35,10 @@
 
     .wrapper-breed {
       position: absolute;
-      background-color: white;
       list-style: none;
       padding: 10px;
       margin: 0;
+      max-width: 300px;
       margin-bottom: 15px;
       max-height: 200px;
       width: 100%;
@@ -48,6 +48,8 @@
 
       .breed-item {
         padding: 7px;
+        margin: 5px 0;
+        box-shadow: $box-shadow;
         cursor: pointer;
 
         &:hover {
