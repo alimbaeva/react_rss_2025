@@ -7,7 +7,9 @@ import { useSelector } from 'react-redux';
 const headerIconColor = '#e67a7a';
 
 const DownloadFile: FC = () => {
-  const { selectedData } = useSelector((state: RootState) => state.selected);
+  const { selectedData, selectedIds } = useSelector(
+    (state: RootState) => state.selected
+  );
 
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
@@ -29,7 +31,7 @@ const DownloadFile: FC = () => {
 
     const downloadLink = document.createElement('a');
     downloadLink.href = url;
-    downloadLink.download = 'Cute_Cats_Data_Select.csv';
+    downloadLink.download = `Cute_Cats_Data_Select-${selectedIds.length}.csv`;
     downloadLink.click();
     setFileUrl(url);
   };
