@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { breedsApi } from './queryApi/breedsApi';
+import { breedIdApi } from './queryApi/breedIdApi';
 import breedsReducer from './slices/breedsSlice';
 import searchReducer from './slices/searchSlice';
 import selectedReducer from './slices/selectedSlice';
@@ -7,12 +8,15 @@ import selectedReducer from './slices/selectedSlice';
 export const store = configureStore({
   reducer: {
     [breedsApi.reducerPath]: breedsApi.reducer,
+    [breedIdApi.reducerPath]: breedIdApi.reducer,
     breeds: breedsReducer,
     search: searchReducer,
     selected: selectedReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(breedsApi.middleware),
+    getDefaultMiddleware()
+      .concat(breedsApi.middleware)
+      .concat(breedIdApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

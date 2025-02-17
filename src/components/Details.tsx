@@ -1,6 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
-import { fetchGetCatsData } from '../customhooks/useFetchCats';
-import { CatsDataType } from '../types/types';
+import { FC, useEffect, useState } from 'react';
 import DetailsCards from './cards/DetailsCards';
 import './styles/details.scss';
 import IsLoading from './IsLoading';
@@ -12,6 +10,8 @@ import {
   addToSelected,
   removeFromSelected,
 } from '../store/slices/selectedSlice';
+import { useGetCatsDataByBreedQuery } from '../store/queryApi/breedIdApi';
+import { setDetaileCards } from '../store/slices/breedsSlice';
 
 const chooseColorTrue = 'rgb(74, 198, 11)';
 const chooseColorFalse = '#f3f798';
@@ -22,30 +22,18 @@ const Details: FC = () => {
   const selectedIds = useSelector(
     (state: RootState) => state.selected.selectedIds
   );
+  const { data: detaileCards, error } = useGetCatsDataByBreedQuery(idValue);
 
-  const [chooseItem, setChooseItem] = useState(
-    selectedIds.includes(idValue) ? true : false
-  );
-  const [detaileCards, setDetaileCards] = useState<CatsDataType[]>([]);
-  const [isLoad, setIsLoad] = useState(false);
-
-  const getData = useCallback(async () => {
-    try {
-      setIsLoad(true);
-      const res = await fetchGetCatsData(idValue);
-      if (!res) return;
-      setDetaileCards(res);
-      setTimeout(() => setIsLoad(false), 300);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [idValue]);
+  const [loading, setIsLoading] = useState(false);
+  const [chooseItem, setChooseItem] = useState(selectedIds.includes(idValue));
 
   const handleCloseDetail = () => {
     dispatch(setIdValue(''));
   };
 
   const handleChoose = () => {
+    if (!detaileCards) return;
+
     const saveData = {
       id: idValue,
       description: detaileCards[0].breeds[0].description,
@@ -63,11 +51,20 @@ const Details: FC = () => {
   };
 
   useEffect(() => {
-    if (idValue) getData();
-  }, [idValue, getData]);
+    if (detaileCards) {
+      dispatch(setDetaileCards(detaileCards));
+    }
+  }, [detaileCards, dispatch]);
 
-  if (isLoad) return <IsLoading />;
-  if (!detaileCards.length) return;
+  useEffect(() => {
+    setIsLoading(true);
+    setChooseItem(selectedIds.includes(idValue));
+    setTimeout(() => setIsLoading(false), 300);
+  }, [idValue]);
+
+  if (loading) return <IsLoading />;
+  if (!detaileCards) return;
+  if (error) return <p>Empty!</p>;
 
   return (
     <div className="details-wraper">
