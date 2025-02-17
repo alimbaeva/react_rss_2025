@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CatItemType } from '../../types/types';
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  saveToLocalStorage,
+} from '../../customhooks/localActions';
 
 interface SelectedState {
   selectedData: { [key: string]: CatItemType };
@@ -8,12 +13,9 @@ interface SelectedState {
 }
 
 const initialState: SelectedState = {
-  selectedData: localStorage.getItem('selectedData')
-    ? JSON.parse(localStorage.getItem('selectedData') as string)
-    : {},
-  selectedIds: localStorage.getItem('selectedIds')
-    ? JSON.parse(localStorage.getItem('selectedIds') as string)
-    : [],
+  selectedData:
+    getFromLocalStorage<{ [key: string]: CatItemType }>('selectedData') ?? {},
+  selectedIds: getFromLocalStorage<string[]>('selectedIds') ?? [],
   dell: '',
 };
 
@@ -25,11 +27,8 @@ const selectedSlice = createSlice({
       if (!state.selectedData[action.payload.id]) {
         state.selectedData[action.payload.id] = action.payload;
         state.selectedIds.push(action.payload.id);
-        localStorage.setItem(
-          'selectedData',
-          JSON.stringify(state.selectedData)
-        );
-        localStorage.setItem('selectedIds', JSON.stringify(state.selectedIds));
+        saveToLocalStorage('selectedData', state.selectedData);
+        saveToLocalStorage('selectedIds', state.selectedIds);
       }
     },
     removeFromSelected: (state, action: PayloadAction<string>) => {
@@ -41,14 +40,14 @@ const selectedSlice = createSlice({
       state.selectedIds = state.selectedIds.filter(
         (id) => id !== action.payload
       );
-      localStorage.setItem('selectedData', JSON.stringify(state.selectedData));
-      localStorage.setItem('selectedIds', JSON.stringify(state.selectedIds));
+      saveToLocalStorage('selectedData', state.selectedData);
+      saveToLocalStorage('selectedIds', state.selectedIds);
     },
     clearSelected: (state) => {
       state.selectedData = {};
       state.selectedIds = [];
-      localStorage.removeItem('selectedData');
-      localStorage.removeItem('selectedIds');
+      removeFromLocalStorage('selectedData');
+      removeFromLocalStorage('selectedIds');
     },
   },
 });

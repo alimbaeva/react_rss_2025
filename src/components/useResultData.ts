@@ -4,6 +4,10 @@ import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setPages } from '../store/slices/searchSlice';
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from '../customhooks/localActions';
 
 export const useResultData = () => {
   const dispatch = useDispatch();
@@ -13,12 +17,14 @@ export const useResultData = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const dataLocSt = localStorage.getItem('dataCurent') ? true : false;
+  const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent')
+    ? true
+    : false;
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const [data, setData] = useState<CatBreed[]>(
-    dataLocSt ? JSON.parse(localStorage.getItem('dataCurent') as string) : cats
+    getFromLocalStorage<CatBreed[]>('dataCurent') ?? cats
   );
 
   const getCatsData = useCallback(async () => {
@@ -32,7 +38,7 @@ export const useResultData = () => {
 
     setData(filteredCat);
     setTimeout(() => setIsLoad(false), 300);
-    localStorage.setItem('dataCurent', JSON.stringify(filteredCat));
+    saveToLocalStorage('dataCurent', filteredCat);
   }, [cats, searchValue, searchValueKey]);
 
   useEffect(() => {

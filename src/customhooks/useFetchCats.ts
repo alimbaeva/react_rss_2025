@@ -1,9 +1,9 @@
 import { Breed, CatBreed, CatsDataType } from '../types/types';
 import { APIKEY, URLAPI, URLAPI_SEARCH } from '../veriables';
+import { getFromLocalStorage, saveToLocalStorage } from './localActions';
 
 export const fetchCatsAll = async () => {
-  const breedsRaw = localStorage.getItem('breedsValue');
-  const breeds: Breed[] = breedsRaw ? JSON.parse(breedsRaw) : [];
+  const breeds: Breed[] = getFromLocalStorage<Breed[]>('breedsValue') ?? [];
 
   if (!breeds.length) return [];
 
@@ -37,8 +37,8 @@ export const fetchCats = async () => {
       name: el.name,
     }));
 
-    localStorage.setItem('breedsValue', JSON.stringify(dataBread));
-    localStorage.setItem('dataCats', JSON.stringify(data));
+    saveToLocalStorage('breedsValue', dataBread);
+    saveToLocalStorage('dataCats', data);
 
     return { data: data, breeds: dataBread };
   } catch (error: unknown) {
@@ -59,7 +59,7 @@ export const fetchGetCatsData = async (idValue: string) => {
     }
     const data: CatsDataType[] = await response.json();
 
-    localStorage.setItem('data', JSON.stringify(data));
+    saveToLocalStorage('data', data);
     return data;
   } catch (err) {
     console.error(err);
