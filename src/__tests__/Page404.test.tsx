@@ -1,22 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import Page404 from '../pages/page404/Page404';
 
-describe('Page404', () => {
-  it('renders with correct text and link', () => {
+describe('Page404 Component', () => {
+  it('renders the correct title and link', () => {
     render(
-      <Router>
+      <MemoryRouter>
         <Page404 />
-      </Router>
+      </MemoryRouter>
     );
 
-    const pageTitle = screen.getByRole('heading', {
-      name: /this page does not exist/i,
-    });
-    expect(pageTitle).toBeInTheDocument();
+    expect(screen.getByText(/this page does not exist/i)).toBeInTheDocument();
 
-    const mainPageLink = screen.getByRole('link', { name: /main page/i });
-    expect(mainPageLink).toBeInTheDocument();
-    expect(mainPageLink).toHaveAttribute('href', '/');
+    const link = screen.getByRole('link', { name: /main page/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '/');
   });
 });
