@@ -29,14 +29,14 @@ const DropDownInfo: FC = () => {
   if (!count) return;
 
   return (
-    <section className="wrapper-info">
+    <section className="wrapper-info" data-testid="dropdown-info-section">
       <div
         className={
           theme === 'light' ? 'light-info down-info' : 'dark-info down-info'
         }
       >
         <div>
-          <p className="count-item">
+          <p className="count-item" data-testid="item-count">
             <span>{count}</span> items selected
           </p>
           {showMoreInfo && (
@@ -52,10 +52,14 @@ const DropDownInfo: FC = () => {
           )}
         </div>
         <div className="button-wrapper">
-          <button onClick={hadleTrashSelected} className="trash-btn">
-            <TrashIcon fill={headerIconColor} />
+          <button
+            data-testid="trash-button"
+            onClick={hadleTrashSelected}
+            className="trash-btn"
+          >
+            <TrashIcon fill={headerIconColor} data-testid="trash-icon" />
           </button>
-          <DownloadFile />
+          <DownloadFile data-testid="download-file" />
         </div>
       </div>
     </section>
