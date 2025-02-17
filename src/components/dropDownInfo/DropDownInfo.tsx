@@ -1,18 +1,16 @@
 import { FC, useEffect, useState } from 'react';
-import DownloadIcon from '../icons/DownloadIcon';
 import TrashIcon from '../icons/TrashIcon';
-import '../styles/dropDownInfo.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { clearSelected } from '../../store/slices/selectedSlice';
+import '../styles/dropDownInfo.scss';
+import DownloadFile from './DownloadFile';
 
 const headerIconColor = '#e67a7a';
 
 const DropDownInfo: FC = () => {
   const dispatch = useDispatch();
-  const selectedIds = useSelector(
-    (state: RootState) => state.selected.selectedIds
-  );
+  const { selectedIds } = useSelector((state: RootState) => state.selected);
 
   const [count, setCount] = useState(0);
 
@@ -39,9 +37,7 @@ const DropDownInfo: FC = () => {
           <button onClick={hadleTrashSelected} className="trash-btn">
             <TrashIcon fill={headerIconColor} />
           </button>
-          <button className="download-btn">
-            <DownloadIcon fill={headerIconColor} />
-          </button>
+          <DownloadFile />
         </div>
       </div>
     </section>

@@ -8,8 +8,8 @@ interface SelectedState {
 }
 
 const initialState: SelectedState = {
-  selectedData: localStorage.getItem('selectedIds')
-    ? JSON.parse(localStorage.getItem('selectedIds') as string)
+  selectedData: localStorage.getItem('selectedData')
+    ? JSON.parse(localStorage.getItem('selectedData') as string)
     : {},
   selectedIds: localStorage.getItem('selectedIds')
     ? JSON.parse(localStorage.getItem('selectedIds') as string)
