@@ -76,7 +76,11 @@ const Details: FC = () => {
         >
           Close
         </button>
-        <div onClick={handleChoose} className="choose-item">
+        <div
+          onClick={handleChoose}
+          className="choose-item"
+          data-testid="choose-item"
+        >
           <ChooseIcone fill={chooseItem ? chooseColorTrue : chooseColorFalse} />
           <div data-element="choose" className="fill"></div>
         </div>
