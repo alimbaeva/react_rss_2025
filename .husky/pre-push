@@ -2,5 +2,6 @@
 # npm run lint
 # npm run format:fix
 # npm run lint:fix
+# echo "Running Сoverage... PUSH"
 # npm run test:coverage
 # npx validate-branch-name

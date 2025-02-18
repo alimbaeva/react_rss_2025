@@ -4,6 +4,7 @@ import { FillType } from '../../types/icons';
 const CatIcon: FC<FillType> = ({ fill, height = '25px' }) => {
   return (
     <svg
+      data-testid="catIcon"
       xmlns="http://www.w3.org/2000/svg"
       height={height}
       fill={fill}

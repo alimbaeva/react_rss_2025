@@ -17,7 +17,7 @@ vi.mock('react-redux', async (importOriginal) => {
   };
 });
 
-test('должен обновлять отображение Result и Details при изменении idValue', async () => {
+test('Result должен обновлять отображение Result и Details при изменении idValue', async () => {
   vi.mocked(useSelector).mockReturnValueOnce({
     search: { idValue: '', data: [] },
   });
