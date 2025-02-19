@@ -23,7 +23,11 @@ const Result: FC = () => {
   if (data.length === 0) return <EmptyData />;
 
   return (
-    <div id="result" onClick={handleMainResultBlock}>
+    <div
+      id="result"
+      data-testid="result-container"
+      onClick={handleMainResultBlock}
+    >
       <Pagination pages={pages} />
       <div
         className={

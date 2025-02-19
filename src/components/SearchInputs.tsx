@@ -45,6 +45,8 @@ const SearchInputs: FC = () => {
     setValueKey('');
     setShowListBreeds(true);
 
+    if (!Array.isArray(breeds)) return;
+
     const filteredBreeds = breeds.filter((el) =>
       el.name.toLowerCase().includes(value)
     );
@@ -92,6 +94,7 @@ const SearchInputs: FC = () => {
             value={valueKey || ''}
             onChange={handleChangeKey}
             placeholder="Введите текст для поиска"
+            data-testid="valueKey"
           />
         </div>
         <div className="input-wrapper">
@@ -101,6 +104,7 @@ const SearchInputs: FC = () => {
             value={seaValue || ''}
             onChange={handleChange}
             placeholder="Введите текст для поиска"
+            data-testid="seaValue"
           />
           {showListBreeds && (
             <>

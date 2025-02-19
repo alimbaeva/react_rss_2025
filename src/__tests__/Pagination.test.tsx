@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { store } from '../store/store';
 import Pagination from '../components/pagination/Pagination';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { vi } from 'vitest';
+import { setCurrentPage } from '../store/slices/searchSlice';
 
 vi.mock('react-redux', async (importOriginal) => {
   const actual = (await importOriginal()) as {
@@ -49,5 +50,60 @@ describe('Pagination Component', () => {
     const activePage = screen.getByText(`${currentPage + 1}`);
 
     expect(activePage).toHaveClass('page-item');
+  });
+
+  it('should highlight the current page', () => {
+    const pages = [1, 2, 3, 4, 5];
+    const currentPage = 2;
+    vi.mocked(useSelector).mockReturnValue({ search: { currentPage } });
+
+    render(
+      <Provider store={store}>
+        <Pagination pages={pages} />
+      </Provider>
+    );
+
+    const activePage = screen.getByText(`${currentPage + 1}`);
+
+    expect(activePage).toBeInTheDocument();
+    expect(activePage).toHaveClass('page-item');
+  });
+
+  it('should render correct number of pages', () => {
+    const pages = [1, 2, 3, 4, 5];
+
+    vi.mocked(useSelector).mockReturnValue({ search: { currentPage: 0 } });
+
+    render(
+      <Provider store={store}>
+        <Pagination pages={pages} />
+      </Provider>
+    );
+
+    const pageItems = screen.getAllByText(/^\d+$/);
+    expect(pageItems).toHaveLength(pages.length);
+  });
+
+  it('should update current page on page click', () => {
+    const pages = [1, 2, 3, 4, 5];
+    const newPage = 3;
+
+    vi.mocked(useSelector).mockReturnValue({ search: { currentPage: 0 } });
+
+    const dispatch = vi.fn();
+
+    vi.mocked(useDispatch).mockReturnValue(dispatch);
+
+    render(
+      <Provider store={store}>
+        <Pagination pages={pages} />
+      </Provider>
+    );
+
+    const pageToClick = screen.getByText(`${newPage + 1}`);
+
+    fireEvent.click(pageToClick);
+
+    expect(dispatch).toHaveBeenCalledWith(setCurrentPage(newPage));
   });
 });

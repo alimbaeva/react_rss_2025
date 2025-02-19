@@ -24,7 +24,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
     (state: RootState) => state.selected.selectedIds
   );
   const [chooseItem, setChooseItem] = useState(
-    selectedIds.includes(data.id) ? true : false
+    Array.isArray(selectedIds) && selectedIds.includes(data.id) ? true : false
   );
 
   const handleCard = (e: MouseEvent<HTMLDivElement>) => {
@@ -49,8 +49,10 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
   };
 
   useEffect(() => {
-    if (selectedIds.includes(data.id)) setChooseItem(true);
-    if (!selectedIds.includes(data.id)) setChooseItem(false);
+    if (Array.isArray(selectedIds) && selectedIds.includes(data.id))
+      setChooseItem(true);
+    if (Array.isArray(selectedIds) && !selectedIds.includes(data.id))
+      setChooseItem(false);
   }, [data.id, selectedIds]);
 
   return (

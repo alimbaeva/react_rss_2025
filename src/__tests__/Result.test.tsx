@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import Result from '../components/Result';
 import { useResultData } from '../components/useResultData';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Мокаем хуки и Redux dispatch
 vi.mock('../components/useResultData', () => ({
@@ -73,5 +73,42 @@ describe('Result Component', () => {
     expect(screen.getByTestId('empty-data-1')).toBeInTheDocument();
     expect(screen.getByTestId('empty-data-2')).toBeInTheDocument();
     expect(screen.getByTestId('empty-data-3')).toBeInTheDocument();
+  });
+});
+
+vi.mock('../components/useResultData', () => ({
+  useResultData: vi.fn(),
+}));
+
+vi.mock('react-redux', () => ({
+  useDispatch: vi.fn(),
+  useSelector: vi.fn(),
+}));
+
+describe('Result Component', () => {
+  const mockDispatch = vi.fn();
+
+  beforeEach(() => {
+    vi.mocked(useDispatch).mockReturnValue(mockDispatch);
+    vi.mocked(useSelector).mockReturnValue({ currentPage: 0 }); // Добавляем мок useSelector
+  });
+
+  it('should dispatch setIdValue when clicking outside an element', () => {
+    vi.mocked(useResultData).mockReturnValue({
+      data: [{ id: '1', title: 'Card 1' }],
+      pages: [1],
+      isLoad: false,
+      error: null,
+      idValue: '123',
+      currentPage: 0,
+      limit: 10,
+    });
+
+    render(<Result />);
+    fireEvent.click(screen.getByTestId('result-container')); // Убедись, что в `Result.tsx` есть `data-testid="result-container"`
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'search/setIdValue',
+      payload: '',
+    });
   });
 });
