@@ -3,6 +3,7 @@ import { vi } from 'vitest';
 import Result from '../components/Result';
 import { useResultData } from '../components/useResultData';
 import { useDispatch, useSelector } from 'react-redux';
+import { mockCatBreed } from './mockData';
 
 // Мокаем хуки и Redux dispatch
 vi.mock('../components/useResultData', () => ({
@@ -90,12 +91,12 @@ describe('Result Component', () => {
 
   beforeEach(() => {
     vi.mocked(useDispatch).mockReturnValue(mockDispatch);
-    vi.mocked(useSelector).mockReturnValue({ currentPage: 0 }); // Добавляем мок useSelector
+    vi.mocked(useSelector).mockReturnValue({ currentPage: 0 });
   });
 
   it('should dispatch setIdValue when clicking outside an element', () => {
     vi.mocked(useResultData).mockReturnValue({
-      data: [{ id: '1', title: 'Card 1' }],
+      data: [mockCatBreed],
       pages: [1],
       isLoad: false,
       error: null,
@@ -103,9 +104,18 @@ describe('Result Component', () => {
       currentPage: 0,
       limit: 10,
     });
+    // vi.mocked(useResultData).mockReturnValue({
+    //   data: [{ id: '1', title: 'Card 1' }] as CatBreed[],
+    //   pages: [1],
+    //   isLoad: false,
+    //   error: null,
+    //   idValue: '123',
+    //   currentPage: 0,
+    //   limit: 10,
+    // });
 
     render(<Result />);
-    fireEvent.click(screen.getByTestId('result-container')); // Убедись, что в `Result.tsx` есть `data-testid="result-container"`
+    fireEvent.click(screen.getByTestId('result-container'));
     expect(mockDispatch).toHaveBeenCalledWith({
       type: 'search/setIdValue',
       payload: '',
