@@ -1,0 +1,79 @@
+$red193: rgb(216, 193, 193);
+$red40: rgb(142, 40, 40);
+$orange124: rgb(190, 124, 95);
+$orange7a: #e67a7a;
+$border-radius: 5px;
+$border100: 100%;
+$green215: rgb(184, 215, 169);
+$sun: #f3f798;
+$box-shadow: 1px 0px 3px 3px $red193;
+$box-shadow-inner: inset 1px 0px 3px 3px $sun;
+$black: #000;
+$white: #fff;
+
+%button {
+  all: unset;
+  margin-bottom: 15px;
+  padding: 7px;
+  font-weight: 700;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+%circle {
+  border-radius: $border100;
+}
+
+%center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%themeBtn {
+  @extend %circle;
+  @extend %center;
+  width: 35px;
+  height: 35px;
+
+  &:hover {
+    box-shadow: $box-shadow;
+    background-color: $red193;
+  }
+}
+
+%afterElement {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $red193;
+  color: $red40;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.light-info {
+  background-color: $white;
+}
+
+.dark-info {
+  background-color: $black;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
