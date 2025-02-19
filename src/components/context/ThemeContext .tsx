@@ -14,10 +14,20 @@ export interface ThemeProviderProps {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(
+    localStorage.getItem('theme')
+      ? (localStorage.getItem('theme') as Theme)
+      : 'light'
+  );
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => {
+      localStorage.setItem(
+        'theme',
+        `${prevTheme === 'light' ? 'dark' : 'light'}`
+      );
+      return prevTheme === 'light' ? 'dark' : 'light';
+    });
   };
 
   return (
