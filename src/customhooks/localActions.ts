@@ -4,14 +4,14 @@ export function saveToLocalStorage<T>(key: string, value: T): void {
 }
 
 export function getFromLocalStorage<T>(key: string): T | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
 
   const value = localStorage.getItem(key);
   if (value) {
     try {
       return JSON.parse(value) as T;
     } catch (error) {
-      console.error("Ошибка при парсинге JSON из localStorage:", error);
+      console.error('Ошибка при парсинге JSON из localStorage:', error);
       return null;
     }
   }

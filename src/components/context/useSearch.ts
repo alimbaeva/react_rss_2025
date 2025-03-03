@@ -16,4 +16,3 @@ export const useTheme = (): ThemeContextType => {
 
   return context || { theme: 'light', toggleTheme: () => {} };
 };
-

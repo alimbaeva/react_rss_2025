@@ -57,22 +57,22 @@ export const useResultData = () => {
     }
   }, [data.length, dispatch, limit]);
 
-//   useEffect(() => {
-//     const page = Number(searchParams.get('page'));
-//     if (data.length <= 0) {
-//       setSearchParams();
-//       return;
-//     }
-//     if (idValue) {
-//       setSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` });
-//       return;
-//     }
-// 
-//     if (!page || currentPage !== page) {
-//       setSearchParams({ page: `${currentPage + 1}` });
-//       return;
-//     }
-//   }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
+  //   useEffect(() => {
+  //     const page = Number(searchParams.get('page'));
+  //     if (data.length <= 0) {
+  //       setSearchParams();
+  //       return;
+  //     }
+  //     if (idValue) {
+  //       setSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` });
+  //       return;
+  //     }
+  //
+  //     if (!page || currentPage !== page) {
+  //       setSearchParams({ page: `${currentPage + 1}` });
+  //       return;
+  //     }
+  //   }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
 
   useEffect(() => {
     if (!dataLocSt) setData(cats);

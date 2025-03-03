@@ -18,7 +18,7 @@ const Result: FC = () => {
     if (close !== 'element') dispatch(setIdValue(''));
   };
 
-  if (isLoad) return <IsLoading />;
+  if (isLoad && !idValue) return <IsLoading />;
   if (error) return <div className="error-message">{error}</div>;
   if (data.length === 0) return <EmptyData />;
 

@@ -10,7 +10,12 @@ import { Breed } from '@/types/types';
 import '@styles/topControls.scss';
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCleanSearch, setCurrentPage, setSearchValue, setSearchValueKey } from '@/store/slices/searchSlice';
+import {
+  setCleanSearch,
+  setCurrentPage,
+  setSearchValue,
+  setSearchValueKey,
+} from '@/store/slices/searchSlice';
 import { useTheme } from './context/useSearch';
 
 const SearchInputs: FC = () => {
