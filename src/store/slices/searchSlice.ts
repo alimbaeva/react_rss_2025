@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   getFromLocalStorage,
   saveToLocalStorage,
-} from '../../customhooks/localActions';
+} from '@customhooks/localActions';
 
 interface SearchState {
   searchValueKey: string;

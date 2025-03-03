@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import TrashIcon from '../icons/TrashIcon';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { clearSelected } from '../../store/slices/selectedSlice';
-import '../styles/dropDownInfo.scss';
+import { RootState } from '@/store/store';
+import { clearSelected } from '@/store/slices/selectedSlice';
+import '@styles/dropDownInfo.scss';
 import DownloadFile from './DownloadFile';
 import MoreInformation from './MoreInformation';
 import { headerIconColor } from '../../veriables';

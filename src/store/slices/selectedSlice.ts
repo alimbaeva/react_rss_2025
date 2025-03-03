@@ -4,7 +4,7 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
   saveToLocalStorage,
-} from '../../customhooks/localActions';
+} from '@customhooks/localActions';
 
 interface SelectedState {
   selectedData: { [key: string]: CatItemType };

@@ -1,14 +1,14 @@
 import { FC, MouseEvent, useEffect, useState } from 'react';
-import { CatBreed } from '../../types/types';
-import '../styles/cardItem.scss';
-import { RootState } from '../../store/store';
+import { CatBreed } from '@/types/types';
+import '@styles/cardItem.scss';
+import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIdValue } from '../../store/slices/searchSlice';
+import { setIdValue } from '@/store/slices/searchSlice';
 import ChooseIcone from '../icons/ChooseIcone';
 import {
   addToSelected,
   removeFromSelected,
-} from '../../store/slices/selectedSlice';
+} from '@/store/slices/selectedSlice';
 
 interface CardItemProps {
   data: CatBreed;

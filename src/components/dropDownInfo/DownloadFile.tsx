@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import DownloadIcon from '../icons/DownloadIcon';
-import { RootState } from '../../store/store';
-import '../styles/dropDownInfo.scss';
+import { RootState } from '@/store/store';
+import '@styles/dropDownInfo.scss';
 import { useSelector } from 'react-redux';
 import { headerIconColor } from '../../veriables';
 

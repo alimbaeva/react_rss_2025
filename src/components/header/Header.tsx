@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import '../styles/header.scss';
+import '@styles/header.scss';
 import CatIcon from '../icons/CarIcon';
 import MooneIcon from '../icons/MooneIcon';
 import SunIcon from '../icons/SunIcon';
 import Logo from '../logo/Logo';
-import { headerIconColor } from '../../veriables';
+import { headerIconColor } from '@/veriables';
 import { useTheme } from '../context/useSearch';
 
 const Header: FC = () => {

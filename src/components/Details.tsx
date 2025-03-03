@@ -1,17 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import DetailsCards from './cards/DetailsCards';
-import './styles/details.scss';
+import '@styles/details.scss';
 import IsLoading from './IsLoading';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { setIdValue } from '../store/slices/searchSlice';
+import { RootState } from '@/store/store';
+import { setIdValue } from '@/store/slices/searchSlice';
 import ChooseIcone from './icons/ChooseIcone';
-import {
-  addToSelected,
-  removeFromSelected,
-} from '../store/slices/selectedSlice';
-import { useGetCatsDataByBreedQuery } from '../store/queryApi/breedIdApi';
-import { setDetaileCards } from '../store/slices/breedsSlice';
+import { addToSelected, removeFromSelected } from '@/store/slices/selectedSlice';
+import { useGetCatsDataByBreedQuery } from '@/store/queryApi/breedIdApi';
+import { setDetaileCards } from '@/store/slices/breedsSlice';
 
 const chooseColorTrue = 'rgb(74, 198, 11)';
 const chooseColorFalse = '#f3f798';

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import '../styles/dropDownInfo.scss';
+import { RootState } from '@/store/store';
+import '@styles/dropDownInfo.scss';
 
 interface Props {
   setShowMoreInfo: (arg: boolean) => void;

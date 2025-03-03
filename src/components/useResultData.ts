@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CatBreed } from '../types/types';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setPages } from '../store/slices/searchSlice';
 import {
   getFromLocalStorage,
   saveToLocalStorage,
-} from '../customhooks/localActions';
+} from '@customhooks/localActions';
 
 export const useResultData = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const useResultData = () => {
     useSelector((state: RootState) => state.search);
   const cats = useSelector((state: RootState) => state.breeds.cats);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent')
     ? true
@@ -57,22 +57,22 @@ export const useResultData = () => {
     }
   }, [data.length, dispatch, limit]);
 
-  useEffect(() => {
-    const page = Number(searchParams.get('page'));
-    if (data.length <= 0) {
-      setSearchParams();
-      return;
-    }
-    if (idValue) {
-      setSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` });
-      return;
-    }
-
-    if (!page || currentPage !== page) {
-      setSearchParams({ page: `${currentPage + 1}` });
-      return;
-    }
-  }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
+//   useEffect(() => {
+//     const page = Number(searchParams.get('page'));
+//     if (data.length <= 0) {
+//       setSearchParams();
+//       return;
+//     }
+//     if (idValue) {
+//       setSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` });
+//       return;
+//     }
+// 
+//     if (!page || currentPage !== page) {
+//       setSearchParams({ page: `${currentPage + 1}` });
+//       return;
+//     }
+//   }, [currentPage, searchParams, setSearchParams, idValue, data.length]);
 
   useEffect(() => {
     if (!dataLocSt) setData(cats);

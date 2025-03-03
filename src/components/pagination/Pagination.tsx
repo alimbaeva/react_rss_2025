@@ -1,7 +1,7 @@
 import { FC, MouseEvent } from 'react';
-import { RootState } from '../../store/store';
+import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPage } from '../../store/slices/searchSlice';
+import { setCurrentPage } from '@/store/slices/searchSlice';
 
 interface PaginationProps {
   pages: number[];

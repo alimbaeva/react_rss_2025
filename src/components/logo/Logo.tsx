@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import '../styles/header.scss';
+import '@styles/header.scss';
 import ChooseIcone from '../icons/ChooseIcone';
 import { headerIconColor } from '../../veriables';
 

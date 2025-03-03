@@ -1,4 +1,4 @@
-import './styles/isLoading.scss';
+import '@styles/isLoading.scss';
 
 const IsLoading = () => {
   return (

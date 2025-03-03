@@ -1,12 +1,12 @@
 import { FC, MouseEvent } from 'react';
 import CardItem from './cards/CardItem';
-import './styles/result.scss';
+import '@styles/result.scss';
 import IsLoading from './IsLoading';
 import EmptyData from './EmptyData';
 import Pagination from './pagination/Pagination';
 import { useResultData } from './useResultData';
 import { useDispatch } from 'react-redux';
-import { setIdValue } from '../store/slices/searchSlice';
+import { setIdValue } from '@/store/slices/searchSlice';
 
 const Result: FC = () => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import { useState, FC } from 'react';
 import { ERRORLOADING } from '../veriables';
 import SearchInputs from './SearchInputs';
-import './styles/topControls.scss';
-import { useGetBreedsQuery } from '../store/queryApi/breedsApi';
+import '@styles/topControls.scss';
+import { useGetBreedsQuery } from '@/store/queryApi/breedsApi';
 
 const TopControls: FC = () => {
   const { error } = useGetBreedsQuery(undefined);
