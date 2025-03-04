@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import '@styles/header.scss';
 import CatIcon from '../icons/CarIcon';
 import MooneIcon from '../icons/MooneIcon';
@@ -9,6 +9,13 @@ import { useTheme } from '../context/useSearch';
 
 const Header: FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <header>

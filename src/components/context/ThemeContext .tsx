@@ -15,8 +15,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>('light');
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setTheme(savedTheme);
@@ -30,6 +32,8 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
       return newTheme;
     });
   };
+
+  if (!isMounted) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

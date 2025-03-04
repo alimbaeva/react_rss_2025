@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { APIKEY, URLAPI, URLAPI_SEARCH } from '../../veriables';
 import { CatsDataType } from '../../types/types';
-import { saveToLocalStorage } from '../../customhooks/localActions';
+// import { saveToLocalStorage } from '../../customhooks/localActions';
 
 export const breedIdApi = createApi({
   reducerPath: 'breedIdApi',
@@ -16,7 +16,7 @@ export const breedIdApi = createApi({
     getCatsDataByBreed: builder.query<CatsDataType[], string>({
       query: (idValue) => `${URLAPI_SEARCH}${idValue}`,
       transformResponse: (response: CatsDataType[]) => {
-        saveToLocalStorage('data', response);
+        // saveToLocalStorage('data', response);
         return response;
       },
     }),

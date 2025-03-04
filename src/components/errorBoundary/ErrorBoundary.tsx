@@ -21,7 +21,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true, errorMessage: error.message };
   }
 
-  handleReload = () => window.location.reload();
+  handleReload = () => (window.location.href = '/');
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({
