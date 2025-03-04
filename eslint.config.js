@@ -14,11 +14,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
+  recommendedConfig: js.configs.recommended,
 });
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends("next", "next/core-web-vitals", "eslint:recommended", "plugin:@typescript-eslint/recommended", 'next/typescript'),
   ...tseslint.configs.strict,
   eslintPluginPrettier,
   js.configs.recommended,
@@ -41,10 +42,7 @@ const typescriptConfig = tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      "react-refresh/only-export-components": "off",
       'no-unused-vars': 'off',
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
