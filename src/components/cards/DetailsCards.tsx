@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 
 interface DetailsCardsProps {
   url: string;
@@ -7,7 +8,15 @@ interface DetailsCardsProps {
 const DetailsCards: FC<DetailsCardsProps> = ({ url }) => {
   return (
     <div data-testid="details-card" className="image-wrapper">
-      <img src={url} alt="cat image" />
+      <Image
+        src={url}
+        alt="cat image"
+        width={300}
+        height={200}
+        priority
+        layout="responsive"
+        objectFit="cover"
+      />
     </div>
   );
 };
