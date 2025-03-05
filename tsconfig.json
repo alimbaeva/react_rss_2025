@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    // "tsBuildInfoFile": "./.tsbuildinfo/tsconfig.node.tsbuildinfo",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2017",
     "useDefineForClassFields": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -26,8 +27,23 @@
       "@styles/*": ["./src/styles/*"],
       "@types/*": ["./src/types/*"],
       "@customhooks/*": ["./src/customhooks/*"]
-    }
+    },
+    "types": [
+      "react",
+      "react-dom",
+      "react-redux",
+      "vitest",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "vite.config.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/__tests__/setup.ts",
+    "src/**/*.test.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

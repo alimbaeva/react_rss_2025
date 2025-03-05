@@ -19,7 +19,15 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next", "next/core-web-vitals", "eslint:recommended", "plugin:@typescript-eslint/recommended", 'next/typescript'),
+  ...compat.extends(
+    'next',
+    'next/core-web-vitals',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'next/typescript',
+    'plugin:react/recommended'
+    // "plugin:vitest/recommended"
+  ),
   ...tseslint.configs.strict,
   eslintPluginPrettier,
   js.configs.recommended,
@@ -32,7 +40,13 @@ const typescriptConfig = tseslint.config(
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        vi: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+      },
     },
     plugins: {
       react,
@@ -42,7 +56,7 @@ const typescriptConfig = tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": "off",
+      'react-refresh/only-export-components': 'off',
       'no-unused-vars': 'off',
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
