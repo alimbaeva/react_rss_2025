@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Result from './Result';
 import Details from '../Details';
 import DropDownInfo from '../dropDownInfo/DropDownInfo';
@@ -7,7 +7,12 @@ import { RootState } from '@/store/store';
 import { CatBreed } from '@/types/types';
 
 const Results = ({ cats }: { cats: CatBreed[] }) => {
-  const { idValue } = useSelector((state: RootState) => state.search);
+  const { idValue } = useSelector((state: RootState) => {
+    if (!state.search) {
+      return { idValue: null };
+    }
+    return state.search;
+  });
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import '@styles/page404.scss';
 import Link from 'next/link';
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { CatBreed } from '@/types/types';
 import dynamic from 'next/dynamic';
 

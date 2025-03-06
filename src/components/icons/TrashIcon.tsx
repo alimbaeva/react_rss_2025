@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { FillType } from '@/types/icons';
 
 const TrashIcon: FC<FillType> = ({ fill, height = '25px' }) => {

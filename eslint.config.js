@@ -46,6 +46,8 @@ const typescriptConfig = tseslint.config(
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
+        test: 'readonly',
+        beforeEach: 'readonly',
       },
     },
     plugins: {

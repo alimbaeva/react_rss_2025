@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import DownloadIcon from '../icons/DownloadIcon';
 import { RootState } from '@/store/store';
 import '@styles/dropDownInfo.scss';

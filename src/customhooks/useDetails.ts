@@ -20,9 +20,13 @@ export const useDetails = (idValue: string) => {
   const [loading, setIsLoading] = useState(false);
   const [chooseItem, setChooseItem] = useState(selectedIds.includes(idValue));
 
-  const { data: detaileCards, error } = useGetCatsDataByBreedQuery(idValue);
+  // const { data: detaileCards, error } = useGetCatsDataByBreedQuery(idValue);
+  const { data: detaileCards = [], error = null } = useGetCatsDataByBreedQuery(
+    idValue || ''
+  );
 
   useEffect(() => {
+    if (idValue === null || idValue === '') return;
     setIsLoading(true);
     setChooseItem(selectedIds.includes(idValue));
     setTimeout(() => setIsLoading(false), 300);
@@ -39,7 +43,7 @@ export const useDetails = (idValue: string) => {
   };
 
   const handleChoose = () => {
-    if (!detaileCards) return;
+    if (!detaileCards.length) return;
 
     const saveData = {
       id: idValue,
@@ -57,7 +61,7 @@ export const useDetails = (idValue: string) => {
     }
   };
 
-  return {
+  const res = {
     loading,
     chooseItem,
     handleCloseDetail,
@@ -67,4 +71,6 @@ export const useDetails = (idValue: string) => {
     chooseColorTrue,
     chooseColorFalse,
   };
+
+  return res || {};
 };

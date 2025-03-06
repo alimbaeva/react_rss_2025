@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import TrashIcon from '../icons/TrashIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';

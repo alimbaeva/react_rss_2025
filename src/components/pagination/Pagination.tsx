@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '@/store/slices/searchSlice';

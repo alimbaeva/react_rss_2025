@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import React, { useState, FC } from 'react';
 import { ERRORLOADING } from '../veriables';
 import '@styles/topControls.scss';
 import SearchInputs from './searchInputs/SearchInputs';
@@ -11,7 +11,7 @@ const TopControls: FC = () => {
   if (errorBtn) throw new Error('Имитация ошибки при клике.');
 
   return (
-    <div className="controls-wrapper">
+    <div className="controls-wrapper" data-testid="top-control">
       <SearchInputs />
       <button
         onClick={() => setErrorBtn(ERRORLOADING)}

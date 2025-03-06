@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import DetailsCards from './cards/DetailsCards';
 import '@styles/details.scss';
 import IsLoading from './IsLoading';
@@ -18,11 +18,12 @@ const Details: FC = () => {
     error,
     chooseColorTrue,
     chooseColorFalse,
-  } = useDetails(idValue);
+  } = useDetails(idValue || '');
 
   if (loading) return <IsLoading />;
   if (!detaileCards) return null;
   if (error) return <p>Empty!</p>;
+  if (!detaileCards || !detaileCards[0]?.breeds?.length) return null;
 
   return (
     <div className="details-wraper">

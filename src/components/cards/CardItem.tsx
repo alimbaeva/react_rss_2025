@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useState } from 'react';
+import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { CatBreed } from '@/types/types';
 import '@styles/cardItem.scss';
 import { RootState } from '@/store/store';
@@ -19,9 +19,11 @@ const chooseColorFalse = '#f3f798';
 
 const CardItem: FC<CardItemProps> = ({ data }) => {
   const dispatch = useDispatch();
-  const { idValue } = useSelector((state: RootState) => state.search);
+  const { idValue } = useSelector(
+    (state: RootState) => state.search || { idValue: null }
+  );
   const selectedIds = useSelector(
-    (state: RootState) => state.selected.selectedIds
+    (state: RootState) => state.selected?.selectedIds || []
   );
   const [chooseItem, setChooseItem] = useState(
     Array.isArray(selectedIds) && selectedIds.includes(data.id) ? true : false
@@ -60,7 +62,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
       id={data.id}
       data-testid="card"
       onClick={handleCard}
-      className={idValue === data.id ? 'activ card' : 'card'}
+      className={idValue && idValue === data.id ? 'activ card' : 'card'}
     >
       <div className="info-wrapper">
         <p>

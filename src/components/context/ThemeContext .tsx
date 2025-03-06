@@ -1,4 +1,10 @@
-import { createContext, ReactNode, FC, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  FC,
+  useState,
+  useEffect,
+} from 'react';
 
 export type Theme = 'light' | 'dark';
 

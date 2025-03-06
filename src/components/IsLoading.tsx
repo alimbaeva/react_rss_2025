@@ -1,3 +1,4 @@
+import React from 'react';
 import '@styles/isLoading.scss';
 
 const IsLoading = () => {

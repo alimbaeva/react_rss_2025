@@ -46,8 +46,9 @@ export const useResultData = () => {
   }, [searchValue, searchValueKey, getCatsData]);
 
   useEffect(() => {
+    const validLimit = limit > 0 ? limit : 10;
     const arr = Array.from(
-      { length: Math.ceil(data.length / limit) },
+      { length: Math.ceil(data.length / validLimit) },
       (_, i) => i
     );
     dispatch(setPages(arr));

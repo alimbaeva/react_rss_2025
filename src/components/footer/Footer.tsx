@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Logo from '../logo/Logo';
 import '@styles/footer.scss';
 

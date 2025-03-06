@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import '@styles/topControls.scss';
 import InputField from './InputField';
 import BreedList from './BreedList';

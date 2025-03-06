@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 const SearchButton: FC = () => (
   <button data-testid="search-button" type="submit">
