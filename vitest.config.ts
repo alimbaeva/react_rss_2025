@@ -31,6 +31,7 @@ export default defineConfig({
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@types': path.resolve(__dirname, 'src/types'),
       '@customhooks': path.resolve(__dirname, 'src/customhooks'),
+      '@components': path.resolve(__dirname, 'src/components'),
     },
   },
 });
