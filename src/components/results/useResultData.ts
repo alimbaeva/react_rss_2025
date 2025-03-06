@@ -21,11 +21,15 @@ export const useResultData = () => {
     useSelector((state: RootState) => state.search);
   const cats = useSelector((state: RootState) => state.breeds.cats);
 
-  const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent') ? true : false;
+  const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent')
+    ? true
+    : false;
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [data, setData] = useState<CatBreed[]>(getFromLocalStorage<CatBreed[]>('dataCurent') ?? cats);
+  const [data, setData] = useState<CatBreed[]>(
+    getFromLocalStorage<CatBreed[]>('dataCurent') ?? cats
+  );
 
   const getCatsData = useCallback(async () => {
     setIsLoad(true);
@@ -48,7 +52,10 @@ export const useResultData = () => {
 
   useEffect(() => {
     const validLimit = limit > 0 ? limit : 10;
-    const arr = Array.from({ length: Math.ceil(data.length / validLimit) }, (_, i) => i);
+    const arr = Array.from(
+      { length: Math.ceil(data.length / validLimit) },
+      (_, i) => i
+    );
     dispatch(setPages(arr));
     if (arr.length === 1) {
       dispatch(setCurrentPage(0));
@@ -64,12 +71,18 @@ export const useResultData = () => {
     }
 
     if (idValue) {
-      router.push(`${pathname}?${new URLSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` })}`, { scroll: false });
+      router.push(
+        `${pathname}?${new URLSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` })}`,
+        { scroll: false }
+      );
       return;
     }
 
     if (!page || currentPage !== page) {
-      router.push(`${pathname}?${new URLSearchParams({ page: `${currentPage + 1}` })}`, { scroll: false });
+      router.push(
+        `${pathname}?${new URLSearchParams({ page: `${currentPage + 1}` })}`,
+        { scroll: false }
+      );
       return;
     }
   }, [currentPage, idValue, data.length, pathname, searchParams, router]);
