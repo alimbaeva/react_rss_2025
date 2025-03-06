@@ -9,8 +9,8 @@ import '@/styles/globals.scss';
 import ClientLayout from '@/components/ClientLayout';
 
 export const metadata: Metadata = {
-  title: 'My Next ssr',
-  description: 'Описание вашего приложения',
+  title: 'My Cats CC',
+  description: '',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
