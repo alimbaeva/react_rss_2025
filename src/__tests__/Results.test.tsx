@@ -7,13 +7,14 @@ import { ThemeProvider } from '@/components/context/ThemeContext ';
 import { mockCatBreed } from './mockData';
 import { configureStore } from '@reduxjs/toolkit';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    query: {},
-    pathname: '/',
-    asPath: '/',
     push: vi.fn(),
     replace: vi.fn(),
+  }),
+  usePathname: () => '/',
+  useSearchParams: () => ({
+    get: vi.fn(),
   }),
 }));
 
@@ -36,7 +37,7 @@ const mockStore = configureStore({
   },
 });
 
-describe('Results Component', async () => {
+describe('Results Component', () => {
   it('should render Results component without idValue', async () => {
     render(
       <Provider store={mockStore}>

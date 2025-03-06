@@ -1,3 +1,4 @@
+import React from 'react';
 import '@styles/page404.scss';
 import Link from 'next/link';
 

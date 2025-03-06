@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Page404 from '../pages/404';
+import Page404 from '../app/404/not-found';
 import React from 'react';
 import '@testing-library/jest-dom';
 
