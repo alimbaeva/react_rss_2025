@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,24 +9,23 @@ import {
 import { RootState } from '@/store/store';
 import { CatBreed } from '@/types/types';
 import { setCurrentPage, setPages } from '@/store/slices/searchSlice';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 export const useResultData = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const { searchValueKey, searchValue, pages, limit, currentPage, idValue } =
     useSelector((state: RootState) => state.search);
   const cats = useSelector((state: RootState) => state.breeds.cats);
 
-  const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent')
-    ? true
-    : false;
+  const dataLocSt = getFromLocalStorage<CatBreed[]>('dataCurent') ? true : false;
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [data, setData] = useState<CatBreed[]>(
-    getFromLocalStorage<CatBreed[]>('dataCurent') ?? cats
-  );
+  const [data, setData] = useState<CatBreed[]>(getFromLocalStorage<CatBreed[]>('dataCurent') ?? cats);
 
   const getCatsData = useCallback(async () => {
     setIsLoad(true);
@@ -47,10 +48,7 @@ export const useResultData = () => {
 
   useEffect(() => {
     const validLimit = limit > 0 ? limit : 10;
-    const arr = Array.from(
-      { length: Math.ceil(data.length / validLimit) },
-      (_, i) => i
-    );
+    const arr = Array.from({ length: Math.ceil(data.length / validLimit) }, (_, i) => i);
     dispatch(setPages(arr));
     if (arr.length === 1) {
       dispatch(setCurrentPage(0));
@@ -58,36 +56,23 @@ export const useResultData = () => {
   }, [data.length, dispatch, limit]);
 
   useEffect(() => {
-    const page = Number(router.query.page);
+    const page = Number(searchParams.get('page'));
 
     if (data.length <= 0) {
-      router.push({ pathname: router.pathname, query: {} }, undefined, {
-        shallow: true,
-      });
+      router.push(`${pathname}?${new URLSearchParams()}`, { scroll: false });
       return;
     }
 
     if (idValue) {
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { page: `${currentPage + 1}`, details: `${idValue}` },
-        },
-        undefined,
-        { shallow: true }
-      );
+      router.push(`${pathname}?${new URLSearchParams({ page: `${currentPage + 1}`, details: `${idValue}` })}`, { scroll: false });
       return;
     }
 
     if (!page || currentPage !== page) {
-      router.push(
-        { pathname: router.pathname, query: { page: `${currentPage + 1}` } },
-        undefined,
-        { shallow: true }
-      );
+      router.push(`${pathname}?${new URLSearchParams({ page: `${currentPage + 1}` })}`, { scroll: false });
       return;
     }
-  }, [currentPage, idValue, data.length, router]);
+  }, [currentPage, idValue, data.length, pathname, searchParams, router]);
 
   useEffect(() => {
     if (!dataLocSt) setData(cats);
