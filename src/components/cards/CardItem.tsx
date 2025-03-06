@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { CatBreed } from '@/types/types';
 import '@styles/cardItem.scss';

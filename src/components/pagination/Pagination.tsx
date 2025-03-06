@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC, MouseEvent } from 'react';
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';

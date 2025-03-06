@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import TrashIcon from '../icons/TrashIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -9,7 +11,7 @@ import MoreInformation from './MoreInformation';
 import { headerIconColor } from '../../veriables';
 import { useTheme } from '../context/useSearch';
 
-const DropDownInfo: FC = () => {
+const DropDownInfo = () => {
   const dispatch = useDispatch();
   const { selectedIds } = useSelector((state: RootState) => state.selected);
   const { theme } = useTheme();

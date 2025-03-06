@@ -1,3 +1,5 @@
+'use client';
+
 import React, { MouseEvent } from 'react';
 import CardItem from '../cards/CardItem';
 import '@styles/result.scss';

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC } from 'react';
 import '@styles/topControls.scss';
 import InputField from './InputField';

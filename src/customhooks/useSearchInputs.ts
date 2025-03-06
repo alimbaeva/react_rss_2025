@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, ChangeEvent, MouseEvent, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Breed } from '@/types/types';

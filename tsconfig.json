@@ -26,7 +26,8 @@
       "@/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
       "@types/*": ["./src/types/*"],
-      "@customhooks/*": ["./src/customhooks/*"]
+      "@customhooks/*": ["./src/customhooks/*"],
+      "@components/*": ["./src/components/*"]
     },
     "types": [
       "react",
@@ -35,15 +36,21 @@
       "vitest",
       "vitest/globals",
       "@testing-library/jest-dom"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
     ]
   },
   "include": [
-    "vite.config.ts",
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "next-env.d.ts",
+    "src/**/*.test.ts",
     "src/__tests__/setup.ts",
-    "src/**/*.test.ts"
+    "vite.config.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

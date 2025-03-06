@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+'use client';
+
+import React from 'react';
 import '@styles/header.scss';
 import ChooseIcone from '../icons/ChooseIcone';
 import { headerIconColor } from '../../veriables';
 
-const Logo: FC = () => {
+const Logo = () => {
   return (
     <div className="logo" data-testid="logo">
       <div>

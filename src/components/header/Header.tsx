@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC, useEffect, useState } from 'react';
 import '@styles/header.scss';
 import CatIcon from '../icons/CarIcon';

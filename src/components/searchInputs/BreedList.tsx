@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC, MouseEvent } from 'react';
 import { Breed } from '@/types/types';
 

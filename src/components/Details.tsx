@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+'use client';
+
+import React from 'react';
 import DetailsCards from './cards/DetailsCards';
 import '@styles/details.scss';
 import IsLoading from './IsLoading';
@@ -7,7 +9,7 @@ import { RootState } from '@/store/store';
 import ChooseIcone from './icons/ChooseIcone';
 import { useDetails } from '@/customhooks/useDetails';
 
-const Details: FC = () => {
+const Details = () => {
   const { idValue } = useSelector((state: RootState) => state.search);
   const {
     loading,

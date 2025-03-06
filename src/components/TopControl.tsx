@@ -1,13 +1,16 @@
-import React, { useState, FC } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { ERRORLOADING } from '../veriables';
 import '@styles/topControls.scss';
 import SearchInputs from './searchInputs/SearchInputs';
 import { useGetBreedsQuery } from '@/store/queryApi/breedsApi';
 
-const TopControls: FC = () => {
+const TopControls = () => {
+  console.log('TopControls');
   const { error } = useGetBreedsQuery(undefined);
   const [errorBtn, setErrorBtn] = useState<string | null>(null);
-
+  console.log('TopControls', error);
   if (errorBtn) throw new Error('Имитация ошибки при клике.');
 
   return (

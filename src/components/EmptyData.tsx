@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const EmptyData: FC = () => {
+const EmptyData = () => {
   return (
     <div className="empty-data">
       <p data-testid="empty-data-1"> Нет данных для отображения!</p>

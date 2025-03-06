@@ -1,3 +1,5 @@
+'use client';
+
 export function saveToLocalStorage<T>(key: string, value: T): void {
   const stringValue = JSON.stringify(value);
   localStorage.setItem(key, stringValue);
