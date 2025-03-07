@@ -1,0 +1,139 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for app/components/icons/TrashIcon.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">app/components/icons</a> TrashIcon.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { type FC } from 'react';
+import type { FillType } from '~/types/icons';
+&nbsp;
+const TrashIcon: FC&lt;FillType&gt; = ({ fill, height = '25px' }) =&gt; {
+  return (
+    &lt;svg
+      data-testid="trashIcon"
+      xmlns="http://www.w3.org/2000/svg"
+      height={height}
+      fill={fill}
+      viewBox="0 0 512 512"
+    &gt;
+      &lt;path d="M 196 40 L 181 64 L 196 40 L 181 64 L 331 64 L 331 64 L 316 40 L 316 40 Q 311 32 302 32 L 210 32 L 210 32 Q 201 32 196 40 L 196 40 Z M 343 23 L 369 64 L 343 23 L 369 64 L 416 64 L 464 64 Q 479 65 480 80 Q 479 95 464 96 L 448 96 L 448 96 L 448 432 L 448 432 Q 447 466 425 489 Q 402 511 368 512 L 144 512 L 144 512 Q 110 511 87 489 Q 65 466 64 432 L 64 96 L 64 96 L 48 96 L 48 96 Q 33 95 32 80 Q 33 65 48 64 L 64 64 L 143 64 L 169 23 L 169 23 Q 184 1 210 0 L 302 0 L 302 0 Q 328 1 343 23 L 343 23 Z M 96 96 L 96 432 L 96 96 L 96 432 Q 97 452 110 466 Q 124 479 144 480 L 368 480 L 368 480 Q 388 479 402 466 Q 415 452 416 432 L 416 96 L 416 96 L 96 96 L 96 96 Z M 176 176 L 176 400 L 176 176 L 176 400 Q 175 415 160 416 Q 145 415 144 400 L 144 176 L 144 176 Q 145 161 160 160 Q 175 161 176 176 L 176 176 Z M 272 176 L 272 400 L 272 176 L 272 400 Q 271 415 256 416 Q 241 415 240 400 L 240 176 L 240 176 Q 241 161 256 160 Q 271 161 272 176 L 272 176 Z M 368 176 L 368 400 L 368 176 L 368 400 Q 367 415 352 416 Q 337 415 336 400 L 336 176 L 336 176 Q 337 161 352 160 Q 367 161 368 176 L 368 176 Z" /&gt;
+    &lt;/svg&gt;
+  );
+};
+&nbsp;
+export default TrashIcon;
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-03-07T17:49:35.261Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    
