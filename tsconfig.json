@@ -3,9 +3,12 @@
     "**/*",
     "**/.server/**/*",
     "**/.client/**/*",
+    "vite-env.d.ts",
     ".react-router/types/**/*"
   ],
+  "types": ["vite/client", "node"],
   "compilerOptions": {
+    "typeRoots": ["node_modules/@types", "node_modules/vite"],
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["node", "vite/client"],
     "target": "ES2022",

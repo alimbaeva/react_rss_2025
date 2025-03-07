@@ -56,5 +56,21 @@
     "typescript": "^5.8.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "validate-branch-name": {
+    "pattern": "[\\S]+$",
+    "errorMsg": "Your current branch name is invalid"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run format:fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --relative",
+      "pre-push": "npm run test:coverage",
+      "commit-msg": "npx validate-branch-name"
+    }
   }
 }
