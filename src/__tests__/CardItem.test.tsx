@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import CardItem from '../components/cards/CardItem';
 import { mockCatBreed } from './mockData';
 
-// Временный редуктор для тестов
 const mockReducer = (state = {}) => state;
 const store = createStore(mockReducer);
 
@@ -38,9 +37,9 @@ describe('CardItem component', () => {
       </Provider>
     );
     const chooseButton = screen.getByTestId('choose-button');
-    fireEvent.click(chooseButton); // First click
-    fireEvent.click(chooseButton); // Second click
-    expect(chooseButton).not.toHaveClass('selected'); // assuming 'selected' class is removed after second click
+    fireEvent.click(chooseButton);
+    fireEvent.click(chooseButton);
+    expect(chooseButton).not.toHaveClass('selected');
   });
 
   it('toggles selection on click', () => {
@@ -51,7 +50,6 @@ describe('CardItem component', () => {
     );
     const chooseButton = screen.getByTestId('choose-button');
     fireEvent.click(chooseButton);
-    // After clicking, verify the selection state (e.g., check class or text change)
-    expect(chooseButton).toHaveClass('choose-item'); // Update the class to match the actual class
+    expect(chooseButton).toHaveClass('choose-item');
   });
 });

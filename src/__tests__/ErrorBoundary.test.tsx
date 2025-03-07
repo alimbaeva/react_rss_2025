@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'; // Add this import
+import React, { StrictMode } from 'react';
 import { render, screen } from '@testing-library/react';
 import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
 

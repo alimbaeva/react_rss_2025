@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ThemeProvider } from '../components/context/ThemeContext '; // Убедитесь, что правильный импорт контекста
-import Header from '../components/header/Header'; // Убедитесь, что правильный путь к компоненту
+import { ThemeProvider } from '../components/context/ThemeContext ';
+import Header from '../components/header/Header';
 
 describe('Header component', () => {
   it('renders correctly with the light theme', () => {
@@ -11,7 +11,6 @@ describe('Header component', () => {
       </ThemeProvider>
     );
 
-    // Ваши тесты
     const themeButton = screen.getByTestId('theme-toggle');
     expect(themeButton).toBeInTheDocument();
   });
@@ -36,7 +35,6 @@ describe('Header component', () => {
       </ThemeProvider>
     );
 
-    // Проверяем, что иконка луны отображается при светлой теме
     const moonIcon = screen.getByTestId('moon-icon');
     expect(moonIcon).toBeInTheDocument();
   });
@@ -48,11 +46,9 @@ describe('Header component', () => {
       </ThemeProvider>
     );
 
-    // Меняем тему на темную
     const themeToggle = screen.getByTestId('theme-toggle');
     fireEvent.click(themeToggle);
 
-    // Проверяем, что иконка солнца отображается при темной теме
     const sunIcon = screen.getByTestId('sun-icon');
     expect(sunIcon).toBeInTheDocument();
   });

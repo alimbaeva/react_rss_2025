@@ -26,7 +26,6 @@ const eslintConfig = [
     'plugin:@typescript-eslint/recommended',
     'next/typescript',
     'plugin:react/recommended'
-    // "plugin:vitest/recommended"
   ),
   ...tseslint.configs.strict,
   eslintPluginPrettier,

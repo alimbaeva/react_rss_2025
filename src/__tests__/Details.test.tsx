@@ -19,7 +19,6 @@ const mockStore = configureStore({
 
 describe('Details Component', () => {
   it('renders loading state', () => {
-    // Мокаем загрузку в useDetails
     (useDetails as Mock).mockReturnValue({
       loading: true,
       chooseItem: false,
@@ -37,7 +36,7 @@ describe('Details Component', () => {
       </Provider>
     );
 
-    expect(screen.getByTestId('load-item-1')).toBeInTheDocument(); // Проверка состояния загрузки
+    expect(screen.getByTestId('load-item-1')).toBeInTheDocument();
   });
 
   it('renders details when data is available', () => {
