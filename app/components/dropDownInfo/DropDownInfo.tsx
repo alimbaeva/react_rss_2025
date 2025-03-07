@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react';
-import TrashIcon from '../icons/TrashIcon';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '~/store/store';
-import { clearSelected } from '~/store/slices/selectedSlice';
-import '~/styles/dropDownInfo.scss';
-import DownloadFile from './DownloadFile';
-import MoreInformation from './MoreInformation';
-import { headerIconColor } from '../../veriables';
-import { useTheme } from '../context/useSearch';
+import { useEffect, useState } from 'react'
+import TrashIcon from '../icons/TrashIcon'
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootState } from '~/store/store'
+import { clearSelected } from '~/store/slices/selectedSlice'
+import '~/styles/dropDownInfo.scss'
+import DownloadFile from './DownloadFile'
+import MoreInformation from './MoreInformation'
+import { headerIconColor } from '../../veriables'
+import { useTheme } from '../context/useSearch'
 
 const DropDownInfo = () => {
-  const dispatch = useDispatch();
-  const { selectedIds } = useSelector((state: RootState) => state.selected);
-  const { theme } = useTheme();
+  const dispatch = useDispatch()
+  const { selectedIds } = useSelector((state: RootState) => state.selected)
+  const { theme } = useTheme()
 
-  const [count, setCount] = useState(0);
-  const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const [count, setCount] = useState(0)
+  const [showMoreInfo, setShowMoreInfo] = useState(false)
 
   const hadleTrashSelected = () => {
-    dispatch(clearSelected());
-  };
+    dispatch(clearSelected())
+  }
 
   useEffect(() => {
-    setCount(selectedIds.length);
-    setShowMoreInfo(false);
-  }, [selectedIds]);
+    setCount(selectedIds.length)
+    setShowMoreInfo(false)
+  }, [selectedIds])
 
-  if (!count) return;
+  if (!count) return
 
   return (
     <section className="wrapper-info" data-testid="dropdown-info-section">
@@ -63,7 +63,7 @@ const DropDownInfo = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default DropDownInfo;
+export default DropDownInfo

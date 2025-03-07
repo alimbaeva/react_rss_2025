@@ -152,13 +152,7 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -247,64 +241,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { type FC, type MouseEvent, useEffect, useState } from 'react';
-import type { CatBreed } from '~/types/types';
-import '~/styles/cardItem.scss';
-import type { RootState } from '~/store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { setIdValue } from '~/store/slices/searchSlice';
-import ChooseIcone from '../icons/ChooseIcone';
-import {
-  addToSelected,
-  removeFromSelected,
-} from '~/store/slices/selectedSlice';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { type FC, type MouseEvent, useEffect, useState } from 'react'
+import type { CatBreed } from '~/types/types'
+import '~/styles/cardItem.scss'
+import type { RootState } from '~/store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIdValue } from '~/store/slices/searchSlice'
+import ChooseIcone from '../icons/ChooseIcone'
+import { addToSelected, removeFromSelected } from '~/store/slices/selectedSlice'
 &nbsp;
 interface CardItemProps {
-  data: CatBreed;
+  data: CatBreed
 }
 &nbsp;
-const chooseColorTrue = 'rgb(74, 198, 11)';
-const chooseColorFalse = '#f3f798';
+const chooseColorTrue = 'rgb(74, 198, 11)'
+const chooseColorFalse = '#f3f798'
 &nbsp;
 const CardItem: FC&lt;CardItemProps&gt; = ({ data }) =&gt; {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { idValue } = useSelector(
-    (state: RootState) =&gt; state.search || { idValue: null }
-  );
+    (state: RootState) =&gt; state.search || { idValue: null },
+  )
   const selectedIds = useSelector(
-    (state: RootState) =&gt; state.selected?.selectedIds || []
-  );
+    (state: RootState) =&gt; state.selected?.selectedIds || [],
+  )
   const [chooseItem, setChooseItem] = useState(
-    Array.isArray(selectedIds) &amp;&amp; selectedIds.includes(data.id) ? <span class="branch-0 cbranch-no" title="branch not covered" >true : f</span>alse
-  );
+    Array.isArray(selectedIds) &amp;&amp; selectedIds.includes(data.id) ? <span class="branch-0 cbranch-no" title="branch not covered" >true : f</span>alse,
+  )
 &nbsp;
   const handleCard = (e: MouseEvent&lt;HTMLDivElement&gt;) =&gt; {
-    const chooseId = (e.target as HTMLElement).getAttribute('data-element');
+    const chooseId = (e.target as HTMLElement).getAttribute('data-element')
     <span class="missing-if-branch" title="if path not taken" >I</span>if (chooseId === 'choose') {
       const saveData = <span class="cstat-no" title="statement not covered" >{</span>
         id: data.id,
         description: data.description,
         name: data.name,
         origin: data.origin,
-      };
+      }
 <span class="cstat-no" title="statement not covered" >      if (!chooseItem) {</span>
-<span class="cstat-no" title="statement not covered" >        dispatch(addToSelected(saveData));</span>
-<span class="cstat-no" title="statement not covered" >        setChooseItem(true);</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(addToSelected(saveData))</span>
+<span class="cstat-no" title="statement not covered" >        setChooseItem(true)</span>
       }
 <span class="cstat-no" title="statement not covered" >      if (chooseItem) {</span>
-<span class="cstat-no" title="statement not covered" >        dispatch(removeFromSelected(data.id));</span>
-<span class="cstat-no" title="statement not covered" >        setChooseItem(false);</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(removeFromSelected(data.id))</span>
+<span class="cstat-no" title="statement not covered" >        setChooseItem(false)</span>
       }
     }
-    dispatch(setIdValue(data.id));
-  };
+    dispatch(setIdValue(data.id))
+  }
 &nbsp;
   useEffect(() =&gt; {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (Array.isArray(selectedIds) &amp;&amp; selectedIds.includes(data.id))
-<span class="cstat-no" title="statement not covered" >      setChooseItem(true);</span>
+<span class="cstat-no" title="statement not covered" >      setChooseItem(true)</span>
     if (Array.isArray(selectedIds) &amp;&amp; !selectedIds.includes(data.id))
-      setChooseItem(false);
-  }, [data.id, selectedIds]);
+      setChooseItem(false)
+  }, [data.id, selectedIds])
 &nbsp;
   return (
     &lt;div
@@ -335,10 +326,10 @@ const CardItem: FC&lt;CardItemProps&gt; = ({ data }) =&gt; {
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  );
-};
+  )
+}
 &nbsp;
-export default CardItem;
+export default CardItem
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -346,7 +337,7 @@ export default CardItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-07T18:25:51.242Z
+                at 2025-03-07T19:40:36.186Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

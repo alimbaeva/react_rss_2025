@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
-global.fetch = vi.fn();
+global.fetch = vi.fn()
 
 Object.defineProperty(window, 'localStorage', {
   value: {
@@ -11,4 +11,4 @@ Object.defineProperty(window, 'localStorage', {
     clear: vi.fn(),
   },
   writable: true,
-});
+})

@@ -9,23 +9,23 @@ import type {
   CatsDataType,
   SearchStateType,
   Weight,
-} from '~/types/types';
+} from '~/types/types'
 
 export const mockWeight: Weight = {
   imperial: '10 - 15',
   metric: '4.5 - 6.8',
-};
+}
 
 export const mockCatBreedExtra: CatBreedExtra = {
   reference_image_id: 'abys123',
-};
+}
 
 export const mockBreedExtra: BreedExtra = {
   description: 'A playful and affectionate breed.',
   temperament: 'Friendly, Energetic, Intelligent',
   vcahospitals_url: 'https://vcahospitals.com/abys',
   vetstreet_url: 'https://www.vetstreet.com/abys',
-};
+}
 
 export const mockBreedAllInfo: BreedAllInfo = {
   id: 'abys',
@@ -59,17 +59,17 @@ export const mockBreedAllInfo: BreedAllInfo = {
   alt_names: 'Aby',
   experimental: 0,
   hairless: 0,
-};
+}
 
 export const mockCatBreed: CatBreed = {
   ...mockBreedAllInfo,
   ...mockBreedExtra,
-};
+}
 
 export const mockCats: Cats = {
   ...mockBreedAllInfo,
   ...mockCatBreedExtra,
-};
+}
 
 export const mockCatsDataType: CatsDataType = {
   breeds: [mockCatBreed],
@@ -77,21 +77,21 @@ export const mockCatsDataType: CatsDataType = {
   id: 'image123',
   url: 'https://example.com/cat.jpg',
   width: 800,
-};
+}
 
 export const mockCatItemType: CatItemType = {
   id: 'abys',
   description: 'A sleek and agile breed with a love for climbing.',
   name: 'Abyssinian',
   origin: 'Egypt',
-};
+}
 
 export const mockBreed: Breed = {
   id: 'abys',
   name: 'Abyssinian',
-};
+}
 
 export const mockSearchState: SearchStateType = {
   searchValue: 'Abyssinian',
   limit: 10,
-};
+}

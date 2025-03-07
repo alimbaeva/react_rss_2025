@@ -1,6 +1,6 @@
-import '~/styles/header.scss';
-import ChooseIcone from '../icons/ChooseIcone';
-import { headerIconColor } from '~/veriables';
+import '~/styles/header.scss'
+import ChooseIcone from '../icons/ChooseIcone'
+import { headerIconColor } from '~/veriables'
 
 const Logo = () => {
   return (
@@ -11,7 +11,7 @@ const Logo = () => {
       </div>
       <h1 data-testid="logo-text">Cute Cats</h1>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

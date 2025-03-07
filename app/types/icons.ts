@@ -1,4 +1,4 @@
 export interface FillType {
-  fill: string;
-  height?: string;
+  fill: string
+  height?: string
 }

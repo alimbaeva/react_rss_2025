@@ -1,12 +1,12 @@
-import { type FC, type ReactNode } from 'react';
-import { Provider } from 'react-redux';
-import ErrorBoundary from './errorBoundary/ErrorBoundary';
-import { store } from '~/store/store';
-import { ThemeProvider } from './context/ThemeContext ';
-import MainContent from './MainContent';
+import { type FC, type ReactNode } from 'react'
+import { Provider } from 'react-redux'
+import ErrorBoundary from './errorBoundary/ErrorBoundary'
+import { store } from '~/store/store'
+import { ThemeProvider } from './context/ThemeContext '
+import MainContent from './MainContent'
 
 interface ClientLayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const ClientLayout: FC<ClientLayoutProps> = ({ children }) => {
@@ -18,7 +18,7 @@ const ClientLayout: FC<ClientLayoutProps> = ({ children }) => {
         </ThemeProvider>
       </Provider>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-export default ClientLayout;
+export default ClientLayout

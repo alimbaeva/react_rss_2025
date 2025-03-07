@@ -1,14 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { type Mock, vi } from 'vitest';
-import { configureStore } from '@reduxjs/toolkit';
-import Details from '../components/Details';
-import { useDetails } from '~/customhooks/useDetails';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { type Mock, vi } from 'vitest'
+import { configureStore } from '@reduxjs/toolkit'
+import Details from '../components/Details'
+import { useDetails } from '~/customhooks/useDetails'
+import '@testing-library/jest-dom'
 
 vi.mock('~/customhooks/useDetails', () => ({
   useDetails: vi.fn(),
-}));
+}))
 
 const mockStore = configureStore({
   reducer: {
@@ -16,11 +16,11 @@ const mockStore = configureStore({
     selected: (state = { selectedIds: [] }) => state,
     breeds: (state = { detaileCards: [] }) => state,
   },
-});
+})
 
 describe('Details Component', () => {
   it('renders loading state', () => {
-    (useDetails as Mock).mockReturnValue({
+    ;(useDetails as Mock).mockReturnValue({
       loading: true,
       chooseItem: false,
       handleCloseDetail: vi.fn(),
@@ -29,19 +29,19 @@ describe('Details Component', () => {
       error: null,
       chooseColorTrue: 'green',
       chooseColorFalse: 'red',
-    });
+    })
 
     render(
       <Provider store={mockStore}>
         <Details />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    expect(screen.getByTestId('load-item-1')).toBeInTheDocument();
-  });
+    expect(screen.getByTestId('load-item-1')).toBeInTheDocument()
+  })
 
   it('renders details when data is available', () => {
-    (useDetails as Mock).mockReturnValue({
+    ;(useDetails as Mock).mockReturnValue({
       loading: false,
       chooseItem: false,
       handleCloseDetail: vi.fn(),
@@ -65,22 +65,22 @@ describe('Details Component', () => {
       error: null,
       chooseColorTrue: 'green',
       chooseColorFalse: 'red',
-    });
+    })
 
     render(
       <Provider store={mockStore}>
         <Details />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    expect(screen.getByText('Ditaile Information:')).toBeInTheDocument();
-    expect(screen.getByText('Breed 1')).toBeInTheDocument();
-    expect(screen.getByText('Origin:')).toBeInTheDocument();
-    expect(screen.getByText('Description of Breed 1')).toBeInTheDocument();
-  });
+    expect(screen.getByText('Ditaile Information:')).toBeInTheDocument()
+    expect(screen.getByText('Breed 1')).toBeInTheDocument()
+    expect(screen.getByText('Origin:')).toBeInTheDocument()
+    expect(screen.getByText('Description of Breed 1')).toBeInTheDocument()
+  })
 
   it('handles error state', () => {
-    (useDetails as Mock).mockReturnValue({
+    ;(useDetails as Mock).mockReturnValue({
       loading: false,
       chooseItem: false,
       handleCloseDetail: vi.fn(),
@@ -89,14 +89,14 @@ describe('Details Component', () => {
       error: 'Some error',
       chooseColorTrue: 'green',
       chooseColorFalse: 'red',
-    });
+    })
 
     render(
       <Provider store={mockStore}>
         <Details />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    expect(screen.getByText('Empty!')).toBeInTheDocument(); // Ensure that the error message is displayed
-  });
-});
+    expect(screen.getByText('Empty!')).toBeInTheDocument() // Ensure that the error message is displayed
+  })
+})

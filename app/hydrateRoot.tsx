@@ -1,8 +1,4 @@
-import { StrictMode } from "react";
-import { hydrateRoot } from "react-dom/client";
+import { StrictMode } from 'react'
+import { hydrateRoot } from 'react-dom/client'
 
-hydrateRoot(
-  document,
-  <StrictMode>
-  </StrictMode>
-);
+hydrateRoot(document, <StrictMode></StrictMode>)

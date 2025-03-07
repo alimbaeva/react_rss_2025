@@ -1,10 +1,10 @@
-import { type ChangeEvent, type FC } from 'react';
+import { type ChangeEvent, type FC } from 'react'
 
 interface InputFieldProps {
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  testId: string;
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  placeholder: string
+  testId: string
 }
 
 const InputField: FC<InputFieldProps> = ({
@@ -22,6 +22,6 @@ const InputField: FC<InputFieldProps> = ({
       data-testid={testId}
     />
   </div>
-);
+)
 
-export default InputField;
+export default InputField

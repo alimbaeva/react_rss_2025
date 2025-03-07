@@ -4,7 +4,8 @@
     "**/.server/**/*",
     "**/.client/**/*",
     "vite-env.d.ts",
-    ".react-router/types/**/*"
+    ".react-router/types/**/*",
+    "eslint.config.js"
   ],
   "types": ["vite/client", "node"],
   "compilerOptions": {
@@ -18,7 +19,7 @@
     "rootDirs": [".", "./.react-router/types"],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["app/*"],
+      "~/*": ["app/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

@@ -5,7 +5,7 @@ const EmptyData = () => {
       <p data-testid="empty-data-2"> Введите запрос в поле поиска.</p>
       <p data-testid="empty-data-3"> Выберите из выподающего списка.</p>
     </div>
-  );
-};
+  )
+}
 
-export default EmptyData;
+export default EmptyData

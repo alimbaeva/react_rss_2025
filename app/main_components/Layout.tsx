@@ -1,10 +1,10 @@
-import {type ReactNode } from "react";
-import { Meta, Links, ScrollRestoration, Scripts } from "react-router";
-import { links } from "./links";
-import ClientLayout from "~/components/ClientLayout";
+import { type ReactNode } from 'react'
+import { Meta, Links, ScrollRestoration, Scripts } from 'react-router'
+import { links } from './links'
+import ClientLayout from '~/components/ClientLayout'
 
 interface LayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
@@ -17,12 +17,10 @@ export function Layout({ children }: LayoutProps) {
         <Links />
       </head>
       <body>
-        <ClientLayout>
-          {children}          
-        </ClientLayout>
+        <ClientLayout>{children}</ClientLayout>
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
-  );
+  )
 }

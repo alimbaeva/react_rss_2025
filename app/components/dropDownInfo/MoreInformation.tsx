@@ -1,20 +1,20 @@
-import { type FC } from 'react';
-import { useSelector } from 'react-redux';
-import type { RootState } from '~/store/store';
-import '~/styles/dropDownInfo.scss';
+import { type FC } from 'react'
+import { useSelector } from 'react-redux'
+import type { RootState } from '~/store/store'
+import '~/styles/dropDownInfo.scss'
 
 interface Props {
-  setShowMoreInfo: (arg: boolean) => void;
+  setShowMoreInfo: (arg: boolean) => void
 }
 
 const MoreInformation: FC<Props> = ({ setShowMoreInfo }) => {
   const { selectedIds, selectedData } = useSelector(
     (state: RootState) => state.selected
-  );
+  )
 
   const handleClose = () => {
-    setShowMoreInfo(false);
-  };
+    setShowMoreInfo(false)
+  }
 
   return (
     <ul className="wrapper-more-info">
@@ -25,7 +25,7 @@ const MoreInformation: FC<Props> = ({ setShowMoreInfo }) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default MoreInformation;
+export default MoreInformation

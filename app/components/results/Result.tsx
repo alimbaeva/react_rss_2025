@@ -1,27 +1,27 @@
-import { type MouseEvent } from 'react';
-import CardItem from '../cards/CardItem';
-import '~/styles/result.scss';
-import IsLoading from '../IsLoading';
-import Pagination from '../pagination/Pagination';
-import { useResultData } from './useResultData';
-import { useDispatch } from 'react-redux';
-import { setIdValue } from '~/store/slices/searchSlice';
-import type { CatBreed } from '~/types/types';
-import EmptyData from '../EmptyData';
+import { type MouseEvent } from 'react'
+import CardItem from '../cards/CardItem'
+import '~/styles/result.scss'
+import IsLoading from '../IsLoading'
+import Pagination from '../pagination/Pagination'
+import { useResultData } from './useResultData'
+import { useDispatch } from 'react-redux'
+import { setIdValue } from '~/store/slices/searchSlice'
+import type { CatBreed } from '~/types/types'
+import EmptyData from '../EmptyData'
 
 const Result = ({ catsSer }: { catsSer: CatBreed[] }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { data, pages, isLoad, error, idValue, currentPage, limit } =
-    useResultData();
+    useResultData()
 
   const handleMainResultBlock = (event: MouseEvent<HTMLDivElement>) => {
-    const close = (event.target as HTMLElement).dataset.element;
-    if (close !== 'element') dispatch(setIdValue(''));
-  };
+    const close = (event.target as HTMLElement).dataset.element
+    if (close !== 'element') dispatch(setIdValue(''))
+  }
 
-  if (isLoad && !idValue) return <IsLoading />;
-  if (error) return <div className="error-message">{error}</div>;
-  if (data.length === 0 && catsSer.length === 0) return <EmptyData />;
+  if (isLoad && !idValue) return <IsLoading />
+  if (error) return <div className="error-message">{error}</div>
+  if (data.length === 0 && catsSer.length === 0) return <EmptyData />
 
   return (
     <div
@@ -45,7 +45,7 @@ const Result = ({ catsSer }: { catsSer: CatBreed[] }) => {
             .map((el) => <CardItem key={el.id} data={el} />)}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Result;
+export default Result

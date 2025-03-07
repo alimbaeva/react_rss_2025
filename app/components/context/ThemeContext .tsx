@@ -4,48 +4,48 @@ import {
   type FC,
   useState,
   useEffect,
-} from 'react';
+} from 'react'
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark'
 
 export interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
+  theme: Theme
+  toggleTheme: () => void
 }
 
 export interface ThemeProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [isMounted, setIsMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme>('light')
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    setIsMounted(true);
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    setIsMounted(true)
+    const savedTheme = localStorage.getItem('theme') as Theme | null
     if (savedTheme) {
-      setTheme(savedTheme);
+      setTheme(savedTheme)
     }
-  }, []);
+  }, [])
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
-      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme);
-      return newTheme;
-    });
-  };
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', newTheme)
+      return newTheme
+    })
+  }
 
-  if (!isMounted) return null;
+  if (!isMounted) return null
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
-  );
-};
+  )
+}
 
-export default ThemeContext;
+export default ThemeContext

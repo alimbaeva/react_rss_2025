@@ -1,4 +1,4 @@
-import '~/styles/isLoading.scss';
+import '~/styles/isLoading.scss'
 
 const IsLoading = () => {
   return (
@@ -11,7 +11,7 @@ const IsLoading = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default IsLoading;
+export default IsLoading

@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import SearchInputs from './searchInputs/SearchInputs';
-import { ERRORLOADING } from '~/veriables';
-import '~/styles/topControls.scss';
-import { useGetBreedsQuery } from '~/store/queryApi/breedsApi';
+import { useState } from 'react'
+import SearchInputs from './searchInputs/SearchInputs'
+import { ERRORLOADING } from '~/veriables'
+import '~/styles/topControls.scss'
+import { useGetBreedsQuery } from '~/store/queryApi/breedsApi'
 
 const TopControls = () => {
-  const { error } = useGetBreedsQuery(undefined);
-  const [errorBtn, setErrorBtn] = useState<string | null>(null);
-  if (errorBtn) throw new Error('Имитация ошибки при клике.');
+  const { error } = useGetBreedsQuery(undefined)
+  const [errorBtn, setErrorBtn] = useState<string | null>(null)
+  if (errorBtn) throw new Error('Имитация ошибки при клике.')
 
   return (
     <div className="controls-wrapper" data-testid="top-control">
@@ -26,7 +26,7 @@ const TopControls = () => {
         </p>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TopControls;
+export default TopControls

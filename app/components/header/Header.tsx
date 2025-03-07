@@ -1,21 +1,21 @@
-import { type FC, useEffect, useState } from 'react';
-import '~/styles/header.scss';
-import CatIcon from '../icons/CarIcon';
-import MooneIcon from '../icons/MooneIcon';
-import SunIcon from '../icons/SunIcon';
-import Logo from '../logo/Logo';
-import { useTheme } from '../context/useSearch';
-import { headerIconColor } from '~/veriables';
+import { type FC, useEffect, useState } from 'react'
+import '~/styles/header.scss'
+import CatIcon from '../icons/CarIcon'
+import MooneIcon from '../icons/MooneIcon'
+import SunIcon from '../icons/SunIcon'
+import Logo from '../logo/Logo'
+import { useTheme } from '../context/useSearch'
+import { headerIconColor } from '~/veriables'
 
 const Header: FC = () => {
-  const { theme, toggleTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
+  const { theme, toggleTheme } = useTheme()
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
-  if (!isMounted) return null;
+  if (!isMounted) return null
 
   return (
     <header>
@@ -43,7 +43,7 @@ const Header: FC = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

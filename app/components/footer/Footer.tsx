@@ -1,6 +1,6 @@
-import { type FC } from 'react';
-import Logo from '../logo/Logo';
-import '~/styles/footer.scss';
+import { type FC } from 'react'
+import Logo from '../logo/Logo'
+import '~/styles/footer.scss'
 
 const Footer: FC = () => {
   return (
@@ -9,7 +9,7 @@ const Footer: FC = () => {
         <Logo />
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

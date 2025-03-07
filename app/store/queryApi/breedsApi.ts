@@ -1,14 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { APIKEY, URLAPI } from '../../veriables';
-import type { Breed, CatBreed } from '~/types/types';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { APIKEY, URLAPI } from '../../veriables'
+import type { Breed, CatBreed } from '~/types/types'
 
 export const breedsApi = createApi({
   reducerPath: 'breedsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: URLAPI,
     prepareHeaders: (headers) => {
-      headers.set('x-api-key', APIKEY);
-      return headers;
+      headers.set('x-api-key', APIKEY)
+      return headers
     },
   }),
   endpoints: (builder) => ({
@@ -18,12 +18,12 @@ export const breedsApi = createApi({
         const breeds: Breed[] = response.map((el) => ({
           id: el.id,
           name: el.name,
-        }));
+        }))
 
-        return { data: response, breeds };
+        return { data: response, breeds }
       },
     }),
   }),
-});
+})
 
-export const { useGetBreedsQuery } = breedsApi;
+export const { useGetBreedsQuery } = breedsApi

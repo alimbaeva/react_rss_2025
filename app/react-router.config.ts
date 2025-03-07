@@ -1,8 +1,8 @@
-import type { Config } from "@react-router/dev/config";
+import type { Config } from '@react-router/dev/config'
 
 export default {
   ssr: true,
   async prerender() {
-    return ["/", "/Home"];
+    return ['/', '/Home']
   },
-} satisfies Config;
+} satisfies Config

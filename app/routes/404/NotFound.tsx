@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import '~/styles/page404.scss';
+import { Link } from 'react-router-dom'
+import '~/styles/page404.scss'
 
 const NotFound = () => {
   return (
@@ -11,7 +11,7 @@ const NotFound = () => {
         </Link>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound

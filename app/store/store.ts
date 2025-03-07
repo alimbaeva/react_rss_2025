@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { breedsApi } from './queryApi/breedsApi';
-import { breedIdApi } from './queryApi/breedIdApi';
-import breedsReducer from './slices/breedsSlice';
-import searchReducer from './slices/searchSlice';
-import selectedReducer from './slices/selectedSlice';
+import { configureStore } from '@reduxjs/toolkit'
+import { breedsApi } from './queryApi/breedsApi'
+import { breedIdApi } from './queryApi/breedIdApi'
+import breedsReducer from './slices/breedsSlice'
+import searchReducer from './slices/searchSlice'
+import selectedReducer from './slices/selectedSlice'
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +17,7 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(breedsApi.middleware)
       .concat(breedIdApi.middleware),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

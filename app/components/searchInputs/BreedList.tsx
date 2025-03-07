@@ -1,10 +1,10 @@
-import { type FC, type MouseEvent } from 'react';
-import type { Breed } from '~/types/types';
+import { type FC, type MouseEvent } from 'react'
+import type { Breed } from '~/types/types'
 
 interface BreedListProps {
-  inputOptions: Breed[];
-  handleBreedItem: (event: MouseEvent<HTMLLIElement>) => void;
-  theme: string;
+  inputOptions: Breed[]
+  handleBreedItem: (event: MouseEvent<HTMLLIElement>) => void
+  theme: string
 }
 
 const BreedList: FC<BreedListProps> = ({
@@ -13,7 +13,7 @@ const BreedList: FC<BreedListProps> = ({
   theme,
 }) => {
   if (inputOptions.length === 0) {
-    return <p>No breeds found</p>;
+    return <p>No breeds found</p>
   }
 
   return (
@@ -30,7 +30,7 @@ const BreedList: FC<BreedListProps> = ({
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default BreedList;
+export default BreedList

@@ -1,13 +1,13 @@
-import DetailsCards from './cards/DetailsCards';
-import '~/styles/details.scss';
-import { useSelector } from 'react-redux';
-import type { RootState } from '~/store/store';
-import ChooseIcone from './icons/ChooseIcone';
-import { useDetails } from '~/customhooks/useDetails';
-import IsLoading from './IsLoading';
+import DetailsCards from './cards/DetailsCards'
+import '~/styles/details.scss'
+import { useSelector } from 'react-redux'
+import type { RootState } from '~/store/store'
+import ChooseIcone from './icons/ChooseIcone'
+import { useDetails } from '~/customhooks/useDetails'
+import IsLoading from './IsLoading'
 
 const Details = () => {
-  const { idValue } = useSelector((state: RootState) => state.search);
+  const { idValue } = useSelector((state: RootState) => state.search)
   const {
     loading,
     chooseItem,
@@ -17,12 +17,12 @@ const Details = () => {
     error,
     chooseColorTrue,
     chooseColorFalse,
-  } = useDetails(idValue || '');
+  } = useDetails(idValue || '')
 
-  if (loading) return <IsLoading />;
-  if (!detaileCards) return null;
-  if (error) return <p>Empty!</p>;
-  if (!detaileCards || !detaileCards[0]?.breeds?.length) return null;
+  if (loading) return <IsLoading />
+  if (!detaileCards) return null
+  if (error) return <p>Empty!</p>
+  if (!detaileCards || !detaileCards[0]?.breeds?.length) return null
 
   return (
     <div className="details-wraper">
@@ -75,11 +75,11 @@ const Details = () => {
       </div>
       <div className="images-container">
         {detaileCards.map((el) => {
-          return <DetailsCards key={el.id} url={el.url} />;
+          return <DetailsCards key={el.id} url={el.url} />
         })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details

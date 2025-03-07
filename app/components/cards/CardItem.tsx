@@ -1,61 +1,58 @@
-import { type FC, type MouseEvent, useEffect, useState } from 'react';
-import type { CatBreed } from '~/types/types';
-import '~/styles/cardItem.scss';
-import type { RootState } from '~/store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { setIdValue } from '~/store/slices/searchSlice';
-import ChooseIcone from '../icons/ChooseIcone';
-import {
-  addToSelected,
-  removeFromSelected,
-} from '~/store/slices/selectedSlice';
+import { type FC, type MouseEvent, useEffect, useState } from 'react'
+import type { CatBreed } from '~/types/types'
+import '~/styles/cardItem.scss'
+import type { RootState } from '~/store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIdValue } from '~/store/slices/searchSlice'
+import ChooseIcone from '../icons/ChooseIcone'
+import { addToSelected, removeFromSelected } from '~/store/slices/selectedSlice'
 
 interface CardItemProps {
-  data: CatBreed;
+  data: CatBreed
 }
 
-const chooseColorTrue = 'rgb(74, 198, 11)';
-const chooseColorFalse = '#f3f798';
+const chooseColorTrue = 'rgb(74, 198, 11)'
+const chooseColorFalse = '#f3f798'
 
 const CardItem: FC<CardItemProps> = ({ data }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { idValue } = useSelector(
     (state: RootState) => state.search || { idValue: null }
-  );
+  )
   const selectedIds = useSelector(
     (state: RootState) => state.selected?.selectedIds || []
-  );
+  )
   const [chooseItem, setChooseItem] = useState(
     Array.isArray(selectedIds) && selectedIds.includes(data.id) ? true : false
-  );
+  )
 
   const handleCard = (e: MouseEvent<HTMLDivElement>) => {
-    const chooseId = (e.target as HTMLElement).getAttribute('data-element');
+    const chooseId = (e.target as HTMLElement).getAttribute('data-element')
     if (chooseId === 'choose') {
       const saveData = {
         id: data.id,
         description: data.description,
         name: data.name,
         origin: data.origin,
-      };
+      }
       if (!chooseItem) {
-        dispatch(addToSelected(saveData));
-        setChooseItem(true);
+        dispatch(addToSelected(saveData))
+        setChooseItem(true)
       }
       if (chooseItem) {
-        dispatch(removeFromSelected(data.id));
-        setChooseItem(false);
+        dispatch(removeFromSelected(data.id))
+        setChooseItem(false)
       }
     }
-    dispatch(setIdValue(data.id));
-  };
+    dispatch(setIdValue(data.id))
+  }
 
   useEffect(() => {
     if (Array.isArray(selectedIds) && selectedIds.includes(data.id))
-      setChooseItem(true);
+      setChooseItem(true)
     if (Array.isArray(selectedIds) && !selectedIds.includes(data.id))
-      setChooseItem(false);
-  }, [data.id, selectedIds]);
+      setChooseItem(false)
+  }, [data.id, selectedIds])
 
   return (
     <div
@@ -86,7 +83,7 @@ const CardItem: FC<CardItemProps> = ({ data }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardItem;
+export default CardItem

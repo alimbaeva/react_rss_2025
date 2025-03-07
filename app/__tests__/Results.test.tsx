@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import Results from '../components/results/Results';
-import { vi } from 'vitest';
-import { ThemeProvider } from '~/components/context/ThemeContext ';
-import { mockCatBreed } from './mockData';
-import { configureStore } from '@reduxjs/toolkit';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import Results from '../components/results/Results'
+import { vi } from 'vitest'
+import { ThemeProvider } from '~/components/context/ThemeContext '
+import { mockCatBreed } from './mockData'
+import { configureStore } from '@reduxjs/toolkit'
+import { MemoryRouter } from 'react-router-dom'
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -16,7 +16,7 @@ vi.mock('next/navigation', () => ({
   useSearchParams: () => ({
     get: vi.fn(),
   }),
-}));
+}))
 
 const mockStore = configureStore({
   reducer: {
@@ -30,12 +30,12 @@ const mockStore = configureStore({
         searchValue: '',
         currentPage: 0,
         limit: 0,
-      }
+      },
     ) => state,
     selected: (state = { selectedIds: [], selectedData: {}, dell: '' }) =>
       state,
   },
-});
+})
 
 describe('Results Component', () => {
   it('should render Results component without idValue', async () => {
@@ -46,13 +46,13 @@ describe('Results Component', () => {
             <Results cats={[mockCatBreed]} />
           </ThemeProvider>
         </MemoryRouter>
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    const persianText = await screen.findByText('1');
+    const persianText = await screen.findByText('1')
 
-    expect(persianText).toBeInTheDocument();
-  });
+    expect(persianText).toBeInTheDocument()
+  })
 
   test('should render Results component with idValue', () => {
     render(
@@ -62,10 +62,10 @@ describe('Results Component', () => {
             <Results cats={[mockCatBreed]} />
           </ThemeProvider>
         </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByText('1')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
-    expect(screen.getByText('3')).toBeInTheDocument();
-  });
-});
+      </Provider>,
+    )
+    expect(screen.getByText('1')).toBeInTheDocument()
+    expect(screen.getByText('2')).toBeInTheDocument()
+    expect(screen.getByText('3')).toBeInTheDocument()
+  })
+})
