@@ -6,7 +6,7 @@ export default defineConfig({
     globals: true,
     isolate: true,
     environment: 'jsdom',
-    setupFiles: './src/__tests__/setup.ts',
+    setupFiles: './app/__tests__/setup.ts',
     coverage: {
       reporter: ['text', 'json', 'html'],
       include: ['**/*.tsx'],
@@ -14,7 +14,7 @@ export default defineConfig({
         '**/node_modules/**',
         '**/*.test.tsx',
         '**/*.spec.tsx',
-        'src/__tests__/setup.ts',
+        'app/__tests__/setup.ts',
       ],
       provider: 'istanbul',
       thresholds: {
@@ -27,11 +27,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@types': path.resolve(__dirname, 'src/types'),
-      '@customhooks': path.resolve(__dirname, 'src/customhooks'),
-      '@components': path.resolve(__dirname, 'src/components'),
+      '~': path.resolve(__dirname, 'app'),
     },
   },
 });

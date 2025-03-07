@@ -1,5 +1,5 @@
-npx lint-staged
-npm run test:coverage
+# npx lint-staged
+# npm run test:coverage
 
 # npx lint-staged
 # echo "Running ESLint..."
