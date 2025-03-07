@@ -1,4 +1,4 @@
-import React, { type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import CardItem from '../cards/CardItem';
 import '~/styles/result.scss';
 import IsLoading from '../IsLoading';

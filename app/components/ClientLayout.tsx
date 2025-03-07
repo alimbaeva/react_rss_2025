@@ -1,4 +1,4 @@
-import React, { type FC, type ReactNode } from 'react';
+import { type FC, type ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './errorBoundary/ErrorBoundary';
 import { store } from '~/store/store';

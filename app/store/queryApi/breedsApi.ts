@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { APIKEY, URLAPI } from '../../veriables';
 import type { Breed, CatBreed } from '~/types/types';
-// import { saveToLocalStorage } from '../../customhooks/localActions';
 
 export const breedsApi = createApi({
   reducerPath: 'breedsApi',
@@ -20,8 +19,6 @@ export const breedsApi = createApi({
           id: el.id,
           name: el.name,
         }));
-        // saveToLocalStorage('breedsValue', breeds);
-        // saveToLocalStorage('dataCats', response);
 
         return { data: response, breeds };
       },

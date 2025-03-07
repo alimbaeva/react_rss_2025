@@ -1,4 +1,3 @@
-import React from 'react';
 import ClientComponents from './ClientComponents';
 import type { CatBreed } from '~/types/types';
 

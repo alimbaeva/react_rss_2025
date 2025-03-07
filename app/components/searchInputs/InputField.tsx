@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, type FC } from 'react';
+import { type ChangeEvent, type FC } from 'react';
 
 interface InputFieldProps {
   value: string;

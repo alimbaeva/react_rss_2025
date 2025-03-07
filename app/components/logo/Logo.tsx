@@ -1,4 +1,3 @@
-import React from 'react';
 import '~/styles/header.scss';
 import ChooseIcone from '../icons/ChooseIcone';
 import { headerIconColor } from '~/veriables';

@@ -1,4 +1,4 @@
-import React, { type FC, useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import '~/styles/header.scss';
 import CatIcon from '../icons/CarIcon';
 import MooneIcon from '../icons/MooneIcon';

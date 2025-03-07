@@ -1,4 +1,4 @@
-import React, { type FC, type MouseEvent, useEffect, useState } from 'react';
+import { type FC, type MouseEvent, useEffect, useState } from 'react';
 import type { CatBreed } from '~/types/types';
 import '~/styles/cardItem.scss';
 import type { RootState } from '~/store/store';

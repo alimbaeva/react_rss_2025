@@ -1,4 +1,4 @@
-import React, { type FC, type MouseEvent } from 'react';
+import { type FC, type MouseEvent } from 'react';
 import type { Breed } from '~/types/types';
 
 interface BreedListProps {

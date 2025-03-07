@@ -1,5 +1,3 @@
-import React from 'react';
-
 const EmptyData = () => {
   return (
     <div className="empty-data">

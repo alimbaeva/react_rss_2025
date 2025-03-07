@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { type FC } from 'react';
 import type { FillType } from '~/types/icons';
 
 const DownloadIcon: FC<FillType> = ({ fill, height = '25px' }) => {

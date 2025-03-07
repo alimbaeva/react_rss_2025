@@ -1,4 +1,3 @@
-import React from 'react';
 import TopControls from './TopControls';
 import type { CatBreed } from '~/types/types';
 import Results from './results/Results';

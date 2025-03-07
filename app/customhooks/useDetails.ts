@@ -20,7 +20,6 @@ export const useDetails = (idValue: string) => {
   const [loading, setIsLoading] = useState(false);
   const [chooseItem, setChooseItem] = useState(selectedIds.includes(idValue));
 
-  // const { data: detaileCards, error } = useGetCatsDataByBreedQuery(idValue);
   const { data: detaileCards = [], error = null } = useGetCatsDataByBreedQuery(
     idValue || ''
   );

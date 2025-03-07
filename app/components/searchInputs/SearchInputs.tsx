@@ -1,4 +1,3 @@
-import React from 'react';
 import '~/styles/topControls.scss';
 import InputField from './InputField';
 import BreedList from './BreedList';
@@ -6,6 +5,7 @@ import SearchButton from './SearchButton';
 import { useTheme } from '../context/useSearch';
 import { useSearchInputs } from '~/customhooks/useSearchInputs';
 import { useNavigate } from 'react-router-dom';
+import type { FormEvent } from 'react';
 
 const SearchInputs = () => {
   const { theme } = useTheme();
@@ -21,7 +21,7 @@ const SearchInputs = () => {
   } = useSearchInputs();
   const navigate = useNavigate();
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
     navigate(`/search?query=${valueKey}`);
     handleSubmit(event);

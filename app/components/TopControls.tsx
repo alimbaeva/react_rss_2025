@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SearchInputs from './searchInputs/SearchInputs';
 import { ERRORLOADING } from '~/veriables';
 import '~/styles/topControls.scss';

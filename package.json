@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "test": "vitest run",
+    "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -31,11 +31,16 @@
   "devDependencies": {
     "@react-router/dev": "^7.3.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/node": "^20.17.23",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-router-dom": "^5.3.3",
+    "@types/testing-library__react": "^10.2.0",
     "@vitest/coverage-c8": "^0.33.0",
+    "@vitest/coverage-istanbul": "^3.0.8",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.2",
     "eslint-plugin-import": "^2.31.0",
@@ -43,6 +48,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
     "react-router-devtools": "^1.1.0",
     "sass": "^1.85.1",

@@ -1,6 +1,3 @@
-'use client';
-
-import React from 'react';
 import DetailsCards from './cards/DetailsCards';
 import '~/styles/details.scss';
 import { useSelector } from 'react-redux';
