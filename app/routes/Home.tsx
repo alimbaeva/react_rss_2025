@@ -2,7 +2,6 @@ import { useLoaderData } from 'react-router-dom'
 import CallClComponent from '~/components/CallClComponent'
 import type { CatBreed } from '~/types/types'
 import { APIKEY, URLAPI } from '~/veriables'
-import type { Route } from '../+types/root'
 
 export async function getCats(): Promise<{ cats: CatBreed[]; error?: string }> {
   try {
