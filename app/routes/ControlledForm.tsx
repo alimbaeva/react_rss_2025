@@ -1,9 +1,5 @@
 const ControlledForm = () => {
-  return (
-    <section>
-      ControlledForm
-    </section>
-  )
+  return <section>ControlledForm</section>
 }
 
 export default ControlledForm

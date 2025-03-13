@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/styles/errorBoundary.scss.css"],"sourcesContent":[".light-info{background-color:#fff}.dark-info{background-color:#000}@keyframes blink{0%{opacity:.2}50%{opacity:.5}100%{opacity:1}}.error-block{width:600px;margin:50px auto;color:#8e2828}.error-block button{all:unset;margin:15px 0;padding:7px 30px;font-weight:700;border-radius:5px;box-shadow:1px 0px 3px 3px #d8c1c1}.error-block button:hover{background-color:#b8d7a9;box-shadow:none}@media(max-width: 650px){.error-block{width:90%}.error-block h1{font-size:26px}}"],"names":[],"mappings":"AAAA;;;;AAAkC;;;;AAAiC;;;;;;;;;;;;;;AAA8D;;;;;;AAAwD;;;;;;;;;AAAkI;;;;;AAAmE;EAAyB;;;;EAAuB"}},
-    {"offset": {"line": 52, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

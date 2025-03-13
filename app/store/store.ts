@@ -1,14 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import uncontrolledReducer from './slices/uncontrolledSlice';
-import countryReducer from './slices/countrySlice';
+import { configureStore } from '@reduxjs/toolkit'
+import uncontrolledReducer from './slices/uncontrolledSlice'
+import countryReducer from './slices/countrySlice'
 
 export const store = configureStore({
   reducer: {
     uncontrolled: uncontrolledReducer,
     countries: countryReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 export type RootState = ReturnType<typeof store.getState>

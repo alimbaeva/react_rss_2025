@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import './header.scss';
+import { Link } from 'react-router-dom'
+import './header.scss'
 
 const Header = () => {
   return (
@@ -7,19 +7,13 @@ const Header = () => {
       <section className="container header">
         <h1 className="logoText">Forms</h1>
         <nav className="wrapperLink">
-          <Link to="/">
-            Main
-          </Link>
-          <Link to="/uncontrolled-form">
-            Form Uncontrolled
-          </Link>
-          <Link to="/controlled-form">
-            Form Controlled
-          </Link>
+          <Link to="/">Main</Link>
+          <Link to="/uncontrolled-form">Form Uncontrolled</Link>
+          <Link to="/controlled-form">Form Controlled</Link>
         </nav>
       </section>
     </header>
   )
 }
 
-export default Header;
+export default Header

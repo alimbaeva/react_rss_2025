@@ -1,13 +1,13 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { countres } from '~/customData/data';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { countres } from '~/customData/data'
 
 interface CountryState {
-  countries: string[];
+  countries: string[]
 }
 
 const initialState: CountryState = {
-  countries: countres
-};
+  countries: countres,
+}
 
 const countrySlice = createSlice({
   name: 'countries',
@@ -15,11 +15,11 @@ const countrySlice = createSlice({
   reducers: {
     setCountries: (state, action: PayloadAction<string>) => {
       if (!state.countries.includes(action.payload)) {
-        state.countries = [...state.countries, action.payload];
+        state.countries = [...state.countries, action.payload]
       }
     },
   },
-});
+})
 
-export const { setCountries } = countrySlice.actions;
-export default countrySlice.reducer;
+export const { setCountries } = countrySlice.actions
+export default countrySlice.reducer

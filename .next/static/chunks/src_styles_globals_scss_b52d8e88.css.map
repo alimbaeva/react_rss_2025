@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/styles/globals.scss.css"],"sourcesContent":[".light-info{background-color:#fff}.dark-info{background-color:#000}@keyframes blink{0%{opacity:.2}50%{opacity:.5}100%{opacity:1}}*,*::after,*::before{margin:0;box-sizing:border-box}.main-section{width:1100px;min-height:100vh;margin:30px auto;flex-wrap:wrap;gap:30px}.main-section .empty-data{text-align:center;font-size:20px}.main-section .empty-data p{margin-bottom:15px}@media(max-width: 1100px){.main-section{width:90%}}.activ{background-color:#d8c1c1}.result-wrapper{position:relative;display:grid;grid-template-columns:repeat(1, 1fr);gap:30px}@media(max-width: 700px){.result-wrapper{grid-template-columns:repeat(1, 1fr);grid-template-rows:auto auto;grid-template-areas:\"second\" \"first\"}.result-wrapper>:nth-child(1){grid-area:first}.result-wrapper>:last-child{grid-area:second}}.in-details{grid-template-columns:repeat(2, 1fr)}.dark{background-color:#000;color:#f3eee7 !important}"],"names":[],"mappings":"AAAA;;;;AAAkC;;;;AAAiC;;;;;;;;;;;;;;AAA8D;;;;;AAAoD;;;;;;;;AAAqF;;;;;AAA2D;;;;AAA+C;EAA0B;;;;;AAAyB;;;;AAAgC;;;;;;;AAA6F;EAAyB;;;;;;;EAAuH;;;;EAA8C;;;;;AAA8C;;;;AAAiD"}},
-    {"offset": {"line": 87, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

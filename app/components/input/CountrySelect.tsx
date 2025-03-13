@@ -1,22 +1,26 @@
-import { forwardRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '~/store/store';
-import TextforInput from './TextforInput';
+import { forwardRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootState } from '~/store/store'
+import TextforInput from './TextforInput'
 
 interface CountrySelectProps {
-  label: string;
-  warnText: string;
-  errors: Record<string, string>;
-  forInput: string;
+  label: string
+  warnText: string
+  errors: Record<string, string>
+  forInput: string
 }
 
 const CountrySelect = forwardRef<HTMLInputElement, CountrySelectProps>(
   ({ forInput, label, warnText, errors }, ref) => {
-    const countries = useSelector((state: RootState) => state.countries.countries);
+    const countries = useSelector(
+      (state: RootState) => state.countries.countries
+    )
 
     return (
       <div>
-        <label htmlFor={forInput} className="block mb-2">{label}</label>
+        <label htmlFor={forInput} className="block mb-2">
+          {label}
+        </label>
         <input
           ref={ref}
           type="text"
@@ -32,10 +36,10 @@ const CountrySelect = forwardRef<HTMLInputElement, CountrySelectProps>(
         </datalist>
         <TextforInput errors={errors} warnText={warnText} forInput={forInput} />
       </div>
-    );
+    )
   }
-);
+)
 
-CountrySelect.displayName = "CountrySelect";
+CountrySelect.displayName = 'CountrySelect'
 
-export default CountrySelect;
+export default CountrySelect

@@ -1,10 +1,10 @@
-import { forwardRef } from "react";
-import TextforInput from "./TextforInput";
+import { forwardRef } from 'react'
+import TextforInput from './TextforInput'
 
 interface ChooseInputProps {
-  forInput: string;
-  warnText: string;
-  errors: Record<string, string>;
+  forInput: string
+  warnText: string
+  errors: Record<string, string>
 }
 
 const ChooseInput = forwardRef<HTMLInputElement, ChooseInputProps>(
@@ -12,15 +12,15 @@ const ChooseInput = forwardRef<HTMLInputElement, ChooseInputProps>(
     return (
       <div>
         <label className="flex items-center">
-          <input ref={ref} type="checkbox" className="mr-2" />
-          I accept the terms of use
+          <input ref={ref} type="checkbox" className="mr-2" />I accept the terms
+          of use
         </label>
         <TextforInput errors={errors} warnText={warnText} forInput={forInput} />
       </div>
-    );
+    )
   }
-);
+)
 
-ChooseInput.displayName = "InputField";
+ChooseInput.displayName = 'InputField'
 
-export default ChooseInput;
+export default ChooseInput

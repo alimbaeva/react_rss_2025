@@ -1,7 +1,7 @@
-import { Provider } from "react-redux";
-import App from "./App";
-import { Layout } from "./Layout";
-import { store } from "./store/store";
+import { Provider } from 'react-redux'
+import App from './App'
+import { Layout } from './Layout'
+import { store } from './store/store'
 
 export default function Root() {
   return (
