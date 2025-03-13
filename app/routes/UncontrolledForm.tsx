@@ -9,39 +9,7 @@ import { formSchema, pictureSchema } from "~/hepler/validationSchema";
 import { setCountries } from "~/store/slices/countrySlice";
 import { useNavigate } from 'react-router-dom'
 import { setData } from "~/store/slices/uncontrolledSlice";
-
-const inputData = [
-  {
-    label: 'Name:',
-    type: 'text',
-    for: 'name',
-    warnText: 'The name must begin with a capital letter.',
-  },
-  {
-    label: 'Age:',
-    type: 'number',
-    for: 'age',
-    warnText: 'Age must be a positive number.',
-  },
-  {
-    label: 'Email:',
-    type: 'email',
-    for: 'email',
-    warnText: 'example@gmail.com',
-  },
-  {
-    label: 'Password:',
-    type: 'password',
-    for: 'password',
-    warnText: 'The password must contain at least 8 characters, one uppercase and lowercase letter, a number and a special character.',
-  },
-  {
-    label: 'Repead Password:',
-    type: 'password',
-    for: 'confirmPassword',
-    warnText: 'Passwords must match',
-  },
-]
+import { inputData } from "~/customData/data";
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch();

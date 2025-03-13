@@ -1,11 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { countres } from '~/customData/data';
 
 interface CountryState {
   countries: string[];
 }
 
 const initialState: CountryState = {
-  countries: ["United States", "Canada", "Germany", "Australia", "India", "Brazil", "Japan", "China", "Russia", "Mexico"],
+  countries: countres
 };
 
 const countrySlice = createSlice({
