@@ -96,12 +96,19 @@ const UncontrolledForm = () => {
     const file = e.target.files ? e.target.files[0] : null;
 
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPicturePreview(reader.result as string);
-      };
-
-      reader.readAsDataURL(file);
+      const allowedTypes = ['image/png', 'image/jpeg'];
+  
+      if (allowedTypes.includes(file.type)) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64Image = reader.result as string;
+          setPicturePreview(base64Image);
+        };
+        
+        reader.readAsDataURL(file);
+      } else {
+        console.error('Only PNG and JPEG images are allowed');
+      }
     }
   };
 
