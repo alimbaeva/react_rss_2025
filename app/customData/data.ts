@@ -1,33 +1,35 @@
-export const inputData = [
+import type { InputData } from '~/types/types'
+
+export const inputData: InputData[] = [
   {
     label: 'Name:',
     type: 'text',
-    for: 'name',
+    forInput: 'name',
     warnText: 'The name must begin with a capital letter.',
   },
   {
     label: 'Age:',
     type: 'number',
-    for: 'age',
+    forInput: 'age',
     warnText: 'Age must be a positive number.',
   },
   {
     label: 'Email:',
     type: 'email',
-    for: 'email',
+    forInput: 'email',
     warnText: 'example@gmail.com',
   },
   {
     label: 'Password:',
     type: 'password',
-    for: 'password',
+    forInput: 'password',
     warnText:
       'The password must contain at least 8 characters, one uppercase and lowercase letter, a number and a special character.',
   },
   {
     label: 'Repead Password:',
     type: 'password',
-    for: 'confirmPassword',
+    forInput: 'confirmPassword',
     warnText: 'Passwords must match',
   },
 ]

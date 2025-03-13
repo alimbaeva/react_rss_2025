@@ -6,11 +6,22 @@ const countrySchema = z
   .regex(/^[A-Za-z\s]+$/, 'Country must be in Latin characters')
 
 export const pictureSchema = z
-  .string()
-  .refine(
-    (val) => /^data:image\/(png|jpeg);base64,/.test(val),
-    'Only PNG and JPEG images allowed.'
-  )
+  .object({
+    base64: z
+      .string()
+      .min(1, 'Picture is required') // Проверка на обязательность
+      .refine((val) => /^data:image\/(png|jpeg);base64,/.test(val), {
+        message: 'Invalid image format. Only PNG and JPEG are allowed',
+      }),
+    type: z
+      .string()
+      .refine((val) => ['image/png', 'image/jpeg'].includes(val), {
+        message: 'Invalid image type. Only PNG and JPEG are allowed',
+      }), // Проверка типа изображения
+  })
+  .refine((data) => !!data.base64 && !!data.type, {
+    message: 'Both base64 and type are required',
+  })
 
 export const formSchema = z
   .object({

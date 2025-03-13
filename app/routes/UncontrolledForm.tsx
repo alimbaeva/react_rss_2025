@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import ChooseInput from '~/components/input/ChooseInput'
 import CountrySelect from '~/components/input/CountrySelect'
@@ -32,8 +32,12 @@ const UncontrolledForm = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [picturePreview, setPicturePreview] = useState<string | null>(null)
+  const [pictureData, setPictureData] = useState<{
+    base64: string
+    type: string
+  } | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     const formData = {
@@ -45,22 +49,35 @@ const UncontrolledForm = () => {
       gender: genderRef.current?.value || '',
       country: countryRef.current?.value || '',
       accept: acceptRef.current?.checked || false,
-      picture: picturePreview,
+      picture: pictureData,
     }
 
     try {
-      pictureSchema.parse(formData.picture)
+      if (pictureData) {
+        pictureSchema.parse(pictureData) // проверяем picture с помощью схемы zod
+      }
       formSchema.parse(formData)
       setErrors({})
       if (countryRef.current?.value)
         dispatch(setCountries(countryRef.current?.value))
-      if (countryRef.current?.value) dispatch(setData(formData))
+      // if (countryRef.current?.value) dispatch(setData(formData))
       navigate('/', { replace: true })
     } catch (err: any) {
       setErrors(err.formErrors.fieldErrors)
     }
-  }
 
+    // try {
+    //   pictureSchema.parse(formData.picture)
+    //   formSchema.parse(formData)
+    //   setErrors({})
+    //   if (countryRef.current?.value)
+    //     dispatch(setCountries(countryRef.current?.value))
+    //   if (countryRef.current?.value) dispatch(setData(formData))
+    //   navigate('/', { replace: true })
+    // } catch (err: any) {
+    //   setErrors(err.formErrors.fieldErrors)
+    // }
+  }
   const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null
 
@@ -72,6 +89,7 @@ const UncontrolledForm = () => {
         reader.onloadend = () => {
           const base64Image = reader.result as string
           setPicturePreview(base64Image)
+          setPictureData({ base64: base64Image, type: file.type }) // сохраняем base64 и type
         }
 
         reader.readAsDataURL(file)
@@ -88,7 +106,7 @@ const UncontrolledForm = () => {
         {updatedInputData.map((el, id) => (
           <InputFeald
             key={id}
-            forInput={el.for}
+            forInput={el.forInput}
             label={el.label}
             type={el.type}
             ref={el.ref}
@@ -100,13 +118,13 @@ const UncontrolledForm = () => {
           forInput={'gender'}
           label={'Male:'}
           ref={genderRef}
-          warnText={'Country must be in Latin characters.'}
+          warnText={'Choose gender.'}
           errors={errors}
         />
         <CountrySelect
           forInput={'country'}
           label={'Country'}
-          warnText={'Choose a country'}
+          warnText={'Country must be in Latin characters.'}
           errors={errors}
           ref={countryRef}
         />
