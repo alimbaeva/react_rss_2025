@@ -2,6 +2,7 @@ import { type ReactNode } from 'react'
 import { Meta, Links, ScrollRestoration, Scripts, Link } from 'react-router'
 import Header from './components/header/Header'
 import './app.css';
+import Footer from './components/footer/Footer';
 
 interface LayoutProps {
   children: ReactNode
@@ -19,7 +20,7 @@ export function Layout({ children }: LayoutProps) {
       <body>
         <Header />
         {children}
-        <footer>ffff</footer>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
