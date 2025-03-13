@@ -14,3 +14,12 @@ body {
     color-scheme: dark;
   }
 }
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.activLink {
+  color: rgb(180, 131, 228);
+}

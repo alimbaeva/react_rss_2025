@@ -1,5 +1,7 @@
 import { type ReactNode } from 'react'
 import { Meta, Links, ScrollRestoration, Scripts, Link } from 'react-router'
+import Header from './components/header/Header'
+import './app.css';
 
 interface LayoutProps {
   children: ReactNode
@@ -15,9 +17,7 @@ export function Layout({ children }: LayoutProps) {
         <Links />
       </head>
       <body>
-        <header>
-        хедер
-        </header>
+        <Header />
         {children}
         <footer>ffff</footer>
         <ScrollRestoration />
