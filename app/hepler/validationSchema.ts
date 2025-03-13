@@ -1,4 +1,9 @@
 import { z } from 'zod';
+
+const countrySchema = z.string()
+  .min(1, "Country is required")
+  .regex(/^[A-Za-z\s]+$/, "Country must be in Latin characters");
+
 export const pictureSchema = z
   .string()
   .refine(
@@ -23,6 +28,7 @@ export const formSchema = z.object({
 ),
   confirmPassword: z.string(),
   gender: z.enum(['male', 'female']),
+  country: countrySchema,
   accept: z.boolean().refine((val) => val === true, 'You must accept the terms of use.'),
   picture: pictureSchema,
 }).refine((data) => data.password === data.confirmPassword, {

@@ -10,7 +10,7 @@ interface ChooseInputProps {
 const ChooseInput = forwardRef<HTMLInputElement, ChooseInputProps>(
   ({ forInput, warnText, errors }, ref) => {
     return (
-      <div className={errors.age ? "" : "pb-5"}>
+      <div>
         <label className="flex items-center">
           <input ref={ref} type="checkbox" className="mr-2" />
           I accept the terms of use

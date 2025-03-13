@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import ChooseInput from "~/components/input/ChooseInput";
+import CountrySelect from "~/components/input/CountrySelect";
 import InputFeald from "~/components/input/InputFeald";
 import MeleInput from "~/components/input/MeleInput";
 import UploadImage from "~/components/input/UploadImage";
 import { formSchema, pictureSchema } from "~/hepler/validationSchema";
+import { setCountries } from "~/store/slices/countrySlice";
+import { useNavigate } from 'react-router-dom'
+import { setData } from "~/store/slices/uncontrolledSlice";
 
 const inputData = [
   {
@@ -39,12 +44,15 @@ const inputData = [
 ]
 
 const UncontrolledForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
   const acceptRef = useRef<HTMLInputElement>(null);
   const pictureRef = useRef<HTMLInputElement>(null);
 
@@ -67,6 +75,7 @@ const UncontrolledForm = () => {
       password: passwordRef.current?.value || "",
       confirmPassword: confirmPasswordRef.current?.value || "",
       gender: genderRef.current?.value || "",
+      country: countryRef.current?.value || "",
       accept: acceptRef.current?.checked || false,
       picture: picturePreview,
     };
@@ -75,6 +84,9 @@ const UncontrolledForm = () => {
         pictureSchema.parse(formData.picture);
         formSchema.parse(formData);
         setErrors({});
+        if (countryRef.current?.value) dispatch(setCountries(countryRef.current?.value));
+        if (countryRef.current?.value) dispatch(setData(formData));
+        navigate("/", { replace: true });
       } catch (err: any) {
         setErrors(err.formErrors.fieldErrors); 
       }
@@ -100,7 +112,8 @@ const UncontrolledForm = () => {
         {updatedInputData.map((el, id) => (
           <InputFeald key={id} forInput={el.for} label={el.label} type={el.type} ref={el.ref} warnText={el.warnText} errors={errors} />
         ))}
-        <MeleInput forInput={"gender"} label={"Male:"} ref={genderRef} warnText={"Choose a gender"} errors={errors} />
+        <MeleInput forInput={"gender"} label={"Male:"} ref={genderRef} warnText={"Country must be in Latin characters."} errors={errors} />
+        <CountrySelect forInput={"country"} label={"Country"} warnText={"Choose a country"} errors={errors} ref={countryRef} />
         <ChooseInput forInput={"accept"} ref={acceptRef} warnText={"Give your consent"} errors={errors} />
         <UploadImage 
           forInput={"picture"} 

@@ -14,7 +14,7 @@ interface UploadImageProps {
 const UploadImage = forwardRef<HTMLInputElement, UploadImageProps>(
   ({ forInput, label, type, warnText, errors, picturePreview, handlePictureChange }, ref) => {
     return (
-      <div className={errors.age ? "" : "pb-5"}>
+      <div>
         <label htmlFor={forInput} className="block">{label}</label>
         <input ref={ref} id={forInput} type={type} accept=".png, .jpeg" onChange={handlePictureChange} />
         {picturePreview && <img src={picturePreview} alt="Preview" className="w-24 h-24 mt-2" />}

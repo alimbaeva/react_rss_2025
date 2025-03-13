@@ -11,7 +11,7 @@ interface MeleInputProps {
 const MeleInput = forwardRef<HTMLSelectElement, MeleInputProps>(
   ({ forInput, label, warnText, errors }, ref) => {
     return (
-      <div className={errors.age ? "" : "pb-5"}>
+      <div>
         <label htmlFor={forInput} className="block mb-2">{label}</label>
         <select ref={ref} id="gender" className="border p-2 w-full">
           <option value="male">Men</option>

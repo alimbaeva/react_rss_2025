@@ -1,7 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import uncontrolledReducer from './slices/uncontrolledSlice';
+import countryReducer from './slices/countrySlice';
 
 export const store = configureStore({
   reducer: {
+    uncontrolled: uncontrolledReducer,
+    countries: countryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
