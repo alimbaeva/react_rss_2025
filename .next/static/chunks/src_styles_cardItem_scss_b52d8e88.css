@@ -1,0 +1,108 @@
+/* [project]/src/styles/cardItem.scss.css [app-client] (css) */
+.light-info {
+  background-color: #fff;
+}
+
+.dark-info {
+  background-color: #000;
+}
+
+@keyframes blink {
+  0% {
+    opacity: .2;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.card {
+  width: 320px;
+  padding: 12px;
+  box-shadow: 1px 0 3px 3px #d8c1c1;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card:hover {
+  background-color: #d8c1c1;
+}
+
+.card .img-container {
+  width: 280px;
+  min-height: 100px;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.card .img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.card .info-wrapper {
+  margin: 10px auto 0;
+}
+
+.card .info-wrapper span {
+  font-weight: 700;
+}
+
+.card .info-wrapper p {
+  margin-top: 12px;
+}
+
+.card .fill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.card .choose-wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.card .choose-item {
+  display: inline-block;
+  padding: 3px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.card .choose-item:hover {
+  box-shadow: inset 1px 0 3px 3px #f3f798;
+}
+
+@media (width <= 1100px) {
+  .card {
+    width: 280px;
+  }
+
+  .card .img-container {
+    width: 250px;
+  }
+}
+
+@media (width <= 630px) {
+  .card {
+    width: 90%;
+  }
+
+  .card .img-container {
+    width: 95%;
+  }
+}
+
+/*# sourceMappingURL=src_styles_cardItem_scss_b52d8e88.css.map*/

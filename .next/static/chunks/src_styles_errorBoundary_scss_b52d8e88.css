@@ -1,0 +1,54 @@
+/* [project]/src/styles/errorBoundary.scss.css [app-client] (css) */
+.light-info {
+  background-color: #fff;
+}
+
+.dark-info {
+  background-color: #000;
+}
+
+@keyframes blink {
+  0% {
+    opacity: .2;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.error-block {
+  width: 600px;
+  margin: 50px auto;
+  color: #8e2828;
+}
+
+.error-block button {
+  all: unset;
+  margin: 15px 0;
+  padding: 7px 30px;
+  font-weight: 700;
+  border-radius: 5px;
+  box-shadow: 1px 0 3px 3px #d8c1c1;
+}
+
+.error-block button:hover {
+  background-color: #b8d7a9;
+  box-shadow: none;
+}
+
+@media (width <= 650px) {
+  .error-block {
+    width: 90%;
+  }
+
+  .error-block h1 {
+    font-size: 26px;
+  }
+}
+
+/*# sourceMappingURL=src_styles_errorBoundary_scss_b52d8e88.css.map*/
