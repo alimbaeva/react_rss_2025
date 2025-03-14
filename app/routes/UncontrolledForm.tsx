@@ -10,6 +10,7 @@ import { setCountries } from '~/store/slices/countrySlice'
 import { useNavigate } from 'react-router-dom'
 import { setData } from '~/store/slices/uncontrolledSlice'
 import { inputData } from '~/customData/data'
+import { ZodError } from 'zod'
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch()
@@ -54,7 +55,7 @@ const UncontrolledForm = () => {
 
     try {
       if (pictureData) {
-        pictureSchema.parse(pictureData) // проверяем picture с помощью схемы zod
+        pictureSchema.parse(pictureData)
       }
       formSchema.parse(formData)
       setErrors({})
@@ -62,22 +63,19 @@ const UncontrolledForm = () => {
         dispatch(setCountries(countryRef.current?.value))
       // if (countryRef.current?.value) dispatch(setData(formData))
       navigate('/', { replace: true })
-    } catch (err: any) {
-      setErrors(err.formErrors.fieldErrors)
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const formattedErrors: { [key: string]: string } = {}
+        err.errors.forEach((error) => {
+          if (error.path.length) {
+            formattedErrors[error.path[0]] = error.message
+          }
+        })
+        setErrors(formattedErrors)
+      }
     }
-
-    // try {
-    //   pictureSchema.parse(formData.picture)
-    //   formSchema.parse(formData)
-    //   setErrors({})
-    //   if (countryRef.current?.value)
-    //     dispatch(setCountries(countryRef.current?.value))
-    //   if (countryRef.current?.value) dispatch(setData(formData))
-    //   navigate('/', { replace: true })
-    // } catch (err: any) {
-    //   setErrors(err.formErrors.fieldErrors)
-    // }
   }
+
   const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null
 
@@ -89,7 +87,7 @@ const UncontrolledForm = () => {
         reader.onloadend = () => {
           const base64Image = reader.result as string
           setPicturePreview(base64Image)
-          setPictureData({ base64: base64Image, type: file.type }) // сохраняем base64 и type
+          setPictureData({ base64: base64Image, type: file.type })
         }
 
         reader.readAsDataURL(file)
