@@ -7,10 +7,9 @@ import ChooseInput from '~/components/controlerInputs/ChooseInput'
 import CountrySelect from '~/components/controlerInputs/CountrySelect'
 import InputField from '~/components/controlerInputs/InputFeald'
 import MeleInput from '~/components/controlerInputs/MeleInput'
-import TextforInput from '~/components/controlerInputs/TextforInput'
 import UploadImage from '~/components/controlerInputs/UploadImage'
 import { inputData } from '~/customData/data'
-import { formSchema, pictureSchema } from '~/hepler/validationSchema'
+import { formSchema } from '~/hepler/validationSchema'
 import { setData } from '~/store/slices/controlledSlice'
 import { setCountries } from '~/store/slices/countrySlice'
 import type { FormDataType } from '~/types/types'
@@ -29,7 +28,6 @@ const ControlledForm = () => {
   })
 
   const onSubmit = (data: FormDataType) => {
-    console.log('Form data submitted:', data)
     if (data) {
       dispatch(setCountries(data.country))
       dispatch(setData({...data, picture: data.picture.base64}));
@@ -94,10 +92,10 @@ const ControlledForm = () => {
 
         <button
           type="submit"
-          // disabled={!isValid}
-          // className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
-          //   !isValid ? 'cursor-not-allowed opacity-50' : ''
-          // }`}
+          disabled={!isValid}
+          className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+            !isValid ? 'cursor-not-allowed opacity-50' : ''
+          }`}
         >
           Submit
         </button>

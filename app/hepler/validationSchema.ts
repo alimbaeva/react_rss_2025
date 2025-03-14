@@ -9,7 +9,7 @@ export const pictureSchema = z
   .object({
     base64: z
       .string()
-      .min(1, 'Picture is required') // Проверка на обязательность
+      .min(1, 'Picture is required')
       .refine((val) => /^data:image\/(png|jpeg);base64,/.test(val), {
         message: 'Invalid image format. Only PNG and JPEG are allowed',
       }),
@@ -17,7 +17,7 @@ export const pictureSchema = z
       .string()
       .refine((val) => ['image/png', 'image/jpeg'].includes(val), {
         message: 'Invalid image type. Only PNG and JPEG are allowed',
-      }), // Проверка типа изображения
+      }),
   })
   .refine((data) => !!data.base64 && !!data.type, {
     message: 'Both base64 and type are required',
@@ -47,7 +47,15 @@ export const formSchema = z
           val.length >= 8,
         'The password must contain at least 8 characters, one uppercase and lowercase letter, a number and a special character.'
       ),
-    confirmPassword: z.string(),
+    confirmPassword: z.string().refine(
+      (val) =>
+        /[A-Z]/.test(val) &&
+        /[a-z]/.test(val) &&
+        /[0-9]/.test(val) &&
+        /[^A-Za-z0-9]/.test(val) &&
+        val.length >= 8,
+      "Passwords don't match"
+    ),
     gender: z.enum(['male', 'female']),
     country: countrySchema,
     accept: z
@@ -55,7 +63,12 @@ export const formSchema = z
       .refine((val) => val === true, 'You must accept the terms of use.'),
     picture: pictureSchema,
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  })
+  .superRefine((data, ctx) => {
+    if (data.password !== data.confirmPassword) {
+      ctx.addIssue({
+        path: ['confirmPassword'],
+        code: z.ZodIssueCode.custom,
+        message: "Passwords don't match",
+      });
+    }
+  });
