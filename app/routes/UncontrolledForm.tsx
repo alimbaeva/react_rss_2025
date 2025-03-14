@@ -8,7 +8,7 @@ import UploadImage from '~/components/input/UploadImage'
 import { formSchema, pictureSchema } from '~/hepler/validationSchema'
 import { setCountries } from '~/store/slices/countrySlice'
 import { useNavigate } from 'react-router-dom'
-import { setData } from '~/store/slices/uncontrolledSlice'
+import { setData, setmodifyUnCon } from '~/store/slices/uncontrolledSlice'
 import { inputData } from '~/customData/data'
 import { ZodError } from 'zod'
 
@@ -61,10 +61,15 @@ const UncontrolledForm = () => {
       setErrors({})
       if (countryRef.current?.value)
         dispatch(setCountries(countryRef.current?.value))
-      if (formData?.picture?.base64) dispatch(setData({
-        ...formData,
-        picture: formData?.picture?.base64,
-      }))
+      if (formData?.picture?.base64)
+        dispatch(
+          setData({
+            ...formData,
+            picture: formData?.picture?.base64,
+          })
+        )
+
+      setTimeout(() => dispatch(setmodifyUnCon()), 1000)
       navigate('/', { replace: true })
     } catch (err) {
       if (err instanceof ZodError) {

@@ -1,16 +1,24 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { FormDataSliceState } from '~/types/types'
 
-const initialState: FormDataSliceState = {
-  name: '',
-  age: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  gender: '',
-  accept: false,
-  picture: '',
-  country: '',
+interface InitialStateType {
+  unControlledData: FormDataSliceState
+  modifyUnCon: boolean
+}
+
+const initialState: InitialStateType = {
+  unControlledData: {
+    name: '',
+    age: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    gender: '',
+    accept: false,
+    picture: '',
+    country: '',
+  },
+  modifyUnCon: false,
 }
 
 const uncontrolledSlice = createSlice({
@@ -18,18 +26,15 @@ const uncontrolledSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action: PayloadAction<FormDataSliceState>) => {
-      state.country = action.payload.country
-      state.picture = action.payload.picture
-      state.accept = action.payload.accept
-      state.gender = action.payload.gender
-      state.confirmPassword = action.payload.confirmPassword
-      state.password = action.payload.password
-      state.email = action.payload.email
-      state.age = action.payload.age
-      state.name = action.payload.name
+      state.unControlledData = action.payload
+      state.unControlledData.country = action.payload.country
+      state.modifyUnCon = true
+    },
+    setmodifyUnCon: (state) => {
+      state.modifyUnCon = false
     },
   },
 })
 
-export const { setData } = uncontrolledSlice.actions
+export const { setData, setmodifyUnCon } = uncontrolledSlice.actions
 export default uncontrolledSlice.reducer

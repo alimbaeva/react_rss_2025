@@ -25,6 +25,6 @@ export interface FormDataSliceState {
   confirmPassword: string
   gender: string
   accept: boolean
-  picture: string | null
+  picture: string
   country: string
 }
