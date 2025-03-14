@@ -24,3 +24,13 @@ header {
     color: rgb(180, 131, 228);
   }
 }
+
+@media (max-width: 700px) {
+  .header {
+    flex-wrap: wrap;
+
+    .logoText {
+      width: 100%;
+    }
+  }
+}

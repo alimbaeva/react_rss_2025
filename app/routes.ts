@@ -4,4 +4,5 @@ export default [
   index('routes/Home.tsx'),
   route('uncontrolled-form', 'routes/UncontrolledForm.tsx'),
   route('controlled-form', 'routes/ControlledForm.tsx'),
+  route('*', 'routes/404/NotFound.tsx'),
 ] satisfies RouteConfig
