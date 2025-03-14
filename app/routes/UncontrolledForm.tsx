@@ -61,7 +61,10 @@ const UncontrolledForm = () => {
       setErrors({})
       if (countryRef.current?.value)
         dispatch(setCountries(countryRef.current?.value))
-      // if (countryRef.current?.value) dispatch(setData(formData))
+      if (formData?.picture?.base64) dispatch(setData({
+        ...formData,
+        picture: formData?.picture?.base64,
+      }))
       navigate('/', { replace: true })
     } catch (err) {
       if (err instanceof ZodError) {
