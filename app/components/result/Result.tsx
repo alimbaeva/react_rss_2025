@@ -31,9 +31,9 @@ const Result = ({
               />
             ) : typeof value === 'boolean' ? (
               value ? (
-                'Да'
+                'Yes'
               ) : (
-                'Нет'
+                'No'
               )
             ) : (
               value

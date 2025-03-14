@@ -12,6 +12,9 @@ const Home = () => {
 
   return (
     <section className="py-3 min-h-screen flex flex-col md:flex-row md:justify-center md:space-x-4 space-y-4 md:space-y-0">
+      {!unControlledData.email && !controlledData.email && (
+        <h1>Welcome to the Form project, please go to the form page and fill out the form.</h1>
+      )}
       {unControlledData.email && (
         <Result
           data={unControlledData}
