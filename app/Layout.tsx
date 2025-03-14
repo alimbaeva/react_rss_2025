@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { Meta, Links, ScrollRestoration, Scripts, Link } from 'react-router'
+import { Meta, Links, ScrollRestoration, Scripts } from 'react-router'
 import Header from './components/header/Header'
 import './app.css'
 import Footer from './components/footer/Footer'
