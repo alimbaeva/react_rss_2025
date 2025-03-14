@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import ChooseInput from '~/components/controlerInputs/ChooseInput'
 import CountrySelect from '~/components/controlerInputs/CountrySelect'
@@ -10,9 +11,12 @@ import TextforInput from '~/components/controlerInputs/TextforInput'
 import UploadImage from '~/components/controlerInputs/UploadImage'
 import { inputData } from '~/customData/data'
 import { formSchema, pictureSchema } from '~/hepler/validationSchema'
+import { setData } from '~/store/slices/controlledSlice'
+import { setCountries } from '~/store/slices/countrySlice'
 import type { FormDataType } from '~/types/types'
 
 const ControlledForm = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const {
     register,
@@ -26,6 +30,10 @@ const ControlledForm = () => {
 
   const onSubmit = (data: FormDataType) => {
     console.log('Form data submitted:', data)
+    if (data) {
+      dispatch(setCountries(data.country))
+      dispatch(setData({...data, picture: data.picture.base64}));
+    }
 
     navigate('/', { replace: true })
   }
