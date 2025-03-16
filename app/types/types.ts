@@ -28,3 +28,5 @@ export interface FormDataSliceState {
   picture: string
   country: string
 }
+
+export type PasswordStrength = 'Poor' | 'Average' | 'Protected';

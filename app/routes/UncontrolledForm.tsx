@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import ChooseInput from '~/components/input/ChooseInput'
 import CountrySelect from '~/components/input/CountrySelect'
@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom'
 import { setAllForm, setData, setmodifyUnCon } from '~/store/slices/uncontrolledSlice'
 import { inputData } from '~/customData/data'
 import { ZodError } from 'zod'
+import { checkPasswordStrength } from '~/hepler/checkPasswordStrength'
+import type { PasswordStrength } from '~/types/types'
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch()
@@ -32,6 +34,7 @@ const UncontrolledForm = () => {
   }))
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const [passwordSafe, setPasswordSafe] = useState<PasswordStrength>('Poor')
   const [picturePreview, setPicturePreview] = useState<string | null>(null)
   const [pictureData, setPictureData] = useState<{
     base64: string
@@ -111,6 +114,13 @@ const UncontrolledForm = () => {
     }
   }
 
+  useEffect(() => {
+    if (passwordRef.current?.value && passwordRef.current?.value?.length >= 8) {
+      setPasswordSafe(checkPasswordStrength(passwordRef.current?.value))
+    }
+    if (passwordRef.current?.value && passwordRef.current?.value?.length < 8) setPasswordSafe('Poor')
+  }, [passwordRef.current?.value]);
+
   return (
     <div className="max-w-lg mx-auto my-10 p-6 border rounded-lg shadow-lg">
       <h2 className="text-xl font-bold mb-4">Un Controlled Form</h2>
@@ -124,6 +134,7 @@ const UncontrolledForm = () => {
             ref={el.ref}
             warnText={el.warnText}
             errors={errors}
+            passwordSafe={passwordSafe}
           />
         ))}
         <MeleInput
