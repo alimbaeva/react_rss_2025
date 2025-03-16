@@ -1,6 +1,6 @@
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import type { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form'
-import type { FormDataType } from '~/types/types'
+import type { FormDataType, PasswordStrength } from '~/types/types'
 import TextforInput from './TextforInput'
 
 interface InputFieldProps {
@@ -8,6 +8,7 @@ interface InputFieldProps {
   label: string
   type: string
   warnText: string
+  passwordSafe?: PasswordStrength
   register: UseFormRegister<FormDataType>
   errors: FieldErrors<FormDataType>
 }
@@ -19,11 +20,28 @@ const InputField: FC<InputFieldProps> = ({
   warnText,
   register,
   errors,
+  passwordSafe,
 }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [passwordSafeCollor, setIsPasswordSafeCollor] = useState('text-red-600');
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState)
+
+  useEffect(() => {
+    switch(passwordSafe) {
+      case 'Average': 
+        setIsPasswordSafeCollor('text-yellow-500');
+        break;
+      case'Protected': 
+        setIsPasswordSafeCollor('text-green-500');
+        break;
+      case 'Poor': 
+        setIsPasswordSafeCollor('text-red-600');
+        break;
+    }
+  }, [passwordSafe])
+
   if (type !== 'password') {
     return (
       <div>
@@ -88,6 +106,7 @@ const InputField: FC<InputFieldProps> = ({
           warnText={warnText}
           forInput={forInput as keyof FormDataType}
         />
+        {passwordSafe && forInput === "password" && <p className={passwordSafeCollor}>{passwordSafe}</p>}
       </div>
     )
   }

@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -8,23 +9,27 @@ import InputField from '~/components/controlerInputs/InputFeald'
 import MeleInput from '~/components/controlerInputs/MeleInput'
 import UploadImage from '~/components/controlerInputs/UploadImage'
 import { inputData } from '~/customData/data'
+import { checkPasswordStrength } from '~/hepler/checkPasswordStrength'
 import { formSchema } from '~/hepler/validationSchema'
 import { setAllFormControle, setData, setmodify } from '~/store/slices/controlledSlice'
 import { setCountries } from '~/store/slices/countrySlice'
-import type { FormDataType } from '~/types/types'
+import type { FormDataType, PasswordStrength } from '~/types/types'
 
 const ControlledForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [passwordSafe, setPasswordSafe] = useState<PasswordStrength>('Poor')
   const {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors, isValid },
   } = useForm<FormDataType>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
   })
+  const password = watch('password'); 
 
   const onSubmit = (data: FormDataType) => {
     if (data) {
@@ -35,6 +40,13 @@ const ControlledForm = () => {
     setTimeout(() => dispatch(setmodify()), 1000)
     navigate('/', { replace: true })
   }
+
+    useEffect(() => {
+      if (password && password.length >= 8) {
+        setPasswordSafe(checkPasswordStrength(password))
+      }
+      if (password && password.length < 8) setPasswordSafe('Poor')
+    }, [password]);
 
   return (
     <div className="max-w-lg mx-auto my-10 p-6 border rounded-lg shadow-lg">
@@ -49,6 +61,7 @@ const ControlledForm = () => {
             warnText={el.warnText}
             register={register}
             errors={errors}
+            passwordSafe={passwordSafe}
           />
         ))}
         <MeleInput
