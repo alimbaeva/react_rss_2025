@@ -19,7 +19,9 @@ export function Layout({ children }: LayoutProps) {
       </head>
       <body>
         <Header />
-        {children}
+        <main className="container">
+          {children}
+        </main>
         <Footer />
         <ScrollRestoration />
         <Scripts />

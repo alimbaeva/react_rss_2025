@@ -9,7 +9,7 @@ import MeleInput from '~/components/controlerInputs/MeleInput'
 import UploadImage from '~/components/controlerInputs/UploadImage'
 import { inputData } from '~/customData/data'
 import { formSchema } from '~/hepler/validationSchema'
-import { setData, setmodify } from '~/store/slices/controlledSlice'
+import { setAllFormControle, setData, setmodify } from '~/store/slices/controlledSlice'
 import { setCountries } from '~/store/slices/countrySlice'
 import type { FormDataType } from '~/types/types'
 
@@ -30,6 +30,7 @@ const ControlledForm = () => {
     if (data) {
       dispatch(setCountries(data.country))
       dispatch(setData({ ...data, picture: data.picture.base64 }))
+      dispatch(setAllFormControle({ ...data, picture: data.picture.base64 }))
     }
     setTimeout(() => dispatch(setmodify()), 1000)
     navigate('/', { replace: true })

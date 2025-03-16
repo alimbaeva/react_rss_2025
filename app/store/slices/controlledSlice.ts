@@ -4,6 +4,7 @@ import type { FormDataSliceState } from '~/types/types'
 interface InitialStateType {
   controlledData: FormDataSliceState
   modify: boolean
+  allFormControle: FormDataSliceState[]
 }
 
 const initialState: InitialStateType = {
@@ -19,6 +20,7 @@ const initialState: InitialStateType = {
     country: '',
   },
   modify: false,
+  allFormControle: [],
 }
 
 const controlledSlice = createSlice({
@@ -30,11 +32,14 @@ const controlledSlice = createSlice({
       state.controlledData.country = action.payload.country
       state.modify = true
     },
+    setAllFormControle: (state, action: PayloadAction<FormDataSliceState>) => {
+      state.allFormControle.push({...action.payload })
+    },
     setmodify: (state) => {
       state.modify = false
     },
   },
 })
 
-export const { setData, setmodify } = controlledSlice.actions
+export const { setData, setmodify, setAllFormControle } = controlledSlice.actions
 export default controlledSlice.reducer
