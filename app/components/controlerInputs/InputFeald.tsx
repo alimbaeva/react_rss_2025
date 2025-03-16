@@ -1,5 +1,5 @@
 import { useEffect, useState, type FC } from 'react'
-import type { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form'
+import type { UseFormRegister, FieldErrors } from 'react-hook-form'
 import type { FormDataType, PasswordStrength } from '~/types/types'
 import TextforInput from './TextforInput'
 

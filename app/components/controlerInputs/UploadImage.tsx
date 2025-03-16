@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FC } from 'react'
+import { type FC } from 'react'
 import TextforInput from './TextforInput'
 import type { FormDataType } from '~/types/types'
 import type { FieldErrors, UseFormRegister } from 'react-hook-form'
@@ -53,39 +53,5 @@ const UploadImage: FC<UploadImageProps> = ({
     </div>
   )
 }
-// const UploadImage: FC<UploadImageProps> = ({
-//   forInput,
-//   label,
-//   type,
-//   warnText,
-//   errors,
-//   picturePreview,
-//   register,
-//   handlePictureChange,
-// }) => {
-//   return (
-//     <div>
-//       <label htmlFor={forInput} className="block">
-//         {label}
-//       </label>
-//       <input
-//         id={forInput}
-//         type={type}
-//         {...register(forInput)}
-//         className="border p-2 w-full"
-//         accept=".png, .jpeg"
-//         onChange={handlePictureChange}
-//       />
-//       {picturePreview && (
-//         <img src={picturePreview} alt="Preview" className="w-24 h-24 mt-2" />
-//       )}
-//       <TextforInput
-//         errors={errors}
-//         warnText={warnText}
-//         forInput={forInput as keyof FormDataType}
-//       />
-//     </div>
-//   )
-// }
 
 export default UploadImage

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState, type FC } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import TextforInput from './TextforInput'
 import type { PasswordStrength } from '~/types/types'
 

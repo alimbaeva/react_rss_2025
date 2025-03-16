@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { FormDataSliceState } from '~/types/types'
 
 const Result = ({
