@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import { useGetCountriesQuery } from '../../store/queriApi/api';
 import { saveToLocalStorage } from '../customhooks/localActions';
 import List from '../list/List';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../../store/slices/searchSlice';
+import { RootState } from '../../store/store';
 
 const Content = () => {
   const dispatch = useDispatch();
   const { data: countries, error, isLoading } = useGetCountriesQuery(undefined);
+  const { filterData } = useSelector((state: RootState) => state.searchSlice);
 
   useEffect(() => {
     if (countries) {
@@ -22,8 +24,11 @@ const Content = () => {
   return (
     <section>
       <ul className="wrapper-item">
-        {countries?.length &&
+        {!filterData.length &&
+          countries?.length &&
           countries?.map((el, id) => <List key={`${id}`} data={el} />)}
+        {filterData.length &&
+          filterData?.map((el, id) => <List key={`${id}`} data={el} />)}
       </ul>
     </section>
   );

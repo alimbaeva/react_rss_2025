@@ -7,6 +7,7 @@ import {
 
 interface SearchState {
   data: CuntryData[];
+  filterData: CuntryData[];
   filter: string;
   search: string;
   sort: string;
@@ -15,6 +16,7 @@ interface SearchState {
 
 const initialState: SearchState = {
   data: getFromLocalStorage('data') ?? [],
+  filterData: [],
   region: getFromLocalStorage('region') ?? [],
   filter: '',
   search: '',
@@ -27,11 +29,16 @@ const searchSlice = createSlice({
   reducers: {
     setData(state, action: PayloadAction<CuntryData[]>) {
       state.data = action.payload;
-      state.region = action.payload.map((el) => el.region);
-      saveToLocalStorage('region', state.region);
+      if (state.region.length) {
+        state.region = [...new Set(action.payload.map((el) => el.region))];
+        saveToLocalStorage('region', state.region);
+      }
     },
     setFilter(state, action: PayloadAction<string>) {
       state.filter = action.payload;
+      state.filterData = state.data.filter(
+        (el) => el.region === action.payload
+      );
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
