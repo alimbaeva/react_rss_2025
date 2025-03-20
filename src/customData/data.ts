@@ -1,5 +1,12 @@
 import { FilterData } from '../types/types';
 
+export const sortLabel = [
+  'A-Z',
+  'Z-A',
+  'population ascending',
+  'population descending',
+];
+
 export const filterData: FilterData[] = [
   {
     label: 'Filter by region:',
