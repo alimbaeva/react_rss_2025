@@ -3,12 +3,17 @@ import '../../styles/header.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { ChangeEvent, memo, useCallback, useMemo } from 'react';
-import { setFilter, setSearch, setSort } from '../../store/slices/searchSlice';
+import {
+  setEmpty,
+  setFilter,
+  setSearch,
+  setSort,
+} from '../../store/slices/searchSlice';
 import { sortLabel } from '../../customData/data';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { region, filter, sort, search } = useSelector(
+  const { region, filter, sort, search, emptyData } = useSelector(
     (state: RootState) => state.searchSlice
   );
 
@@ -32,8 +37,9 @@ const Header = () => {
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       dispatch(setSearch(event.target.value));
+      if (emptyData) dispatch(setEmpty());
     },
-    [dispatch]
+    [dispatch, emptyData]
   );
 
   return (

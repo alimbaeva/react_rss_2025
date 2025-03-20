@@ -9,7 +9,9 @@ import { RootState } from '../../store/store';
 const Content = () => {
   const dispatch = useDispatch();
   const { data: countries, error, isLoading } = useGetCountriesQuery(undefined);
-  const { filterData } = useSelector((state: RootState) => state.searchSlice);
+  const { filterData, emptyData } = useSelector(
+    (state: RootState) => state.searchSlice
+  );
 
   const saveAndDispatchData = useCallback(
     (data: typeof countries) => {
@@ -29,6 +31,7 @@ const Content = () => {
 
   if (isLoading) return <p>isLoading</p>;
   if (error) return <p>error</p>;
+  if (emptyData) return <p>{emptyData}</p>;
 
   return (
     <section>

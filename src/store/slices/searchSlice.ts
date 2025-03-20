@@ -14,6 +14,7 @@ interface SearchState {
   filter: string;
   search: string;
   sort: string;
+  emptyData: string | null;
   region: string[];
 }
 
@@ -24,6 +25,7 @@ const initialState: SearchState = {
   filter: '',
   search: '',
   sort: '',
+  emptyData: null,
 };
 
 const searchSlice = createSlice({
@@ -57,9 +59,15 @@ const searchSlice = createSlice({
       state.sort = '';
       state.filter = '';
       state.filterData = searchFilter(state.data, action.payload) ?? [];
+      if (!state.filterData.length)
+        state.emptyData = 'Nothing was found for your query.';
+    },
+    setEmpty(state) {
+      state.emptyData = null;
     },
   },
 });
 
-export const { setFilter, setSort, setSearch, setData } = searchSlice.actions;
+export const { setFilter, setSort, setSearch, setData, setEmpty } =
+  searchSlice.actions;
 export default searchSlice.reducer;
