@@ -1,4 +1,4 @@
-# npx lint-staged
+npx lint-staged
 # npm run test:coverage
 
 # npx lint-staged
