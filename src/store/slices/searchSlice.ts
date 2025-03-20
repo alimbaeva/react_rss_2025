@@ -5,6 +5,8 @@ import {
   saveToLocalStorage,
 } from '../../componentr/customhooks/localActions';
 import { sortData } from '../../componentr/helpers/sortData';
+import { filterDataRegion } from '../../componentr/helpers/regionRegion';
+import { searchFilter } from '../../componentr/helpers/searchFilter';
 
 interface SearchState {
   data: CuntryData[];
@@ -38,22 +40,23 @@ const searchSlice = createSlice({
     setFilter(state, action: PayloadAction<string>) {
       state.filter = action.payload;
       state.search = '';
-      state.filterData = state.data.filter(
-        (el) => el.region === action.payload
-      );
+      state.filterData = filterDataRegion(state.data, action.payload) ?? [];
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
       state.search = '';
-      state.filterData = sortData(state.filterData, action.payload);
+      state.filterData =
+        sortData(
+          state.filterData.length ? state.filterData : state.data,
+          action.payload,
+          state.filter
+        ) ?? [];
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
       state.sort = '';
       state.filter = '';
-      state.filterData = state.data.filter((el) =>
-        el.name.common.toLowerCase().includes(action.payload.toLowerCase())
-      );
+      state.filterData = searchFilter(state.data, action.payload) ?? [];
     },
   },
 });
