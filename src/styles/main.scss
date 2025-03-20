@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.main-page {
+  padding-top: 10rem;
+}
+
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -16,4 +20,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+@media (max-width: 999px) {
+  .container {
+    width: 90%;
+  }
+}
+@media (max-width: 769px) {
+  .main-page {
+    padding-top: 0rem;
+  }
 }

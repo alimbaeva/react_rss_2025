@@ -3,10 +3,12 @@ import Header from '../componentr/header/Header';
 
 function App() {
   return (
-    <main className="container">
+    <>
       <Header />
-      <Content />
-    </main>
+      <main className="container main-page">
+        <Content />
+      </main>
+    </>
   );
 }
 export default App;

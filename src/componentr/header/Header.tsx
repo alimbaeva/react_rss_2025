@@ -38,7 +38,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="filter-wrapper">
+      <div className="filter-wrapper container">
         <InputField
           forInput={'search'}
           label={'Search countries by name:'}

@@ -22,7 +22,6 @@ const saveAndDispatchData = useCallback(
 );
 ```
 
-
 > **Предотвратила ненужные перерисовки с помощью `useCallback`.**
 
 ```
@@ -43,7 +42,6 @@ const handleSelectChange = useCallback(
 
 > Хуки useCallback используются для мемоизации обработчиков событий: handleSelectChange, handleSortChange и handleChange.
 
-
 ```
 export default memo(Header);
 ```
@@ -62,7 +60,7 @@ const renderOptions = useMemo(
 );
 ```
 
-> renderOptions мемоизируется с помощью хука useMemo. Это предотвращает пересоздание опций для ```<select>```, если массив options не изменился. Таким образом, если options не изменяется, то при рендерах компонента не будет происходить перерасчета массива опций, что может быть полезно для больших списков.
+> renderOptions мемоизируется с помощью хука useMemo. Это предотвращает пересоздание опций для `<select>`, если массив options не изменился. Таким образом, если options не изменяется, то при рендерах компонента не будет происходить перерасчета массива опций, что может быть полезно для больших списков.
 
 ```
 export default memo(InputField);
@@ -99,5 +97,4 @@ if (filterCache.has(cacheKey)) {
 
 > Каждый раз, когда вызывается функция filterDataRegion, проверяется, есть ли уже закэшированные данные для текущего фильтра (с ключом cacheKey).
 
-
-** В таком же варианте написан: searchFilter, sortData ***
+** В таком же варианте написан: searchFilter, sortData \***
