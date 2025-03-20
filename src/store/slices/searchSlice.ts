@@ -61,6 +61,7 @@ const searchSlice = createSlice({
       state.filterData = searchFilter(state.data, action.payload) ?? [];
       if (!state.filterData.length)
         state.emptyData = 'Nothing was found for your query.';
+      if (state.filterData.length && state.emptyData) state.emptyData = null;
     },
     setEmpty(state) {
       state.emptyData = null;
