@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import '../../styles/inputField.scss';
 
 interface InputFieldProps {
   forInput: string;
@@ -8,9 +9,11 @@ interface InputFieldProps {
 
 const InputField: FC<InputFieldProps> = ({ forInput, label, type }) => {
   return (
-    <div>
-      <label htmlFor={forInput}>{label}</label>
-      <input id={forInput} type={type} />
+    <div className="wrapper-input">
+      <label htmlFor={forInput} className="label">
+        {label}
+      </label>
+      <input id={forInput} type={type} className="input" />
     </div>
   );
 };

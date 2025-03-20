@@ -3,7 +3,7 @@ import Header from '../componentr/header/Header';
 
 function App() {
   return (
-    <main>
+    <main className="container">
       <Header />
       <Content />
     </main>
