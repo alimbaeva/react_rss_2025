@@ -12,7 +12,7 @@ export const countriesApi = createApi({
       transformResponse: (response: CuntryData[]) => {
         return response.map((country) => ({
           continents: country.continents,
-          name: country.name.common,
+          name: country.name,
           population: country.population,
           region: country.region,
           flags: country.flags,
