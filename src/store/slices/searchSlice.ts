@@ -37,16 +37,23 @@ const searchSlice = createSlice({
     },
     setFilter(state, action: PayloadAction<string>) {
       state.filter = action.payload;
+      state.search = '';
       state.filterData = state.data.filter(
         (el) => el.region === action.payload
       );
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
+      state.search = '';
       state.filterData = sortData(state.filterData, action.payload);
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
+      state.sort = '';
+      state.filter = '';
+      state.filterData = state.data.filter((el) =>
+        el.name.common.toLowerCase().includes(action.payload.toLowerCase())
+      );
     },
   },
 });
