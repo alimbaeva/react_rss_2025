@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { CuntryData } from '../../types/types';
 import '../../styles/list.scss';
 
@@ -24,11 +24,15 @@ const List: FC<ListProp> = ({ data }) => {
         </p>
       </div>
       <div className="wrapper-image">
-        <img src={data.flags.png} alt="flag" />
+        <img src={data.flags.png} alt="flag" loading="lazy" />
         <p className="text-flag">{data.flag}</p>
       </div>
     </li>
   );
 };
 
-export default List;
+export default memo(
+  List,
+  (prevProps, nextProps) =>
+    JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data)
+);

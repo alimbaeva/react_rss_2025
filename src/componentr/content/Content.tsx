@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useGetCountriesQuery } from '../../store/queriApi/api';
 import { saveToLocalStorage } from '../customhooks/localActions';
 import List from '../list/List';
@@ -11,12 +11,21 @@ const Content = () => {
   const { data: countries, error, isLoading } = useGetCountriesQuery(undefined);
   const { filterData } = useSelector((state: RootState) => state.searchSlice);
 
+  const saveAndDispatchData = useCallback(
+    (data: typeof countries) => {
+      if (data) {
+        saveToLocalStorage('data', data);
+        dispatch(setData(data));
+      }
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     if (countries) {
-      saveToLocalStorage('data', countries);
-      dispatch(setData(countries));
+      saveAndDispatchData(countries);
     }
-  }, [countries, dispatch]);
+  }, [countries, saveAndDispatchData]);
 
   if (isLoading) return <p>isLoading</p>;
   if (error) return <p>error</p>;

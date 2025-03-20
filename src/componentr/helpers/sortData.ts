@@ -1,6 +1,18 @@
 import { CuntryData } from '../../types/types';
 
-export const sortData = (data: CuntryData[], sortText: string) => {
+const sortCache = new Map<string, CuntryData[]>();
+
+export const sortData = (
+  data: CuntryData[],
+  sortText: string,
+  filterKey?: string
+) => {
+  const cacheKey = `${sortText}-${data.length}-${filterKey}`;
+
+  if (sortCache.has(cacheKey)) {
+    return sortCache.get(cacheKey);
+  }
+
   let sortData: CuntryData[] = [];
 
   switch (sortText) {
@@ -22,5 +34,6 @@ export const sortData = (data: CuntryData[], sortText: string) => {
       break;
   }
 
+  sortCache.set(cacheKey, sortData);
   return sortData;
 };

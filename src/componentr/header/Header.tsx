@@ -2,26 +2,39 @@ import InputField from '../inputs/InputFeald';
 import '../../styles/header.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo, useCallback, useMemo } from 'react';
 import { setFilter, setSearch, setSort } from '../../store/slices/searchSlice';
 import { sortLabel } from '../../customData/data';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { region, filter, sort } = useSelector(
+  const { region, filter, sort, search } = useSelector(
     (state: RootState) => state.searchSlice
   );
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setFilter(event.target.value));
-  };
-  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSort(event.target.value));
-  };
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-    dispatch(setSearch(event.target.value));
-  };
+  const memRegion = useMemo(() => region, [region]);
+  const memSortLabel = useMemo(() => sortLabel, []);
+
+  const handleSelectChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      dispatch(setFilter(event.target.value));
+    },
+    [dispatch]
+  );
+
+  const handleSortChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      dispatch(setSort(event.target.value));
+    },
+    [dispatch]
+  );
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      dispatch(setSearch(event.target.value));
+    },
+    [dispatch]
+  );
 
   return (
     <header>
@@ -30,13 +43,14 @@ const Header = () => {
           forInput={'search'}
           label={'Search countries by name:'}
           type={'text'}
+          value={search}
           handleChange={handleChange}
         />
         <InputField
           forInput={'filter'}
           label={'Filter by region:'}
           type={'text'}
-          options={region}
+          options={memRegion}
           value={filter}
           handleSelectChange={handleSelectChange}
         />
@@ -45,7 +59,7 @@ const Header = () => {
           label={'Sort countries by population or name:'}
           type={'text'}
           value={sort}
-          options={sortLabel}
+          options={memSortLabel}
           handleSelectChange={handleSortChange}
         />
       </div>
@@ -53,4 +67,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

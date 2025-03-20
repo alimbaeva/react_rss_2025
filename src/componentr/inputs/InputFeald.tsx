@@ -1,4 +1,4 @@
-import { ChangeEvent, type FC } from 'react';
+import { ChangeEvent, memo, useMemo, type FC } from 'react';
 import '../../styles/inputField.scss';
 
 interface InputFieldProps {
@@ -20,6 +20,16 @@ const InputField: FC<InputFieldProps> = ({
   handleSelectChange,
   handleChange,
 }) => {
+  const renderOptions = useMemo(
+    () =>
+      options?.map((el, id) => (
+        <option key={id} value={el}>
+          {el}
+        </option>
+      )),
+    [options]
+  );
+
   return (
     <div className="wrapper-input">
       <label htmlFor={forInput} className="label">
@@ -30,6 +40,7 @@ const InputField: FC<InputFieldProps> = ({
           id={forInput}
           type={type}
           className="input"
+          value={value}
           onChange={handleChange}
         />
       ) : (
@@ -40,16 +51,11 @@ const InputField: FC<InputFieldProps> = ({
           onChange={handleSelectChange}
         >
           <option value=""></option>
-          {options &&
-            options.map((el, id) => (
-              <option key={id} value={el}>
-                {el}
-              </option>
-            ))}
+          {renderOptions}
         </select>
       )}
     </div>
   );
 };
 
-export default InputField;
+export default memo(InputField);
