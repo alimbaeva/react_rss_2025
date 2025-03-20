@@ -32,7 +32,7 @@ const searchSlice = createSlice({
   reducers: {
     setData(state, action: PayloadAction<CuntryData[]>) {
       state.data = action.payload;
-      if (state.region.length) {
+      if (!state.region.length) {
         state.region = [...new Set(action.payload.map((el) => el.region))];
         saveToLocalStorage('region', state.region);
       }
