@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { countriesApi } from './queriApi/api';
 
 export const store = configureStore({
-  reducer: {},
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  reducer: {
+    [countriesApi.reducerPath]: countriesApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(countriesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
