@@ -1,8 +1,9 @@
 const Header = () => {
   return (
     <header>
-      <p>filter</p>
-      <p>sort</p>
+      <div>
+        <input type="text" />
+      </div>
     </header>
   );
 };
