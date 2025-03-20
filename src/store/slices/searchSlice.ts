@@ -4,6 +4,7 @@ import {
   getFromLocalStorage,
   saveToLocalStorage,
 } from '../../componentr/customhooks/localActions';
+import { sortData } from '../../componentr/helpers/sortData';
 
 interface SearchState {
   data: CuntryData[];
@@ -42,6 +43,7 @@ const searchSlice = createSlice({
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
+      state.filterData = sortData(state.filterData, action.payload);
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
