@@ -1,0 +1,43 @@
+.wrapper-list {
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.wrapper-text {
+  max-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  p {
+    width: 100%;
+  }
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.wrapper-image {
+  width: 100px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .text-flag {
+    position: absolute;
+    padding: 2px;
+    background-color: #c5baba;
+    bottom: 0;
+    right: 0;
+  }
+}
